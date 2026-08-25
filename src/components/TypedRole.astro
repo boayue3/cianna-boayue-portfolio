@@ -1,0 +1,98 @@
+---
+import { site } from '../data/site';
+---
+
+<div class="typed-row" data-roles={JSON.stringify(site.roles)}>
+  <span class="eyebrow accent typed-eyebrow">Currently</span>
+  <span class="typed-text" data-typed-text>{site.roles[0]}</span>
+  <span class="caret typed-caret" aria-hidden="true"></span>
+</div>
+
+<style>
+  .typed-row {
+    margin-top: 22px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 30px;
+  }
+
+  .typed-eyebrow {
+    letter-spacing: 0.16em;
+    white-space: nowrap;
+  }
+
+  .typed-text {
+    font: 400 22px/1.2 var(--font-body);
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  .typed-caret {
+    width: 11px;
+    height: 22px;
+  }
+
+  @media (max-width: 640px) {
+    .typed-row {
+      margin-top: 20px;
+      gap: 8px;
+      min-height: 26px;
+    }
+    .typed-eyebrow {
+      display: none;
+    }
+    .typed-text {
+      font-size: 15px;
+    }
+    .typed-caret {
+      width: 9px;
+      height: 17px;
+    }
+  }
+</style>
+
+<script>
+  const row = document.querySelector<HTMLElement>('.typed-row');
+  const textEl = row?.querySelector<HTMLElement>('[data-typed-text]');
+  const roles: string[] = JSON.parse(row?.dataset.roles ?? '[]');
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (textEl && roles.length && !reduceMotion) {
+    textEl.textContent = '';
+    let i = 0;
+    let len = 0;
+    let del = false;
+    let holdTicks = 0;
+
+    const id = window.setInterval(() => {
+      const full = roles[i];
+
+      if (!del) {
+        if (len < full.length) {
+          len++;
+        } else {
+          holdTicks++;
+          if (holdTicks >= 16) {
+            del = true;
+            holdTicks = 0;
+          }
+        }
+      } else {
+        if (len > 0) {
+          len--;
+        } else {
+          del = false;
+          i = (i + 1) % roles.length;
+        }
+      }
+
+      textEl.textContent = full.slice(0, len);
+    }, 62);
+
+    window.addEventListener('pagehide', () => window.clearInterval(id), { once: true });
+  } else if (textEl && roles.length) {
+    textEl.textContent = roles[0];
+  }
+</script>

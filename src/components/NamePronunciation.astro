@@ -1,0 +1,90 @@
+---
+import { site } from '../data/site';
+---
+
+<div class="name-wrap">
+  <h1 class="name" aria-describedby="pron-tip">{site.name}</h1>
+  <div class="tooltip" id="pron-tip" role="tooltip">
+    {site.pronunciation} &nbsp;·&nbsp; {site.pronouns}
+  </div>
+  <span class="visually-hidden">Pronounced {site.pronunciation}, pronouns {site.pronouns}.</span>
+</div>
+<div class="mobile-hint">tap for pronunciation</div>
+
+<style>
+  .name-wrap {
+    position: relative;
+    display: inline-block;
+  }
+
+  .name {
+    margin: 0;
+    font: 700 62px/1.06 var(--font-display);
+    letter-spacing: -0.035em;
+    white-space: nowrap;
+    border-bottom: 2px dotted var(--hairline-dashed);
+    cursor: help;
+  }
+
+  .tooltip {
+    position: absolute;
+    left: 0;
+    top: -40px;
+    opacity: 0;
+    transition: opacity 0.22s ease;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 7px 11px;
+    font: 400 12px/1 var(--font-body);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .name-wrap.is-visible .tooltip {
+    opacity: 1;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .mobile-hint {
+    display: none;
+    margin-top: 9px;
+    font: 400 11px/1 var(--font-body);
+    color: var(--ink-40);
+  }
+
+  @media (max-width: 640px) {
+    .name {
+      font-size: 34px;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      display: inline-block;
+    }
+    .mobile-hint {
+      display: block;
+    }
+  }
+</style>
+
+<script>
+  const wrap = document.querySelector<HTMLElement>('.name-wrap');
+  if (wrap) {
+    const canHover = window.matchMedia('(hover: hover)').matches;
+    if (canHover) {
+      wrap.addEventListener('mouseenter', () => wrap.classList.add('is-visible'));
+      wrap.addEventListener('mouseleave', () => wrap.classList.remove('is-visible'));
+      wrap.addEventListener('focus', () => wrap.classList.add('is-visible'));
+      wrap.addEventListener('blur', () => wrap.classList.remove('is-visible'));
+    } else {
+      wrap.addEventListener('click', () => wrap.classList.toggle('is-visible'));
+    }
+  }
+</script>

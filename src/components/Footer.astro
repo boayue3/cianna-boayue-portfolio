@@ -1,0 +1,43 @@
+---
+import { site } from '../data/site';
+---
+
+<footer class="site-footer">
+  <div class="left">
+    {site.email}<br />
+    {site.location} · {site.availability}
+  </div>
+  <div class="right">
+    <a href={site.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+    <a href={site.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href={site.resumePdf} class="accent">Résumé ↓</a>
+    <a href={`mailto:${site.email}`}>Email</a>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font: 300 12px/1.8 var(--font-body);
+    color: var(--ink-60);
+  }
+
+  .right {
+    display: flex;
+    gap: 18px;
+    font: 400 12px var(--font-body);
+    color: var(--ink);
+  }
+
+  @media (max-width: 640px) {
+    .site-footer {
+      font-size: 11.5px;
+    }
+    .right {
+      display: none;
+    }
+  }
+</style>

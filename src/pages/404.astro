@@ -1,0 +1,79 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Page jammed — 404">
+  <main class="page">
+    <div class="figure accent">4Ø4</div>
+    <div class="headline">The page jammed.</div>
+    <p class="paragraph">Nothing at this address. Either I moved it or you typed it from memory. Both happen.</p>
+    <div class="fake-url">
+      /work/qveue<span class="caret url-caret" aria-hidden="true"></span>
+    </div>
+    <div class="actions">
+      <a href="/#work" class="btn btn--filled">← Back to work</a>
+      <a href="/" class="btn">Home</a>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .page {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 78px 60px;
+    background: var(--paper);
+    color: var(--ink);
+    text-align: center;
+  }
+
+  .figure {
+    font: 700 76px/1 var(--font-display);
+    letter-spacing: -0.04em;
+  }
+
+  .headline {
+    margin-top: 26px;
+    font: 400 17px/1.7 var(--font-body);
+  }
+
+  .paragraph {
+    margin: 14px auto 0;
+    max-width: 340px;
+    font: 300 12.5px/1.9 var(--font-body);
+    color: var(--ink-60);
+  }
+
+  .fake-url {
+    margin: 34px auto 0;
+    max-width: 400px;
+    padding: 14px 16px;
+    border: 1px dashed var(--hairline-dashed);
+    font: 400 12px/1 var(--font-body);
+    color: var(--ink-40);
+    text-align: left;
+  }
+
+  .url-caret {
+    width: 9px;
+    height: 15px;
+    margin-left: 1px;
+    vertical-align: -2px;
+  }
+
+  .actions {
+    margin-top: 30px;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  @media (max-width: 640px) {
+    .page {
+      padding: 56px var(--gutter-mobile);
+    }
+    .figure {
+      font-size: 56px;
+    }
+  }
+</style>

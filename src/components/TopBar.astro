@@ -1,0 +1,97 @@
+---
+import { site } from '../data/site';
+
+interface Props {
+  active?: 'work' | 'about' | 'resume';
+}
+
+const { active } = Astro.props;
+---
+
+<div class="topbar">
+  <div class="eyebrow">{site.eyebrow}</div>
+  <nav class="nav-desktop">
+    <a href="/#work" class:list={{ active: active === 'work' }}>Work</a>
+    <a href="/about" class:list={{ active: active === 'about' }}>About</a>
+    <a href="/resume" class:list={{ active: active === 'resume' }}>Résumé</a>
+  </nav>
+  <button class="nav-toggle" aria-expanded="false" aria-controls="mobile-menu" type="button">Menu ≡</button>
+</div>
+<nav id="mobile-menu" class="nav-mobile" hidden>
+  <a href="/#work" class:list={{ active: active === 'work' }}>Work</a>
+  <a href="/about" class:list={{ active: active === 'about' }}>About</a>
+  <a href="/resume" class:list={{ active: active === 'resume' }}>Résumé</a>
+</nav>
+
+<style>
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--hairline-strong);
+    font-family: var(--font-body);
+  }
+
+  .eyebrow {
+    font: 400 11px/1 var(--font-body);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-60);
+  }
+
+  .nav-desktop {
+    display: flex;
+    gap: 24px;
+    font: 400 12px/1 var(--font-body);
+    color: var(--ink-60);
+  }
+
+  .nav-desktop a.active {
+    color: var(--accent);
+  }
+
+  .nav-toggle {
+    display: none;
+    font: 400 12px var(--font-body);
+    color: var(--accent);
+  }
+
+  .nav-mobile {
+    display: none;
+    flex-direction: column;
+    gap: 14px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--hairline-strong);
+    font: 400 13px var(--font-body);
+    color: var(--ink-60);
+  }
+
+  .nav-mobile a.active {
+    color: var(--accent);
+  }
+
+  .nav-mobile:not([hidden]) {
+    display: flex;
+  }
+
+  @media (max-width: 640px) {
+    .nav-desktop {
+      display: none;
+    }
+    .nav-toggle {
+      display: block;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
+  const menu = document.getElementById('mobile-menu');
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = !menu?.hidden;
+    if (menu) menu.hidden = isOpen;
+    toggle.setAttribute('aria-expanded', String(!isOpen));
+  });
+</script>

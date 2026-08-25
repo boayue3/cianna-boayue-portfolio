@@ -1,0 +1,114 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TopBar from '../components/TopBar.astro';
+import NamePronunciation from '../components/NamePronunciation.astro';
+import TypedRole from '../components/TypedRole.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+import { projects } from '../data/projects';
+---
+
+<Layout title={`${site.name} — Portfolio`}>
+  <main class="page">
+    <TopBar active="work" />
+
+    <section class="hero">
+      <NamePronunciation />
+      <TypedRole />
+      <p class="intro">{site.intro}</p>
+    </section>
+
+    <section class="work" id="work">
+      <div class="section-head">
+        <div class="eyebrow">Work</div>
+        <div class="leader"></div>
+        <div class="count">{projects.length}</div>
+      </div>
+      <div class="grid">
+        {projects.map((project) => <ProjectCard project={project} />)}
+      </div>
+    </section>
+
+    <Footer />
+  </main>
+</Layout>
+
+<style>
+  .page {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding: 64px var(--gutter-desktop) 56px;
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  .hero {
+    margin-top: 64px;
+  }
+
+  .intro {
+    margin: 40px 0 0;
+    max-width: 560px;
+    font: 300 15px/1.95 var(--font-body);
+    color: var(--ink-80);
+    text-wrap: pretty;
+  }
+
+  .work {
+    margin-top: 72px;
+  }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+  }
+
+  .section-head .eyebrow {
+    letter-spacing: 0.16em;
+  }
+
+  .leader {
+    flex: 1;
+    border-bottom: 1px dotted #b6afa3;
+  }
+
+  .count {
+    font: 400 11px var(--font-body);
+    color: var(--ink-40);
+  }
+
+  .grid {
+    margin-top: 26px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+
+  @media (max-width: 640px) {
+    .page {
+      padding: 26px var(--gutter-mobile) 34px;
+    }
+    .hero {
+      margin-top: 0;
+    }
+    .intro {
+      margin-top: 24px;
+      font-size: 13px;
+      line-height: 1.9;
+    }
+    .work {
+      margin-top: 34px;
+    }
+    .grid {
+      margin-top: 14px;
+      grid-template-columns: 1fr;
+      gap: 26px;
+    }
+    .leader,
+    .count {
+      display: none;
+    }
+  }
+</style>

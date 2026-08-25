@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics><meta name="design_doc_mode" content="canvas">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#e4e0d6;font-family:'JetBrains Mono',ui-monospace,monospace}
+.dv-turn{padding:40px 44px 32px;border-bottom:1px solid rgba(0,0,0,.08);scroll-margin-top:16px}
+.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 20px}
+.dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1c1a17;color:#fff;border-radius:4px;text-decoration:none}
+.dv-tname{font:600 13px/1.2 'JetBrains Mono',monospace;color:#1c1a17}
+.dv-opts{display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start}
+.dv-opt{flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px}
+.dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1c1a17;border-radius:5px;text-decoration:none}
+.dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 'JetBrains Mono',monospace;color:rgba(0,0,0,.55)}
+.dv-card{max-width:100%;background:#f0ede4;border:1px solid rgba(0,0,0,.10);box-shadow:0 2px 10px rgba(0,0,0,.08);overflow:hidden}
+.dv-opt:target .dv-oid{background:#6E44FF;color:#fff}
+.dv-next{margin:22px 0 0;font:12px/1.5 'JetBrains Mono',monospace;color:rgba(0,0,0,.5)}
+a{color:#6E44FF}a:hover{color:#1c1a17}
+@keyframes cursorBlink{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes typeIn{from{max-width:0}to{max-width:100%}}</style></helmet>
+
+<section class="dv-turn" id="t2">
+<div class="dv-thd"><a class="dv-tid" href="#t2">2</a><span class="dv-tname">Full set — engineer pivoting to design. Restrained mono, live typing, hover pronunciation.</span></div>
+<div class="dv-opts">
+
+<div class="dv-opt" id="2a">
+<div class="dv-olabel"><a class="dv-oid" href="#2a">2a</a>Home — roles type themselves; hover the name for pronunciation</div>
+<div class="dv-card" style="width:900px">
+<div style="padding:64px 88px 56px;background:#f0ede4;color:#1c1a17">
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:14px;border-bottom:1px solid rgba(28,26,23,.2)">
+<div style="font:400 11px/1 'JetBrains Mono',monospace;letter-spacing:.2em;text-transform:uppercase;color:#57524a">Portfolio · 2026</div>
+<div style="display:flex;gap:24px;font:400 12px/1 'JetBrains Mono',monospace;color:#57524a"><span>Work</span><span>About</span><span style="color:#6E44FF">Résumé</span></div>
+</div>
+<div style="margin-top:64px">
+<div style="position:relative;display:inline-block" onMouseEnter="{{ showPron }}" onMouseLeave="{{ hidePron }}">
+<h1 style="margin:0;font:700 62px/1.06 'Space Mono',monospace;letter-spacing:-.035em;white-space:nowrap;border-bottom:2px dotted rgba(28,26,23,.35);cursor:help">Cianna Boayue</h1>
+<div style="position:absolute;left:0;top:-40px;opacity:{{ pronOpacity }};transition:opacity .22s ease;background:#1c1a17;color:#f0ede4;padding:7px 11px;font:400 12px/1 'JetBrains Mono',monospace;letter-spacing:.04em;white-space:nowrap;pointer-events:none">/ AHN-yuh EYE-yer / &nbsp;·&nbsp; she/her</div>
+</div>
+<div style="margin-top:22px;display:flex;align-items:center;gap:12px;min-height:30px">
+<span style="font:400 11px/1 'JetBrains Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:#6E44FF;white-space:nowrap">Currently</span>
+<span style="font:400 22px/1.2 'JetBrains Mono',monospace;color:#1c1a17;white-space:nowrap">{{ typedRole }}</span>
+<span style="display:inline-block;width:11px;height:22px;background:#6E44FF;animation:cursorBlink 1.05s step-end infinite"></span>
+</div>
+<p style="margin:40px 0 0;max-width:560px;font:300 15px/1.95 'JetBrains Mono',monospace;color:#3b3630;text-wrap:pretty">Six years shipping backend systems, now moving to the other side of the spec. I still write the code — I just want to decide what it does. Below: three things I designed and built end to end.</p>
+</div>
+<div style="margin-top:72px;display:flex;align-items:baseline;gap:14px">
+<div style="font:400 11px/1 'JetBrains Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:#57524a">Work</div>
+<div style="flex:1;border-bottom:1px dotted #b6afa3"></div><div style="font:400 11px 'JetBrains Mono',monospace;color:#8a8377">3</div>
+</div>
+<div style="margin-top:26px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px">
+<div style="display:flex;flex-direction:column;gap:13px">
+<div style="height:190px;border:1px dashed rgba(28,26,23,.35);background:#e9e5da;display:flex;align-items:center;justify-content:center;text-align:center;font:400 10.5px/1.7 'JetBrains Mono',monospace;color:#8a8377">[ image ]<br>1200×900</div>
+<div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:400 11px 'JetBrains Mono',monospace;color:#6E44FF">01</span><span style="font:400 11px 'JetBrains Mono',monospace;color:#8a8377">2026</span></div>
+<div style="font:400 17px/1.3 'Space Mono',monospace">Queue you can actually read</div>
+<div style="font:300 11.5px/1.75 'JetBrains Mono',monospace;color:#57524a">Triage for 400 tickets a day, designed and shipped end to end.</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px;font:400 10px/1 'JetBrains Mono',monospace">
+<span style="padding:6px 9px;white-space:nowrap;border:1px solid #6E44FF;color:#6E44FF">Work project</span>
+<span style="padding:6px 9px;white-space:nowrap;border:1px solid rgba(28,26,23,.22);color:#57524a">Product design</span>
+<span style="padding:6px 9px;white-space:nowrap;border:1px solid rgba(28,26,23,.22);color:#57524a">Go</span>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:13px">
+<div style="height:190px;border:1px dashed rgba(28,26,23,.35);background:#e9e5da;display:flex;align-items:center;justify-content:center;text-align:center;font:400 10.5px/1.7 'JetBrains Mono',monospace;color:#8a8377">[ image ]<br>1200×900</div>
+<div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:400 11px 'JetBrains Mono',monospace;color:#6E44FF">02</span><span style="font:400 11px 'JetBrains Mono',monospace;color:#8a8377">2025</span></div>
+<div style="font:400 17px/1.3 'Space Mono',monospace">Splitwise for housemates</div>
+<div style="font:300 11.5px/1.75 'JetBrains Mono',monospace;color:#57524a">Shared bills without the monthly argument. Built for four of us.</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px;font:400 10px/1 'JetBrains Mono',monospace">
+<span style="padding:6px 9px;white-space:nowrap;border:1px solid #6E44FF;color:#6E44FF">Side project</span>
+<span style="padding:6px 9px;white-space:nowrap;border:1px solid rgba(28,26,23,.22);color:#57524a">React</span>
+<span style="padding:6px 9px;white-space:nowrap;border:1px solid rgba(28,26,23,.22);color:#57524a">Postgres</span>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:13px">
+<div style="height:190px;border:1px dashed rgba(28,26,23,.35);background:#e9e5da;display:flex;align-items:center;justify-content:center;text-align:center;font:400 10.5px/1.7 'JetBrains Mono',monospace;color:#8a8377">[ image ]<br>1200×900</div>
+<div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:400 11px 'JetBrains Mono',monospace;color:#6E44FF">03</span><span style="font:400 11px 'JetBrains Mono',monospace;color:#8a8377">2024</span></div>
+<div style="font:400 17px/1.3 'Space Mono',monospace">Docs for an API nobody read</div>
+<div style="font:300 11.5px/1.75 'JetBrains Mono',monospace;color:#57524a">A rewrite that cut support questions in half.</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px;font:400 10px/1 'JetBrains Mono',monospace">
+<span style="padding:6px 9px;white-space:nowrap;border:1px solid #6E44FF;color:#6E44FF">School project</span>
+<span style="padding:6px 9px;white-space:nowrap;border:1px solid rgba(28,26,23,.22);color:#57524a">Writing</span>
+<span style="padding:6px 9px;white-space:nowrap;border:1px solid rgba(28,26,23,.22);color:#57524a">UX</span>
+</div>
+</div>
+</div>
+<div style="margin-top:56px;display:flex;justify-content:space-between;align-items:flex-end;font:300 12px/1.8 'JetBrains Mono',monospace;color:#57524a">
+<div>aanya@iyer.dev<br>Bangalore · open to design roles</div>
+<div style="display:flex;gap:18px;font:400 12px 'JetBrains Mono',monospace"><span>GitHub</span><span style="color:#6E44FF">Résumé ↓</span><span>Email</span></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="dv-opt" id="2b">
+<div class="dv-olabel"><a class="dv-oid" href="#2b">2b</a>Case study — full process, engineer's version</div>
+<div class="dv-card" style="width:900px">
+<div style="background:#f0ede4;color:#1c1a17">
+<div style="padding:20px 88px;border-bottom:1px solid rgba(28,26,23,.16);display:flex;justify-content:space-between;font:400 12px 'JetBrains Mono',monospace">
+<span style="color:#6E44FF">← Cianna Boayue</span><span style="color:#8a8377">01 / 03 · 9 min read</span>
+</div>
+<div style="padding:60px 88px 68px">
+<div style="font:400 11px/1 'JetBrains Mono',monospace;letter-spacing:.18em;text-transform:uppercase;color:#6E44FF">Case study 01</div>
+<h1 style="margin:16px 0 0;font:700 42px/1.2 'Space Mono',monospace;letter-spacing:-.025em;max-width:620px">A queue you can actually read</h1>
+<p style="margin:20px 0 0;max-width:580px;font:300 15px/1.9 'JetBrains Mono',monospace;color:#3b3630">Support engineers were triaging 400 tickets a day in a table with 19 columns. I designed and shipped the replacement.</p>
+<div style="margin-top:40px;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;border-top:1px solid rgba(28,26,23,.16);border-bottom:1px solid rgba(28,26,23,.16);padding:20px 0">
+<div><div style="font:400 10px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8a8377">Role</div><div style="margin-top:7px;font:400 12.5px/1.5 'JetBrains Mono',monospace">Design + backend</div></div>
+<div><div style="font:400 10px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8a8377">Team</div><div style="margin-top:7px;font:400 12.5px/1.5 'JetBrains Mono',monospace">Me, 1 frontend</div></div>
+<div><div style="font:400 10px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8a8377">Span</div><div style="margin-top:7px;font:400 12.5px/1.5 'JetBrains Mono',monospace">11 weeks</div></div>
+<div><div style="font:400 10px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8a8377">Result</div><div style="margin-top:7px;font:400 12.5px/1.5 'JetBrains Mono',monospace">−38% handle time</div></div>
+</div>
+<div style="margin-top:44px;height:330px;border:1px dashed rgba(28,26,23,.4);background:#e9e5da;display:flex;align-items:center;justify-content:center;text-align:center;font:400 11px/1.7 'JetBrains Mono',monospace;color:#8a8377">[ hero image placeholder ]<br>final triage view — 1600×900</div>
+<div style="margin-top:56px;display:flex;flex-direction:column;gap:0">
+<div style="display:grid;grid-template-columns:180px 1fr;gap:36px;padding:34px 0;border-top:1px solid rgba(28,26,23,.14)">
+<div style="font:400 11px/1.6 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#6E44FF">01 — Research</div>
+<div style="max-width:520px"><div style="font:400 17px/1.55 'Space Mono',monospace">I sat with six agents for a full shift each.</div><p style="margin:14px 0 0;font:300 13.5px/1.95 'JetBrains Mono',monospace;color:#3b3630">Every one of them had built the same private workaround: sort by age, ignore twelve columns, keep a paper list of the accounts that matter. The table wasn't slow. It was undecidable.</p></div>
+</div>
+<div style="display:grid;grid-template-columns:180px 1fr;gap:36px;padding:34px 0;border-top:1px solid rgba(28,26,23,.14)">
+<div style="font:400 11px/1.6 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#6E44FF">02 — Framing</div>
+<div style="max-width:520px"><p style="margin:0;font:300 13.5px/1.95 'JetBrains Mono',monospace;color:#3b3630">Reframed the job from "show all ticket data" to "answer one question: what do I open next?" Everything else became progressive disclosure.</p>
+<div style="margin-top:18px;padding:16px 18px;border-left:2px solid #6E44FF;background:#eae6db;font:400 12.5px/1.8 'JetBrains Mono',monospace">"I don't need more information. I need permission to ignore most of it." — agent, week 2</div></div>
+</div>
+<div style="display:grid;grid-template-columns:180px 1fr;gap:36px;padding:34px 0;border-top:1px solid rgba(28,26,23,.14)">
+<div style="font:400 11px/1.6 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#6E44FF">03 — Explorations</div>
+<div><p style="margin:0 0 18px;max-width:520px;font:300 13.5px/1.95 'JetBrains Mono',monospace;color:#3b3630">Three directions, tested as clickable prototypes over two weeks.</p>
+<div style="display:flex;gap:12px">
+<div style="flex:1"><div style="height:150px;border:1px dashed rgba(28,26,23,.4);background:#e9e5da;display:flex;align-items:center;justify-content:center;font:400 10.5px 'JetBrains Mono',monospace;color:#8a8377">[ A — kanban ]</div><div style="margin-top:8px;font:300 10.5px/1.5 'JetBrains Mono',monospace;color:#8a8377">Died on volume.</div></div>
+<div style="flex:1"><div style="height:150px;border:1px dashed rgba(28,26,23,.4);background:#e9e5da;display:flex;align-items:center;justify-content:center;font:400 10.5px 'JetBrains Mono',monospace;color:#8a8377">[ B — one at a time ]</div><div style="margin-top:8px;font:300 10.5px/1.5 'JetBrains Mono',monospace;color:#8a8377">Fast, but no overview.</div></div>
+<div style="flex:1"><div style="height:150px;border:1px solid #6E44FF;background:#e9e5da;display:flex;align-items:center;justify-content:center;font:400 10.5px 'JetBrains Mono',monospace;color:#6E44FF">[ C — shipped ]</div><div style="margin-top:8px;font:300 10.5px/1.5 'JetBrains Mono',monospace;color:#6E44FF">Ranked list + peek.</div></div>
+</div></div>
+</div>
+<div style="display:grid;grid-template-columns:180px 1fr;gap:36px;padding:34px 0;border-top:1px solid rgba(28,26,23,.14)">
+<div style="font:400 11px/1.6 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#6E44FF">04 — Build</div>
+<div style="max-width:520px"><p style="margin:0;font:300 13.5px/1.95 'JetBrains Mono',monospace;color:#3b3630">The ranking needed a service that didn't exist, so I wrote it: a scoring endpoint in Go that folded SLA risk, account tier and reopen count into one number. Designing it and owning the query plan turned out to be the same job.</p></div>
+</div>
+<div style="display:grid;grid-template-columns:180px 1fr;gap:36px;padding:34px 0;border-top:1px solid rgba(28,26,23,.14)">
+<div style="font:400 11px/1.6 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#6E44FF">05 — Results</div>
+<div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(28,26,23,.18);border:1px solid rgba(28,26,23,.18);max-width:520px">
+<div style="background:#f4f1ea;padding:20px"><div style="font:700 26px/1 'Space Mono',monospace">−38%</div><div style="margin-top:7px;font:300 10.5px/1.5 'JetBrains Mono',monospace;color:#57524a">median handle time</div></div>
+<div style="background:#f4f1ea;padding:20px"><div style="font:700 26px/1 'Space Mono',monospace">19→4</div><div style="margin-top:7px;font:300 10.5px/1.5 'JetBrains Mono',monospace;color:#57524a">columns on screen</div></div>
+<div style="background:#f4f1ea;padding:20px"><div style="font:700 26px/1 'Space Mono',monospace">0</div><div style="margin-top:7px;font:300 10.5px/1.5 'JetBrains Mono',monospace;color:#57524a">paper lists left</div></div>
+</div></div>
+</div>
+<div style="display:grid;grid-template-columns:180px 1fr;gap:36px;padding:34px 0;border-top:1px solid rgba(28,26,23,.14);border-bottom:1px solid rgba(28,26,23,.14)">
+<div style="font:400 11px/1.6 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#6E44FF">06 — What I'd change</div>
+<div style="max-width:520px"><p style="margin:0;font:300 13.5px/1.95 'JetBrains Mono',monospace;color:#3b3630">I shipped the ranking as a black box. Agents trusted it for a month, then stopped when it got one call wrong. Next time the score explains itself on the row.</p></div>
+</div>
+</div>
+<div style="margin-top:50px;display:flex;justify-content:space-between;align-items:baseline;border-top:2px solid #1c1a17;padding-top:20px">
+<div style="font:400 11px 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#57524a">Next</div>
+<div style="font:700 21px/1 'Space Mono',monospace">Splitwise for housemates <span style="color:#6E44FF">→</span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="dv-opt" id="2c">
+<div class="dv-olabel"><a class="dv-oid" href="#2c">2c</a>About — the pivot, stated plainly</div>
+<div class="dv-card" style="width:640px">
+<div style="padding:56px 60px;background:#f0ede4;color:#1c1a17">
+<div style="font:400 11px/1 'JetBrains Mono',monospace;letter-spacing:.2em;text-transform:uppercase;color:#6E44FF">About</div>
+<h1 style="margin:18px 0 0;font:700 30px/1.35 'Space Mono',monospace;letter-spacing:-.02em">I write software. I want to decide what it does.</h1>
+<p style="margin:24px 0 0;font:300 14px/1.95 'JetBrains Mono',monospace;color:#3b3630">Six years in backend — payments, queues, the parts with no screens. I kept redesigning the internal tools I had to use, and eventually noticed that was the part I looked forward to.</p>
+<div style="margin-top:40px;display:flex;flex-direction:column;gap:0">
+<div style="display:grid;grid-template-columns:74px 1fr;gap:20px;padding:15px 0;border-top:1px solid rgba(28,26,23,.14);font:400 12.5px/1.6 'JetBrains Mono',monospace"><span style="color:#6E44FF">2026</span><span>Design + backend, internal tools · Northbridge</span></div>
+<div style="display:grid;grid-template-columns:74px 1fr;gap:20px;padding:15px 0;border-top:1px solid rgba(28,26,23,.14);font:400 12.5px/1.6 'JetBrains Mono',monospace"><span style="color:#6E44FF">2022</span><span>Senior backend engineer · Northbridge</span></div>
+<div style="display:grid;grid-template-columns:74px 1fr;gap:20px;padding:15px 0;border-top:1px solid rgba(28,26,23,.14);font:400 12.5px/1.6 'JetBrains Mono',monospace"><span style="color:#6E44FF">2020</span><span>Backend engineer · Kettle Labs</span></div>
+<div style="display:grid;grid-template-columns:74px 1fr;gap:20px;padding:15px 0;border-top:1px solid rgba(28,26,23,.14);border-bottom:1px solid rgba(28,26,23,.14);font:400 12.5px/1.6 'JetBrains Mono',monospace"><span style="color:#6E44FF">2019</span><span>BE Computer Science · BMSCE</span></div>
+</div>
+<div style="margin-top:34px;display:grid;grid-template-columns:1fr 1fr;gap:26px">
+<div><div style="font:400 10px/1 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#8a8377">Design</div><div style="margin-top:9px;font:300 12px/1.9 'JetBrains Mono',monospace;color:#3b3630">Figma · prototyping · research · systems · writing</div></div>
+<div><div style="font:400 10px/1 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#8a8377">Code</div><div style="margin-top:9px;font:300 12px/1.9 'JetBrains Mono',monospace;color:#3b3630">Go · TypeScript · React · Postgres · Terraform</div></div>
+</div>
+<div style="margin-top:38px;height:180px;border:1px dashed rgba(28,26,23,.4);background:#e9e5da;display:flex;align-items:center;justify-content:center;font:400 11px 'JetBrains Mono',monospace;color:#8a8377">[ photo placeholder — 1200×640 ]</div>
+</div>
+</div>
+</div>
+
+<div class="dv-opt" id="2d">
+<div class="dv-olabel"><a class="dv-oid" href="#2d">2d</a>Résumé — reads on screen, prints as one page</div>
+<div class="dv-card" style="width:720px">
+<div style="padding:56px 62px;background:#f0ede4;color:#1c1a17">
+<div style="display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:20px;border-bottom:2px solid #1c1a17">
+<div>
+<div style="font:700 30px/1.1 'Space Mono',monospace;letter-spacing:-.025em;white-space:nowrap">Cianna Boayue</div>
+<div style="margin-top:9px;font:400 12px/1.6 'JetBrains Mono',monospace;color:#57524a">Product design · Full-stack · Back-end</div>
+</div>
+<div style="text-align:right;font:300 11.5px/1.85 'JetBrains Mono',monospace;color:#57524a">aanya@iyer.dev<br>Bangalore, IN<br><span style="color:#6E44FF">iyer.dev</span></div>
+</div>
+<div style="margin-top:20px;display:flex;justify-content:flex-end"><span style="padding:9px 15px;white-space:nowrap;border:1px solid #6E44FF;color:#6E44FF;font:400 11px/1 'JetBrains Mono',monospace">Download PDF ↓</span></div>
+<div style="margin-top:30px;display:grid;grid-template-columns:120px 1fr;gap:30px;padding-top:22px;border-top:1px solid rgba(28,26,23,.14)">
+<div style="font:400 10.5px/1.6 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#6E44FF">Summary</div>
+<div style="font:300 13px/1.9 'JetBrains Mono',monospace;color:#3b3630;max-width:430px">Six years of backend engineering in payments and internal tools, now designing the products I used to only build. I own a feature from research through the query plan.</div>
+</div>
+<div style="margin-top:26px;display:grid;grid-template-columns:120px 1fr;gap:30px;padding-top:22px;border-top:1px solid rgba(28,26,23,.14)">
+<div style="font:400 10.5px/1.6 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#6E44FF">Experience</div>
+<div style="display:flex;flex-direction:column;gap:22px;max-width:430px">
+<div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:14px"><span style="font:400 15px/1.35 'Space Mono',monospace">Design + backend, internal tools</span><span style="font:400 11px/1 'JetBrains Mono',monospace;color:#8a8377;white-space:nowrap">2026—</span></div>
+<div style="margin-top:5px;font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#57524a">Northbridge · Bangalore</div>
+<div style="margin-top:9px;display:flex;flex-direction:column;gap:6px;font:300 12px/1.75 'JetBrains Mono',monospace;color:#3b3630">
+<div style="display:grid;grid-template-columns:14px 1fr;gap:6px"><span style="color:#6E44FF">·</span><span>Redesigned the support triage queue; median handle time down 38%.</span></div>
+<div style="display:grid;grid-template-columns:14px 1fr;gap:6px"><span style="color:#6E44FF">·</span><span>Wrote the ranking service behind it in Go, and ran the usability sessions that shaped it.</span></div>
+</div>
+</div>
+<div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:14px"><span style="font:400 15px/1.35 'Space Mono',monospace">Senior backend engineer</span><span style="font:400 11px/1 'JetBrains Mono',monospace;color:#8a8377;white-space:nowrap">2022—2026</span></div>
+<div style="margin-top:5px;font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#57524a">Northbridge · Bangalore</div>
+<div style="margin-top:9px;display:flex;flex-direction:column;gap:6px;font:300 12px/1.75 'JetBrains Mono',monospace;color:#3b3630">
+<div style="display:grid;grid-template-columns:14px 1fr;gap:6px"><span style="color:#6E44FF">·</span><span>Owned payment reconciliation across three providers, 2M transactions a month.</span></div>
+<div style="display:grid;grid-template-columns:14px 1fr;gap:6px"><span style="color:#6E44FF">·</span><span>Started the internal design-review habit that later became my job.</span></div>
+</div>
+</div>
+<div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:14px"><span style="font:400 15px/1.35 'Space Mono',monospace">Backend engineer</span><span style="font:400 11px/1 'JetBrains Mono',monospace;color:#8a8377;white-space:nowrap">2020—2022</span></div>
+<div style="margin-top:5px;font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#57524a">Kettle Labs · Remote</div>
+</div>
+</div>
+</div>
+<div style="margin-top:26px;display:grid;grid-template-columns:120px 1fr;gap:30px;padding-top:22px;border-top:1px solid rgba(28,26,23,.14)">
+<div style="font:400 10.5px/1.6 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#6E44FF">Skills</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px;font:400 10px/1 'JetBrains Mono',monospace;max-width:430px">
+<span style="padding:6px 9px;white-space:nowrap;border:1px solid #6E44FF;color:#6E44FF">Product design</span>
+<span style="padding:6px 9px;white-space:nowrap;border:1px solid rgba(28,26,23,.22);color:#57524a">Figma</span>
+<span style="padding:6px 9px;white-space:nowrap;border:1px solid rgba(28,26,23,.22);color:#57524a">Prototyping</span>
+<span style="padding:6px 9px;white-space:nowrap;border:1px solid rgba(28,26,23,.22);color:#57524a">Research</span>
+<span style="padding:6px 9px;white-space:nowrap;border:1px solid rgba(28,26,23,.22);color:#57524a">Design systems</span>
+<span style="padding:6px 9px;white-space:nowrap;border:1px solid rgba(28,26,23,.22);color:#57524a">Go</span>
+<span style="padding:6px 9px;white-space:nowrap;border:1px solid rgba(28,26,23,.22);color:#57524a">TypeScript</span>
+<span style="padding:6px 9px;white-space:nowrap;border:1px solid rgba(28,26,23,.22);color:#57524a">React</span>
+<span style="padding:6px 9px;white-space:nowrap;border:1px solid rgba(28,26,23,.22);color:#57524a">Postgres</span>
+<span style="padding:6px 9px;white-space:nowrap;border:1px solid rgba(28,26,23,.22);color:#57524a">Terraform</span>
+</div>
+</div>
+<div style="margin-top:26px;display:grid;grid-template-columns:120px 1fr;gap:30px;padding-top:22px;border-top:1px solid rgba(28,26,23,.14);border-bottom:1px solid rgba(28,26,23,.14);padding-bottom:22px">
+<div style="font:400 10.5px/1.6 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#6E44FF">Education</div>
+<div style="max-width:430px">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:14px"><span style="font:400 15px/1.35 'Space Mono',monospace">BE Computer Science</span><span style="font:400 11px/1 'JetBrains Mono',monospace;color:#8a8377;white-space:nowrap">2019</span></div>
+<div style="margin-top:5px;font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#57524a">BMS College of Engineering</div>
+</div>
+</div>
+<div style="margin-top:20px;font:300 10.5px/1.6 'JetBrains Mono',monospace;color:#8a8377">Updated August 2026 · references on request</div>
+</div>
+</div>
+</div>
+
+<div class="dv-opt" id="2e">
+<div class="dv-olabel"><a class="dv-oid" href="#2e">2e</a>404 — jammed page</div>
+<div class="dv-card" style="width:640px">
+<div style="padding:78px 60px;background:#f0ede4;color:#1c1a17;text-align:center">
+<div style="font:700 76px/1 'Space Mono',monospace;letter-spacing:-.04em;color:#6E44FF">4Ø4</div>
+<div style="margin-top:26px;font:400 17px/1.7 'JetBrains Mono',monospace">The page jammed.</div>
+<p style="margin:14px auto 0;max-width:340px;font:300 12.5px/1.9 'JetBrains Mono',monospace;color:#57524a">Nothing at this address. Either I moved it or you typed it from memory. Both happen.</p>
+<div style="margin:34px auto 0;max-width:400px;padding:14px 16px;border:1px dashed rgba(28,26,23,.35);font:400 12px/1 'JetBrains Mono',monospace;color:#8a8377;text-align:left">/work/qveue<span style="display:inline-block;width:9px;height:15px;margin-left:1px;background:#6E44FF;vertical-align:-2px;animation:cursorBlink 1.05s step-end infinite"></span></div>
+<div style="margin-top:30px;display:flex;gap:12px;justify-content:center;font:400 12px/1 'JetBrains Mono',monospace">
+<span style="background:#1c1a17;color:#f0ede4;padding:12px 20px">← Back to work</span>
+<span style="border:1px solid #1c1a17;padding:12px 20px">Home</span>
+</div>
+</div>
+</div>
+</div>
+
+<div class="dv-opt" id="2f">
+<div class="dv-olabel"><a class="dv-oid" href="#2f">2f</a>Mobile — home and case study</div>
+<div style="display:flex;gap:24px">
+<div class="dv-card" style="width:390px;border-radius:26px">
+<div style="background:#f0ede4;color:#1c1a17;padding:0">
+<div style="padding:12px 22px 0;display:flex;justify-content:space-between;font:400 10.5px/1 'JetBrains Mono',monospace;color:#57524a"><span>9:41</span><span>▮▮▮ ⌁</span></div>
+<div style="padding:26px 22px 34px">
+<div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid rgba(28,26,23,.2)">
+<span style="font:400 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:#57524a">A. Iyer</span>
+<span style="font:400 12px 'JetBrains Mono',monospace;color:#6E44FF">Menu ≡</span>
+</div>
+<h1 style="margin:34px 0 0;font:700 34px/1.12 'Space Mono',monospace;letter-spacing:-.03em;white-space:nowrap;border-bottom:2px dotted rgba(28,26,23,.35);display:inline-block">Aanya Iyer</h1>
+<div style="margin-top:9px;font:400 11px/1 'JetBrains Mono',monospace;color:#8a8377">tap for pronunciation</div>
+<div style="margin-top:20px;display:flex;align-items:center;gap:8px;min-height:26px">
+<span style="font:400 15px/1.2 'JetBrains Mono',monospace;white-space:nowrap">{{ typedRole }}</span>
+<span style="display:inline-block;width:9px;height:17px;background:#6E44FF;animation:cursorBlink 1.05s step-end infinite"></span>
+</div>
+<p style="margin:24px 0 0;font:300 13px/1.9 'JetBrains Mono',monospace;color:#3b3630">Six years shipping backend systems, now moving to the other side of the spec.</p>
+<div style="margin-top:34px;font:400 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:#57524a">Work</div>
+<div style="margin-top:14px;display:flex;flex-direction:column;gap:26px">
+<div style="display:flex;flex-direction:column;gap:11px">
+<div style="height:170px;border:1px dashed rgba(28,26,23,.35);background:#e9e5da;display:flex;align-items:center;justify-content:center;font:400 10.5px 'JetBrains Mono',monospace;color:#8a8377">[ image ]</div>
+<div style="display:flex;justify-content:space-between"><span style="font:400 10.5px 'JetBrains Mono',monospace;color:#6E44FF">01</span><span style="font:400 10.5px 'JetBrains Mono',monospace;color:#8a8377">2026</span></div>
+<div style="font:400 17px/1.3 'Space Mono',monospace">Queue you can actually read</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px;font:400 10px/1 'JetBrains Mono',monospace">
+<span style="padding:6px 9px;white-space:nowrap;border:1px solid #6E44FF;color:#6E44FF">Work project</span>
+<span style="padding:6px 9px;white-space:nowrap;border:1px solid rgba(28,26,23,.22);color:#57524a">Product design</span>
+<span style="padding:6px 9px;white-space:nowrap;border:1px solid rgba(28,26,23,.22);color:#57524a">Go</span>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:11px">
+<div style="height:170px;border:1px dashed rgba(28,26,23,.35);background:#e9e5da;display:flex;align-items:center;justify-content:center;font:400 10.5px 'JetBrains Mono',monospace;color:#8a8377">[ image ]</div>
+<div style="display:flex;justify-content:space-between"><span style="font:400 10.5px 'JetBrains Mono',monospace;color:#6E44FF">02</span><span style="font:400 10.5px 'JetBrains Mono',monospace;color:#8a8377">2025</span></div>
+<div style="font:400 17px/1.3 'Space Mono',monospace">Splitwise for housemates</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px;font:400 10px/1 'JetBrains Mono',monospace">
+<span style="padding:6px 9px;white-space:nowrap;border:1px solid #6E44FF;color:#6E44FF">Side project</span>
+<span style="padding:6px 9px;white-space:nowrap;border:1px solid rgba(28,26,23,.22);color:#57524a">React</span>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:11px">
+<div style="height:170px;border:1px dashed rgba(28,26,23,.35);background:#e9e5da;display:flex;align-items:center;justify-content:center;font:400 10.5px 'JetBrains Mono',monospace;color:#8a8377">[ image ]</div>
+<div style="display:flex;justify-content:space-between"><span style="font:400 10.5px 'JetBrains Mono',monospace;color:#6E44FF">03</span><span style="font:400 10.5px 'JetBrains Mono',monospace;color:#8a8377">2024</span></div>
+<div style="font:400 17px/1.3 'Space Mono',monospace">Docs for an API nobody read</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px;font:400 10px/1 'JetBrains Mono',monospace">
+<span style="padding:6px 9px;white-space:nowrap;border:1px solid #6E44FF;color:#6E44FF">School project</span>
+<span style="padding:6px 9px;white-space:nowrap;border:1px solid rgba(28,26,23,.22);color:#57524a">Writing</span>
+</div>
+</div>
+</div>
+<div style="margin-top:30px;font:300 11.5px/1.8 'JetBrains Mono',monospace;color:#57524a">aanya@iyer.dev<br>Bangalore · open to design roles</div>
+</div>
+</div>
+</div>
+<div class="dv-card" style="width:390px;border-radius:26px">
+<div style="background:#f0ede4;color:#1c1a17">
+<div style="padding:12px 22px 0;display:flex;justify-content:space-between;font:400 10.5px/1 'JetBrains Mono',monospace;color:#57524a"><span>9:41</span><span>▮▮▮ ⌁</span></div>
+<div style="padding:22px 22px 34px">
+<div style="display:flex;justify-content:space-between;font:400 11px/1 'JetBrains Mono',monospace;padding-bottom:12px;border-bottom:1px solid rgba(28,26,23,.2)"><span style="color:#6E44FF">← Work</span><span style="color:#8a8377">01 / 03</span></div>
+<div style="margin-top:26px;font:400 10px/1 'JetBrains Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:#6E44FF">Case study 01</div>
+<h1 style="margin:12px 0 0;font:700 26px/1.24 'Space Mono',monospace;letter-spacing:-.02em">A queue you can actually read</h1>
+<p style="margin:14px 0 0;font:300 12.5px/1.85 'JetBrains Mono',monospace;color:#3b3630">400 tickets a day in a table with 19 columns. I designed and shipped the replacement.</p>
+<div style="margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:14px;border-top:1px solid rgba(28,26,23,.16);border-bottom:1px solid rgba(28,26,23,.16);padding:16px 0">
+<div><div style="font:400 9.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8a8377">Role</div><div style="margin-top:6px;font:400 11.5px 'JetBrains Mono',monospace">Design + backend</div></div>
+<div><div style="font:400 9.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8a8377">Result</div><div style="margin-top:6px;font:400 11.5px 'JetBrains Mono',monospace">−38% handle time</div></div>
+</div>
+<div style="margin-top:22px;height:200px;border:1px dashed rgba(28,26,23,.4);background:#e9e5da;display:flex;align-items:center;justify-content:center;font:400 10.5px 'JetBrains Mono',monospace;color:#8a8377">[ hero image ]</div>
+<div style="margin-top:26px;font:400 10.5px/1.6 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#6E44FF">01 — Research</div>
+<div style="margin-top:10px;font:400 15px/1.5 'Space Mono',monospace">I sat with six agents for a full shift each.</div>
+<p style="margin:12px 0 0;font:300 12.5px/1.9 'JetBrains Mono',monospace;color:#3b3630">Every one had built the same private workaround. The table wasn't slow — it was undecidable.</p>
+<div style="margin-top:22px;padding:14px 16px;border-left:2px solid #6E44FF;background:#eae6db;font:400 11.5px/1.8 'JetBrains Mono',monospace">"I don't need more information. I need permission to ignore most of it."</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+<p class="dv-next">Try next: "swap in my real name and projects" · "make the roles type slower" · "show the hover pronunciation as a footnote instead"</p>
+</section>
+
+<section class="dv-turn" id="t1">
+<div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">Typewriter portfolio — three home directions + a case study</span></div>
+<div class="dv-opts">
+
+<div class="dv-opt" id="1a">
+<div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>The letter — one column, typed on the page</div>
+<div class="dv-card" style="width:900px">
+<div style="padding:72px 96px 64px; background:#f0ede4; color:#1c1a17">
+<div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #1c1a17;padding-bottom:14px">
+<div style="font:700 15px/1 'Space Mono',monospace;letter-spacing:.02em">SAM ELLERY</div>
+<div style="display:flex;gap:26px;font:400 12px/1 'JetBrains Mono',monospace;color:#57524a">
+<span>Work</span><span>About</span><span>Writing</span><span style="color:#8f2f26">Contact</span></div>
+</div>
+<div style="margin-top:54px;max-width:620px">
+<div style="font:400 12px/1 'JetBrains Mono',monospace;color:#8f2f26;letter-spacing:.14em;text-transform:uppercase">Product designer · Lisbon</div>
+<h1 style="margin:18px 0 0;font:400 34px/1.42 'Space Mono',monospace;letter-spacing:-.01em;text-wrap:pretty">I design software that stays out of the way. Currently at <span style="border-bottom:2px solid #8f2f26">Tessellate</span>, previously at two banks and one very small startup.<span style="display:inline-block;width:12px;height:26px;margin-left:6px;background:#1c1a17;vertical-align:-4px;animation:cursorBlink 1.05s step-end infinite"></span></h1>
+</div>
+<div style="margin-top:76px;display:flex;align-items:baseline;gap:14px">
+<div style="font:400 11px/1 'JetBrains Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:#57524a">Selected work</div>
+<div style="flex:1;border-bottom:1px dotted #a8a196"></div>
+<div style="font:400 11px/1 'JetBrains Mono',monospace;color:#57524a">2019—2026</div>
+</div>
+<div style="margin-top:26px;display:flex;flex-direction:column">
+<div style="display:flex;align-items:baseline;gap:16px;padding:17px 0;border-top:1px solid rgba(28,26,23,.14)">
+<span style="font:400 12px/1 'JetBrains Mono',monospace;color:#8f2f26;width:26px">01</span>
+<span style="font:400 19px/1.2 'Space Mono',monospace;min-width:250px">Ledger for freelancers</span>
+<span style="flex:1;border-bottom:1px dotted #bdb6aa"></span>
+<span style="font:400 12px/1 'JetBrains Mono',monospace;color:#57524a">Fintech · 2026</span>
+</div>
+<div style="display:flex;align-items:baseline;gap:16px;padding:17px 0;border-top:1px solid rgba(28,26,23,.14)">
+<span style="font:400 12px/1 'JetBrains Mono',monospace;color:#8f2f26;width:26px">02</span>
+<span style="font:400 19px/1.2 'Space Mono',monospace;min-width:250px">Rebuilding onboarding</span>
+<span style="flex:1;border-bottom:1px dotted #bdb6aa"></span>
+<span style="font:400 12px/1 'JetBrains Mono',monospace;color:#57524a">Growth · 2025</span>
+</div>
+<div style="display:flex;align-items:baseline;gap:16px;padding:17px 0;border-top:1px solid rgba(28,26,23,.14)">
+<span style="font:400 12px/1 'JetBrains Mono',monospace;color:#8f2f26;width:26px">03</span>
+<span style="font:400 19px/1.2 'Space Mono',monospace;min-width:250px">A design system, twice</span>
+<span style="flex:1;border-bottom:1px dotted #bdb6aa"></span>
+<span style="font:400 12px/1 'JetBrains Mono',monospace;color:#57524a">Systems · 2024</span>
+</div>
+<div style="display:flex;align-items:baseline;gap:16px;padding:17px 0;border-top:1px solid rgba(28,26,23,.14);border-bottom:1px solid rgba(28,26,23,.14)">
+<span style="font:400 12px/1 'JetBrains Mono',monospace;color:#8f2f26;width:26px">04</span>
+<span style="font:400 19px/1.2 'Space Mono',monospace;min-width:250px">Field notes app</span>
+<span style="flex:1;border-bottom:1px dotted #bdb6aa"></span>
+<span style="font:400 12px/1 'JetBrains Mono',monospace;color:#57524a">Side project · 2023</span>
+</div>
+</div>
+<div style="margin-top:72px;display:flex;justify-content:space-between;align-items:flex-end;font:400 12px/1.7 'JetBrains Mono',monospace;color:#57524a">
+<div>sam@ellery.studio<br>Open to freelance from October.</div>
+<div style="text-align:right">Read <span style="color:#8f2f26">↗ CV</span><br>Say hi <span style="color:#8f2f26">↗ Email</span></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="dv-opt" id="1b">
+<div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>The carriage — fixed masthead, work rolls past</div>
+<div class="dv-card" style="width:900px">
+<div style="display:flex;background:#f0ede4;color:#1c1a17;min-height:660px">
+<div style="width:296px;flex:none;padding:56px 34px;border-right:1px solid rgba(28,26,23,.16);display:flex;flex-direction:column;justify-content:space-between;background:#eae6db">
+<div>
+<div style="font:700 26px/1.2 'Space Mono',monospace">Sam<br>Ellery</div>
+<div style="margin-top:16px;font:400 12px/1.75 'JetBrains Mono',monospace;color:#57524a">Product designer.<br>Interfaces, systems,<br>and the words in them.</div>
+<div style="margin-top:38px;display:flex;flex-direction:column;gap:11px;font:400 13px/1 'JetBrains Mono',monospace">
+<span style="display:flex;gap:10px"><span style="color:#8f2f26">→</span>Work</span>
+<span style="display:flex;gap:10px;color:#57524a"><span style="color:transparent">→</span>About</span>
+<span style="display:flex;gap:10px;color:#57524a"><span style="color:transparent">→</span>Writing</span>
+<span style="display:flex;gap:10px;color:#57524a"><span style="color:transparent">→</span>Contact</span>
+</div>
+</div>
+<div style="font:400 10.5px/1.7 'JetBrains Mono',monospace;color:#8a8377;letter-spacing:.04em">LIS 38.7°N<br>© 2026 — set in Space Mono</div>
+</div>
+<div style="flex:1;padding:56px 44px">
+<div style="font:400 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.18em;text-transform:uppercase;color:#8a8377">Four things worth showing</div>
+<div style="margin-top:30px;display:flex;flex-direction:column;gap:16px">
+<div style="border:1px solid rgba(28,26,23,.18);padding:22px 24px;background:#f5f2ea">
+<div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font:700 18px/1.3 'Space Mono',monospace">Ledger for freelancers</div><div style="font:400 11px/1 'JetBrains Mono',monospace;color:#8f2f26">2026</div></div>
+<div style="margin-top:9px;font:300 12.5px/1.7 'JetBrains Mono',monospace;color:#57524a;max-width:400px">Invoicing that a sole trader can finish in ninety seconds. Shipped to 40k users.</div>
+<div style="margin-top:16px;display:flex;gap:8px;font:400 10px/1 'JetBrains Mono',monospace;color:#57524a">
+<span style="border:1px solid rgba(28,26,23,.2);padding:5px 8px">iOS</span><span style="border:1px solid rgba(28,26,23,.2);padding:5px 8px">Web</span><span style="border:1px solid rgba(28,26,23,.2);padding:5px 8px">Research</span></div>
+</div>
+<div style="border:1px solid rgba(28,26,23,.18);padding:22px 24px">
+<div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font:700 18px/1.3 'Space Mono',monospace">Rebuilding onboarding</div><div style="font:400 11px/1 'JetBrains Mono',monospace;color:#8f2f26">2025</div></div>
+<div style="margin-top:9px;font:300 12.5px/1.7 'JetBrains Mono',monospace;color:#57524a;max-width:400px">Eleven screens became four. Activation up 22%.</div>
+</div>
+<div style="border:1px solid rgba(28,26,23,.18);padding:22px 24px">
+<div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font:700 18px/1.3 'Space Mono',monospace">A design system, twice</div><div style="font:400 11px/1 'JetBrains Mono',monospace;color:#8f2f26">2024</div></div>
+<div style="margin-top:9px;font:300 12.5px/1.7 'JetBrains Mono',monospace;color:#57524a;max-width:400px">What I got wrong the first time, and what I did differently.</div>
+</div>
+<div style="border:1px solid rgba(28,26,23,.18);padding:22px 24px">
+<div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font:700 18px/1.3 'Space Mono',monospace">Field notes</div><div style="font:400 11px/1 'JetBrains Mono',monospace;color:#8f2f26">2023</div></div>
+<div style="margin-top:9px;font:300 12.5px/1.7 'JetBrains Mono',monospace;color:#57524a;max-width:400px">A note-taking app for people who walk a lot.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="dv-opt" id="1c">
+<div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a>Overtype — corrections, ribbon red, paper grain</div>
+<div class="dv-card" style="width:900px">
+<div style="padding:0;background:
+repeating-linear-gradient(0deg, rgba(28,26,23,.028) 0 1px, transparent 1px 4px),
+radial-gradient(120% 80% at 20% 0%, #f6f3ec 0%, #eae5da 100%);color:#1c1a17">
+<div style="padding:26px 40px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #1c1a17">
+<div style="font:400 11px/1 'JetBrains Mono',monospace;letter-spacing:.2em;text-transform:uppercase">S. Ellery — portfolio, ed. 7</div>
+<div style="font:400 11px/1 'JetBrains Mono',monospace;letter-spacing:.1em;color:#8f2f26">◼ PRESS ANY KEY</div>
+</div>
+<div style="padding:66px 40px 52px">
+<div style="font:400 12px/1 'JetBrains Mono',monospace;color:#57524a;letter-spacing:.1em">RE:</div>
+<h1 style="margin:12px 0 0;font:700 52px/1.16 'Space Mono',monospace;letter-spacing:-.02em;max-width:740px;text-wrap:pretty">A designer who <span style="text-decoration:line-through;text-decoration-color:#8f2f26;text-decoration-thickness:3px;color:#8a8377">makes things pretty</span> <span style="background:#8f2f26;color:#f0ede4;padding:0 8px">gets things shipped</span>.</h1>
+<div style="margin-top:34px;max-width:520px;font:300 14px/1.85 'JetBrains Mono',monospace;color:#3b3630">Twelve years of product work, mostly in money and mostly in tools people are obliged to use. I like the unglamorous parts: empty states, error copy, the settings screen nobody owns.</div>
+<div style="margin-top:56px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(28,26,23,.2);border:1px solid rgba(28,26,23,.2)">
+<div style="background:#f4f1ea;padding:26px 22px"><div style="font:700 30px/1 'Space Mono',monospace">40k</div><div style="margin-top:8px;font:400 11px/1.6 'JetBrains Mono',monospace;color:#57524a">people using the last thing I shipped</div></div>
+<div style="background:#f4f1ea;padding:26px 22px"><div style="font:700 30px/1 'Space Mono',monospace">4</div><div style="margin-top:8px;font:400 11px/1.6 'JetBrains Mono',monospace;color:#57524a">case studies, written properly</div></div>
+<div style="background:#f4f1ea;padding:26px 22px"><div style="font:700 30px/1 'Space Mono',monospace">1</div><div style="margin-top:8px;font:400 11px/1.6 'JetBrains Mono',monospace;color:#57524a">typewriter, actually working</div></div>
+</div>
+<div style="margin-top:44px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;font:400 12px/1 'JetBrains Mono',monospace">
+<span style="background:#1c1a17;color:#f0ede4;padding:13px 20px">See the work →</span>
+<span style="border:1px solid #1c1a17;padding:13px 20px">Download CV</span>
+<span style="color:#57524a;margin-left:8px">or just email me: sam@ellery.studio</span>
+</div>
+</div>
+<div style="border-top:1px dashed rgba(28,26,23,.35);padding:16px 40px;font:400 10.5px/1 'JetBrains Mono',monospace;color:#8a8377;display:flex;justify-content:space-between">
+<span>— end of page 1 —</span><span>↵ carriage return for work</span>
+</div>
+</div>
+</div>
+</div>
+
+<div class="dv-opt" id="1d">
+<div class="dv-olabel"><a class="dv-oid" href="#1d">1d</a>Case study page — pairs with <a class="dv-oid" href="#1a">1a</a></div>
+<div class="dv-card" style="width:900px">
+<div style="background:#f0ede4;color:#1c1a17">
+<div style="padding:22px 96px;border-bottom:1px solid rgba(28,26,23,.16);display:flex;justify-content:space-between;font:400 12px/1 'JetBrains Mono',monospace">
+<span style="color:#8f2f26">← Work</span><span style="color:#57524a">01 / 04</span>
+</div>
+<div style="padding:64px 96px 72px">
+<div style="font:400 11px/1 'JetBrains Mono',monospace;letter-spacing:.18em;text-transform:uppercase;color:#8f2f26">Case study 01</div>
+<h1 style="margin:16px 0 0;font:700 40px/1.22 'Space Mono',monospace;letter-spacing:-.02em;max-width:640px">Ledger for freelancers</h1>
+<div style="margin-top:34px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;border-top:1px solid rgba(28,26,23,.16);border-bottom:1px solid rgba(28,26,23,.16);padding:20px 0">
+<div><div style="font:400 10px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8a8377">Role</div><div style="margin-top:7px;font:400 12.5px/1.5 'JetBrains Mono',monospace">Lead designer</div></div>
+<div><div style="font:400 10px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8a8377">Team</div><div style="margin-top:7px;font:400 12.5px/1.5 'JetBrains Mono',monospace">2 eng, 1 PM</div></div>
+<div><div style="font:400 10px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8a8377">Year</div><div style="margin-top:7px;font:400 12.5px/1.5 'JetBrains Mono',monospace">2026</div></div>
+<div><div style="font:400 10px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8a8377">Outcome</div><div style="margin-top:7px;font:400 12.5px/1.5 'JetBrains Mono',monospace">+22% activation</div></div>
+</div>
+<p style="margin:40px 0 0;font:400 19px/1.7 'Space Mono',monospace;max-width:600px;text-wrap:pretty">Sole traders were abandoning invoices halfway through. Not because the form was long, but because it asked for things they did not have yet.</p>
+<div style="margin-top:46px;height:340px;border:1px dashed rgba(28,26,23,.4);background:#e9e5da;display:flex;align-items:center;justify-content:center;font:400 11px/1.6 'JetBrains Mono',monospace;color:#8a8377;text-align:center">
+[ image placeholder ]<br>before / after of the invoice flow — 1600×900
+</div>
+<div style="margin-top:14px;font:400 11px/1.6 'JetBrains Mono',monospace;color:#8a8377">Fig. 1 — the old flow, annotated during a research session.</div>
+<div style="margin-top:52px;display:grid;grid-template-columns:170px 1fr;gap:34px;align-items:start">
+<div style="font:400 11px/1.6 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8f2f26">The problem</div>
+<div style="font:300 14px/1.9 'JetBrains Mono',monospace;color:#3b3630;max-width:520px">We watched nine freelancers invoice a real client. Seven of them stopped at the tax field and opened a browser tab. The form was not too long — it was in the wrong order.</div>
+</div>
+<div style="margin-top:36px;display:grid;grid-template-columns:170px 1fr;gap:34px;align-items:start;border-top:1px solid rgba(28,26,23,.12);padding-top:36px">
+<div style="font:400 11px/1.6 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8f2f26">What we did</div>
+<div style="font:300 14px/1.9 'JetBrains Mono',monospace;color:#3b3630;max-width:520px">Moved everything the user could not answer from memory behind a single deferred step, and let a draft invoice exist without it.</div>
+</div>
+<div style="margin-top:56px;display:flex;gap:16px">
+<div style="flex:1;height:200px;border:1px dashed rgba(28,26,23,.4);background:#e9e5da;display:flex;align-items:center;justify-content:center;font:400 11px 'JetBrains Mono',monospace;color:#8a8377">[ screen 1 ]</div>
+<div style="flex:1;height:200px;border:1px dashed rgba(28,26,23,.4);background:#e9e5da;display:flex;align-items:center;justify-content:center;font:400 11px 'JetBrains Mono',monospace;color:#8a8377">[ screen 2 ]</div>
+</div>
+<div style="margin-top:64px;border-top:2px solid #1c1a17;padding-top:22px;display:flex;justify-content:space-between;align-items:baseline">
+<div style="font:400 12px/1 'JetBrains Mono',monospace;color:#57524a">Next case study</div>
+<div style="font:700 22px/1 'Space Mono',monospace">Rebuilding onboarding <span style="color:#8f2f26">→</span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+<p class="dv-next">Try next: "more like <a class="dv-oid" href="#1c">1c</a> but restrained like <a class="dv-oid" href="#1a">1a</a>" · "add a mobile version of <a class="dv-oid" href="#1b">1b</a>" · "make the work index its own page"</p>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">class Component extends DCLogic {
+  state = { i: 0, len: 0, del: false, pron: false };
+  roles = ["Product Designer", "Full-Stack Developer", "Freelancer"];
+  componentDidMount() {
+    this.t = setInterval(() => {
+      this.setState(s => {
+        const full = this.roles[s.i];
+        if (!s.del) {
+          if (s.len < full.length) return { len: s.len + 1 };
+          this.pause = (this.pause || 0) + 1;
+          return this.pause > 16 ? (this.pause = 0, { del: true }) : {};
+        }
+        if (s.len > 0) return { len: s.len - 1 };
+        return { del: false, i: (s.i + 1) % this.roles.length };
+      });
+    }, 62);
+  }
+  componentWillUnmount() { clearInterval(this.t); }
+  renderVals() {
+    return {
+      typedRole: this.roles[this.state.i].slice(0, this.state.len),
+      pronOpacity: this.state.pron ? 1 : 0,
+      showPron: () => this.setState({ pron: true }),
+      hidePron: () => this.setState({ pron: false })
+    };
+  }
+}</script>
+</body>
+</html>

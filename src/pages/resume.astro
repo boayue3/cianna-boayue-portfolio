@@ -1,0 +1,275 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TopBar from '../components/TopBar.astro';
+import { site } from '../data/site';
+import { resume } from '../data/resume';
+---
+
+<Layout title={`Résumé — ${site.name}`}>
+  <main class="page">
+    <TopBar active="resume" />
+
+    <div class="content">
+      <div class="header">
+        <div>
+          <div class="name">{resume.name}</div>
+          <div class="role-line">{resume.roleLine}</div>
+        </div>
+        <div class="contact">
+          {resume.contact.map((line, i) => (
+            <>
+              <span class:list={{ accent: i === resume.contact.length - 1 }}>{line}</span>
+              {i < resume.contact.length - 1 && <br />}
+            </>
+          ))}
+        </div>
+      </div>
+
+      <div class="download-row no-print">
+        <a class="btn btn--outline-accent" href={site.resumePdf} download>Download PDF ↓</a>
+      </div>
+
+      <div class="section">
+        <div class="section-label accent">Summary</div>
+        <div class="summary">{resume.summary}</div>
+      </div>
+
+      <div class="section">
+        <div class="section-label accent">Experience</div>
+        <div class="experience">
+          {resume.experience.map((job) => (
+            <div class="job">
+              <div class="job-head">
+                <span class="job-title">{job.title}</span>
+                <span class="job-dates">{job.dates}</span>
+              </div>
+              <div class="job-employer">{job.employer}</div>
+              {job.bullets.length > 0 && (
+                <div class="bullets">
+                  {job.bullets.map((bullet) => (
+                    <div class="bullet">
+                      <span class="accent">·</span>
+                      <span>{bullet}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-label accent">Skills</div>
+        <div class="skills-cloud">
+          {resume.skills.map((skill, i) => (
+            <span class:list={['chip', { 'chip--accent': i === 0 }]}>{skill}</span>
+          ))}
+        </div>
+      </div>
+
+      <div class="section section--last">
+        <div class="section-label accent">Education</div>
+        <div class="education">
+          <div class="edu-head">
+            <span class="edu-title">{resume.education.title}</span>
+            <span class="edu-dates">{resume.education.dates}</span>
+          </div>
+          <div class="edu-school">{resume.education.school}</div>
+        </div>
+      </div>
+
+      <div class="updated">{resume.updated}</div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 56px 62px;
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  .content {
+    margin-top: 40px;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 20px;
+    border-bottom: var(--rule-heavy);
+  }
+
+  .name {
+    font: 700 30px/1.1 var(--font-display);
+    letter-spacing: -0.025em;
+    white-space: nowrap;
+  }
+
+  .role-line {
+    margin-top: 9px;
+    font: 400 12px/1.6 var(--font-body);
+    color: var(--ink-60);
+  }
+
+  .contact {
+    text-align: right;
+    font: 300 11.5px/1.85 var(--font-body);
+    color: var(--ink-60);
+  }
+
+  .download-row {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .section {
+    margin-top: 26px;
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 30px;
+    padding-top: 22px;
+    border-top: 1px solid var(--hairline);
+  }
+
+  .section--last {
+    border-bottom: 1px solid var(--hairline);
+    padding-bottom: 22px;
+  }
+
+  .content > .section:first-of-type {
+    margin-top: 30px;
+  }
+
+  .section-label {
+    font: 400 10.5px/1.6 var(--font-body);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .summary {
+    font: 300 13px/1.9 var(--font-body);
+    color: var(--ink-80);
+    max-width: 430px;
+  }
+
+  .experience {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    max-width: 430px;
+  }
+
+  .job-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 14px;
+  }
+
+  .job-title {
+    font: 400 15px/1.35 var(--font-display);
+  }
+
+  .job-dates {
+    font: 400 11px/1 var(--font-body);
+    color: var(--ink-40);
+    white-space: nowrap;
+  }
+
+  .job-employer {
+    margin-top: 5px;
+    font: 400 11.5px/1.6 var(--font-body);
+    color: var(--ink-60);
+  }
+
+  .bullets {
+    margin-top: 9px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font: 300 12px/1.75 var(--font-body);
+    color: var(--ink-80);
+  }
+
+  .bullet {
+    display: grid;
+    grid-template-columns: 14px 1fr;
+    gap: 6px;
+  }
+
+  .skills-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    max-width: 430px;
+  }
+
+  .education {
+    max-width: 430px;
+  }
+
+  .edu-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 14px;
+  }
+
+  .edu-title {
+    font: 400 15px/1.35 var(--font-display);
+  }
+
+  .edu-dates {
+    font: 400 11px/1 var(--font-body);
+    color: var(--ink-40);
+    white-space: nowrap;
+  }
+
+  .edu-school {
+    margin-top: 5px;
+    font: 400 11.5px/1.6 var(--font-body);
+    color: var(--ink-60);
+  }
+
+  .updated {
+    margin-top: 20px;
+    font: 300 10.5px/1.6 var(--font-body);
+    color: var(--ink-40);
+  }
+
+  @media (max-width: 640px) {
+    .page {
+      padding: 34px var(--gutter-mobile) 40px;
+    }
+    .content {
+      margin-top: 0;
+    }
+    .header {
+      flex-direction: column;
+      gap: 14px;
+    }
+    .contact {
+      text-align: left;
+    }
+    .section,
+    .content > .section:first-of-type {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 22px;
+    }
+  }
+
+  @media print {
+    .page {
+      max-width: none;
+      padding: 0;
+    }
+  }
+</style>
