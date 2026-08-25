@@ -2,10 +2,10 @@
 
 :root {
   /* Color */
-  --paper: #f0ede4;
-  --paper-raised: #f4f1ea;
-  --paper-sunken: #e9e5da;
-  --paper-alt: #eae6db;
+  --paper: #f6f4ef;
+  --paper-raised: #f9f7f3;
+  --paper-sunken: #eeebe4;
+  --paper-alt: #efece5;
   --ink: #1c1a17;
   --ink-80: #3b3630;
   --ink-60: #57524a;
