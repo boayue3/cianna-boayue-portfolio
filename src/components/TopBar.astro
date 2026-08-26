@@ -40,7 +40,7 @@ const { active } = Astro.props;
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    padding: 0 var(--gutter-desktop) 14px;
+    padding: 0 calc(var(--gutter-desktop) + 24px) 14px;
     border-bottom: 1px solid var(--hairline-strong);
     font-family: var(--font-body);
   }
@@ -80,8 +80,7 @@ const { active } = Astro.props;
   .tooltip {
     position: absolute;
     top: calc(100% + 10px);
-    left: 50%;
-    transform: translateX(-50%);
+    right: 0;
     background: var(--paper-raised);
     border: 1px solid var(--hairline-strong);
     padding: 6px 10px;
@@ -115,7 +114,7 @@ const { active } = Astro.props;
     display: none;
     flex-direction: column;
     gap: 14px;
-    padding: 16px var(--gutter-desktop);
+    padding: 16px calc(var(--gutter-desktop) + 24px);
     border-bottom: 1px solid var(--hairline-strong);
     font: 400 16px var(--font-body);
     color: var(--ink-60);
