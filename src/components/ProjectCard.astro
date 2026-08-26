@@ -23,7 +23,10 @@ const Tag = project.comingSoon ? 'div' : 'a';
   <div class="desc">{project.description}</div>
   <div class="chips">
     {project.comingSoon ? (
-      <span class="chip">Coming soon</span>
+      <>
+        <span class="chip">Coming soon</span>
+        {project.tags?.map((tag) => <span class="chip">{tag}</span>)}
+      </>
     ) : (
       <>
         <span class="chip chip--accent">{project.type}</span>
@@ -55,11 +58,6 @@ const Tag = project.comingSoon ? 'div' : 'a';
 
   .card--soon {
     cursor: default;
-  }
-
-  .card--soon .thumb {
-    border-style: dashed;
-    opacity: 0.6;
   }
 
   .card--soon .title,

@@ -521,8 +521,10 @@ export const projects: Project[] = [
     slug: 'coming-soon',
     index: '04',
     year: '—',
-    title: 'Next case study',
-    description: 'A new project is in the works — check back soon.',
+    title: 'Client artwork website',
+    description: 'An end-to-end website built for a client selling their artwork — check back soon.',
+    tags: ['Client work', 'UX Design', 'Web Development'],
+    coverImage: '/work/coming-soon-cover.svg',
     comingSoon: true,
   },
 ];
