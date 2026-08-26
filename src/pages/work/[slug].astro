@@ -1,18 +1,28 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { projects, getNextProject } from '../../data/projects';
+import { projects, getNextProject, type Project } from '../../data/projects';
 import { site } from '../../data/site';
 
+const caseStudies = projects.filter((p) => p.caseStudy);
+
 export function getStaticPaths() {
-  return projects.map((project) => ({
-    params: { slug: project.slug },
-    props: { project },
-  }));
+  return projects
+    .filter((project) => project.caseStudy)
+    .map((project) => ({
+      params: { slug: project.slug },
+      props: { project },
+    }));
 }
 
-const { project } = Astro.props;
+const { project } = Astro.props as { project: Project & { caseStudy: NonNullable<Project['caseStudy']> } };
 const next = getNextProject(project.slug);
-const position = `${project.index} / ${String(projects.length).padStart(2, '0')}`;
+const position = `${project.index} / ${String(caseStudies.length).padStart(2, '0')}`;
+const factLabels = {
+  role: project.caseStudy.factLabels?.role ?? 'Role',
+  team: project.caseStudy.factLabels?.team ?? 'Team',
+  span: project.caseStudy.factLabels?.span ?? 'Span',
+  result: project.caseStudy.factLabels?.result ?? 'Result',
+};
 ---
 
 <Layout title={`${project.title} — ${site.name}`} description={project.description}>
@@ -28,13 +38,19 @@ const position = `${project.index} / ${String(projects.length).padStart(2, '0')}
       <p class="standfirst">{project.caseStudy.standfirst}</p>
 
       <div class="fact-strip">
-        <div class="fact"><div class="fact-label">Role</div><div class="fact-value">{project.caseStudy.fact.role}</div></div>
-        <div class="fact"><div class="fact-label">Team</div><div class="fact-value">{project.caseStudy.fact.team}</div></div>
-        <div class="fact"><div class="fact-label">Span</div><div class="fact-value">{project.caseStudy.fact.span}</div></div>
-        <div class="fact"><div class="fact-label">Result</div><div class="fact-value">{project.caseStudy.fact.result}</div></div>
+        <div class="fact"><div class="fact-label">{factLabels.role}</div><div class="fact-value">{project.caseStudy.fact.role}</div></div>
+        <div class="fact"><div class="fact-label">{factLabels.team}</div><div class="fact-value">{project.caseStudy.fact.team}</div></div>
+        <div class="fact"><div class="fact-label">{factLabels.span}</div><div class="fact-value">{project.caseStudy.fact.span}</div></div>
+        <div class="fact"><div class="fact-label">{factLabels.result}</div><div class="fact-value">{project.caseStudy.fact.result}</div></div>
       </div>
 
-      <div class="hero-image placeholder-image">[ hero image placeholder ]<br />{project.caseStudy.heroCaption}</div>
+      {project.coverImage ? (
+        <div class="hero-image hero-image--photo">
+          <img src={project.coverImage} alt={project.caseStudy.heroCaption} />
+        </div>
+      ) : (
+        <div class="hero-image placeholder-image">[ hero image placeholder ]<br />{project.caseStudy.heroCaption}</div>
+      )}
 
       <div class="steps">
         {project.caseStudy.steps.map((step) => (
@@ -76,6 +92,131 @@ const position = `${project.index} / ${String(projects.length).padStart(2, '0')}
                     </div>
                   ))}
                 </div>
+              )}
+              {step.kind === 'testimonials' && (
+                <div class="testimonials">
+                  {step.testimonials?.map((t) => (
+                    <div class="testimonial">
+                      <div class="testimonial-quote">“{t.quote}”</div>
+                      <div class="testimonial-name">{t.name}</div>
+                      <div class="testimonial-role">{t.role}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {step.kind === 'insights' && (
+                <div class="insight-groups">
+                  {step.insightGroups?.map((group) => (
+                    <div class="insight-group">
+                      <div class="insight-title accent">{group.title}</div>
+                      <ul class="insight-list">
+                        {group.points.map((point) => <li>{point}</li>)}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {step.kind === 'comparison' && (
+                <>
+                  <p class="paragraph" style="margin:0 0 18px">{step.paragraph}</p>
+                  <div class="comparisons">
+                    {step.comparisons?.map((c) => (
+                      <div class:list={['comparison-card', { highlight: c.highlight }]}>
+                        <div class:list={['comparison-name', { highlight: c.highlight }]}>{c.name}</div>
+                        <p class="comparison-desc">{c.description}</p>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
+              {step.kind === 'gallery' && (
+                <div class="gallery">
+                  {step.gallery?.map((g) => (
+                    <div class="gallery-thumb placeholder-image">[ image ]<br />{g.caption}</div>
+                  ))}
+                </div>
+              )}
+              {step.kind === 'list' && (
+                <ul class:list={['step-list', { numbered: step.ordered !== false }]}>
+                  {step.listItems?.map((item) => (
+                    <li>
+                      {item.title && <strong>{item.title}</strong>}{item.title ? ' ' : ''}{item.body}
+                      {item.subitems && (
+                        <ul class="sublist">
+                          {item.subitems.map((sub) => (
+                            <li><strong>{sub.title}</strong> — {sub.body}</li>
+                          ))}
+                        </ul>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {step.kind === 'quotelist' && (
+                <>
+                  {step.paragraph && <p class="paragraph" style="margin:0 0 20px">{step.paragraph}</p>}
+                  <div class="quote-list">
+                    {step.quoteList?.map((q) => (
+                      <div class="quote-list-item">
+                        <p class="paragraph" style="margin:0 0 10px">{q.context}</p>
+                        {q.quotes.map((quote) => <div class="quote">{quote}</div>)}
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
+              {step.kind === 'evidence' && (
+                <>
+                  {step.paragraph && <p class="paragraph" style="margin:0 0 20px">{step.paragraph}</p>}
+                  <div class="evidence-grid">
+                    {step.evidenceRows?.map((row) => (
+                      <div class="evidence-row">
+                        <div class="evidence-thumb placeholder-image">[ image ]<br />{row.title}</div>
+                        <div class="evidence-body">
+                          <div class="evidence-title">{row.title}</div>
+                          <p class="evidence-desc">{row.body}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
+              {step.kind === 'image' && step.image && (
+                <>
+                  {step.paragraph && <p class="paragraph" style="margin:0 0 18px">{step.paragraph}</p>}
+                  <figure class="step-figure">
+                    <img src={step.image.src} alt={step.image.caption ?? ''} />
+                    {step.image.caption && <figcaption>{step.image.caption}</figcaption>}
+                  </figure>
+                </>
+              )}
+              {step.kind === 'video' && step.video && (
+                <>
+                  {step.paragraph && <p class="paragraph" style="margin:0 0 18px">{step.paragraph}</p>}
+                  <figure class="step-figure">
+                    <video controls poster={step.video.poster} src={step.video.src} />
+                    {step.video.caption && <figcaption>{step.video.caption}</figcaption>}
+                  </figure>
+                </>
+              )}
+              {step.kind === 'reflection' && (
+                <>
+                  <p class="paragraph" style="margin:0 0 22px">{step.paragraph}</p>
+                  <div class="reflection-grid">
+                    <div class="reflection-col">
+                      <div class="reflection-title accent">What worked</div>
+                      <ul class="reflection-list">
+                        {step.worked?.map((item) => <li>{item}</li>)}
+                      </ul>
+                    </div>
+                    <div class="reflection-col">
+                      <div class="reflection-title accent">Open questions</div>
+                      <ul class="reflection-list">
+                        {step.openQuestions?.map((item) => <li>{item}</li>)}
+                      </ul>
+                    </div>
+                  </div>
+                </>
               )}
             </div>
           </div>
@@ -160,6 +301,13 @@ const position = `${project.index} / ${String(projects.length).padStart(2, '0')}
     line-height: 1.7;
   }
 
+  .hero-image--photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
   .steps {
     margin-top: 56px;
   }
@@ -208,8 +356,254 @@ const position = `${project.index} / ${String(projects.length).padStart(2, '0')}
     margin-bottom: 18px;
   }
 
-  .step-body:has(.explorations) {
+  .step-body:has(.explorations),
+  .step-body:has(.testimonials),
+  .step-body:has(.insight-groups),
+  .step-body:has(.comparisons),
+  .step-body:has(.gallery),
+  .step-body:has(.step-figure),
+  .step-body:has(.step-list),
+  .step-body:has(.quote-list),
+  .step-body:has(.evidence-grid),
+  .step-body:has(.reflection-grid) {
     max-width: 760px;
+  }
+
+  .testimonials {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .testimonial {
+    padding: 18px 20px;
+    border-left: 2px solid var(--accent);
+    background: var(--paper-alt);
+  }
+
+  .testimonial-quote {
+    font: 400 12.5px/1.8 var(--font-body);
+  }
+
+  .testimonial-name {
+    margin-top: 14px;
+    font: 700 12px var(--font-display);
+  }
+
+  .testimonial-role {
+    margin-top: 2px;
+    font: 300 10.5px var(--font-body);
+    color: var(--ink-40);
+  }
+
+  .insight-groups {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .insight-title {
+    font: 400 11px/1 var(--font-body);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .insight-list {
+    margin: 14px 0 0;
+    padding-left: 18px;
+    font: 300 13px/1.8 var(--font-body);
+    color: var(--ink-80);
+  }
+
+  .insight-list li {
+    margin-bottom: 10px;
+  }
+
+  .comparisons {
+    display: flex;
+    gap: 14px;
+  }
+
+  .comparison-card {
+    flex: 1;
+    padding: 18px;
+    border: 1px solid var(--hairline);
+  }
+
+  .comparison-card.highlight {
+    border: 1px solid var(--accent);
+    background: var(--paper-alt);
+  }
+
+  .comparison-name {
+    font: 700 13px var(--font-display);
+  }
+
+  .comparison-name.highlight {
+    color: var(--accent);
+  }
+
+  .comparison-desc {
+    margin: 10px 0 0;
+    font: 300 11.5px/1.75 var(--font-body);
+    color: var(--ink-60);
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 14px;
+  }
+
+  .gallery-thumb {
+    height: 190px;
+    font-size: 10.5px;
+    line-height: 1.7;
+  }
+
+  .step-figure {
+    margin: 0;
+  }
+
+  .step-figure img,
+  .step-figure video {
+    display: block;
+    width: 100%;
+    border: 1px solid var(--hairline);
+  }
+
+  .step-figure figcaption {
+    margin-top: 10px;
+    font: 300 11px/1.6 var(--font-body);
+    color: var(--ink-40);
+  }
+
+  .step-list {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+    font: 300 13px/1.85 var(--font-body);
+    color: var(--ink-80);
+  }
+
+  .step-list > li {
+    position: relative;
+  }
+
+  .step-list > li + li {
+    margin-top: 16px;
+  }
+
+  .step-list.numbered {
+    counter-reset: step-list-counter;
+  }
+
+  .step-list.numbered > li {
+    counter-increment: step-list-counter;
+    padding-left: 28px;
+  }
+
+  .step-list.numbered > li::before {
+    content: counter(step-list-counter) '.';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .step-list:not(.numbered) > li {
+    padding-left: 18px;
+  }
+
+  .step-list:not(.numbered) > li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--ink-40);
+  }
+
+  .step-list .sublist {
+    margin: 14px 0 0;
+    padding-left: 18px;
+    list-style: none;
+  }
+
+  .step-list .sublist > li {
+    padding-left: 0;
+  }
+
+  .step-list .sublist > li::before {
+    content: none;
+  }
+
+  .step-list .sublist > li + li {
+    margin-top: 10px;
+  }
+
+  .quote-list-item + .quote-list-item {
+    margin-top: 26px;
+  }
+
+  .quote-list-item .quote + .quote {
+    margin-top: 10px;
+  }
+
+  .evidence-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .evidence-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .evidence-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .evidence-thumb {
+    height: 130px;
+    font-size: 10px;
+    line-height: 1.6;
+  }
+
+  .evidence-title {
+    font: 700 13px var(--font-display);
+  }
+
+  .evidence-desc {
+    margin: 8px 0 0;
+    font: 300 12px/1.75 var(--font-body);
+    color: var(--ink-60);
+  }
+
+  .reflection-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .reflection-title {
+    font: 400 11px/1 var(--font-body);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .reflection-list {
+    margin: 14px 0 0;
+    padding-left: 18px;
+    font: 300 13px/1.8 var(--font-body);
+    color: var(--ink-80);
+  }
+
+  .reflection-list li {
+    margin-bottom: 10px;
   }
 
   .explorations {
@@ -354,6 +748,24 @@ const position = `${project.index} / ${String(projects.length).padStart(2, '0')}
     }
     .stat-grid {
       max-width: none;
+    }
+    .testimonials,
+    .insight-groups,
+    .reflection-grid {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+    .comparisons {
+      flex-direction: column;
+    }
+    .gallery {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .evidence-row {
+      grid-template-columns: 1fr;
+    }
+    .evidence-thumb {
+      height: 160px;
     }
     .next-title {
       font-size: 17px;
