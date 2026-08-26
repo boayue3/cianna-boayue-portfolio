@@ -7,9 +7,8 @@ export const site = {
   email: 'boayuecianna@gmail.com',
   location: 'New York City',
   availability: 'open to design roles',
-  roles: ['Product Designer', 'Full-Stack Developer', 'Freelancer'],
-  intro:
-    "Six years shipping backend systems, now moving to the other side of the spec. I still write the code — I just want to decide what it does. Below: three things I designed and built end to end.",
+  roles: ['Product Designer', 'Software Engineer', 'UX Researcher', 'Freelancer'],
+  intro: 'Passionate about combining creativity with critical design thinking.',
   github: 'https://github.com/boayue3',
   linkedin: 'https://www.linkedin.com/in/cianna-boayue/',
   resumePdf: '/cianna-boayue-resume.pdf',

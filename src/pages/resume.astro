@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import TopBar from '../components/TopBar.astro';
+import Footer from '../components/Footer.astro';
 import { site } from '../data/site';
 import { resume } from '../data/resume';
 ---
@@ -82,15 +83,17 @@ import { resume } from '../data/resume';
       </div>
 
       <div class="updated">{resume.updated}</div>
+
+      <Footer />
     </div>
   </main>
 </Layout>
 
 <style>
   .page {
-    max-width: 1040px;
+    max-width: 850px;
     margin: 0 auto;
-    padding: 60px 80px;
+    padding: 64px 72px;
     background: var(--paper);
     color: var(--ink);
   }
@@ -134,8 +137,8 @@ import { resume } from '../data/resume';
   .section {
     margin-top: 26px;
     display: grid;
-    grid-template-columns: 140px 1fr;
-    gap: 36px;
+    grid-template-columns: 130px 1fr;
+    gap: 30px;
     padding-top: 22px;
     border-top: 1px solid var(--hairline);
   }
@@ -159,7 +162,7 @@ import { resume } from '../data/resume';
     display: flex;
     flex-direction: column;
     gap: 22px;
-    max-width: 620px;
+    max-width: 560px;
   }
 
   .job-head {
@@ -204,11 +207,11 @@ import { resume } from '../data/resume';
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-    max-width: 620px;
+    max-width: 560px;
   }
 
   .education {
-    max-width: 620px;
+    max-width: 560px;
   }
 
   .edu-head {

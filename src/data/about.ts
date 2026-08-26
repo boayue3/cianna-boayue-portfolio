@@ -1,15 +1,8 @@
-// Stand-in content — replace with the real bio, timeline, and skills before shipping.
 export const about = {
   eyebrow: 'About',
-  heading: 'I write software. I want to decide what it does.',
-  paragraph:
-    'Six years in backend — payments, queues, the parts with no screens. I kept redesigning the internal tools I had to use, and eventually noticed that was the part I looked forward to.',
-  timeline: [
-    { year: '2026', text: 'Design + backend, internal tools · Northbridge' },
-    { year: '2022', text: 'Senior backend engineer · Northbridge' },
-    { year: '2020', text: 'Backend engineer · Kettle Labs' },
-    { year: '2019', text: 'BE Computer Science · BMSCE' },
+  paragraphs: [
+    'Hi, I’m Cianna, I’m a Product Designer with experience as a Software Engineer at Oracle. I graduated with a Bachelor’s in Computer Science and a minor in Africana Studies from Barnard College.',
+    'In my free time, I enjoy curating floral arrangements, ceramics, and watching way too many documentaries.',
+    'Currently open to contract roles.',
   ],
-  design: ['Figma', 'prototyping', 'research', 'systems', 'writing'],
-  code: ['Go', 'TypeScript', 'React', 'Postgres', 'Terraform'],
 };

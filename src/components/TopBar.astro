@@ -9,11 +9,15 @@ const { active } = Astro.props;
 ---
 
 <div class="topbar">
-  <div class="eyebrow">{site.eyebrow}</div>
+  <a href="/" class="brand">{site.name}</a>
   <nav class="nav-desktop">
     <a href="/#work" class:list={{ active: active === 'work' }}>Work</a>
     <a href="/about" class:list={{ active: active === 'about' }}>About</a>
     <a href="/resume" class:list={{ active: active === 'resume' }}>Résumé</a>
+    <span class="nav-flower" tabindex="0">
+      *
+      <span class="tooltip" role="tooltip">Coming soon — floral arrangements</span>
+    </span>
   </nav>
   <button class="nav-toggle" aria-expanded="false" aria-controls="mobile-menu" type="button">Menu ≡</button>
 </div>
@@ -21,27 +25,40 @@ const { active } = Astro.props;
   <a href="/#work" class:list={{ active: active === 'work' }}>Work</a>
   <a href="/about" class:list={{ active: active === 'about' }}>About</a>
   <a href="/resume" class:list={{ active: active === 'resume' }}>Résumé</a>
+  <span class="nav-flower" tabindex="0">
+    * Florals
+    <span class="tooltip" role="tooltip">Coming soon</span>
+  </span>
 </nav>
 
 <style>
   .topbar {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    box-sizing: border-box;
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    padding-bottom: 14px;
+    padding: 0 var(--gutter-desktop) 14px;
     border-bottom: 1px solid var(--hairline-strong);
     font-family: var(--font-body);
   }
 
-  .eyebrow {
+  .brand {
     font: 400 11px/1 var(--font-body);
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--ink-60);
   }
 
+  .brand:hover {
+    color: var(--accent);
+  }
+
   .nav-desktop {
     display: flex;
+    align-items: center;
     gap: 24px;
     font: 400 12px/1 var(--font-body);
     color: var(--ink-60);
@@ -51,6 +68,39 @@ const { active } = Astro.props;
     color: var(--accent);
   }
 
+  .nav-flower {
+    position: relative;
+    display: inline-flex;
+    color: var(--accent);
+    font: 700 15px/1 var(--font-body);
+    cursor: default;
+    outline: none;
+  }
+
+  .tooltip {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--paper-raised);
+    border: 1px solid var(--hairline-strong);
+    padding: 6px 10px;
+    font: 400 10px/1 var(--font-body);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-60);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+  }
+
+  .nav-flower:hover .tooltip,
+  .nav-flower:focus .tooltip,
+  .nav-flower:focus-within .tooltip {
+    opacity: 1;
+  }
+
   .nav-toggle {
     display: none;
     font: 400 12px var(--font-body);
@@ -58,10 +108,14 @@ const { active } = Astro.props;
   }
 
   .nav-mobile {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    box-sizing: border-box;
     display: none;
     flex-direction: column;
     gap: 14px;
-    padding: 16px 0;
+    padding: 16px var(--gutter-desktop);
     border-bottom: 1px solid var(--hairline-strong);
     font: 400 13px var(--font-body);
     color: var(--ink-60);
@@ -76,6 +130,12 @@ const { active } = Astro.props;
   }
 
   @media (max-width: 640px) {
+    .topbar {
+      padding: 0 var(--gutter-mobile) 14px;
+    }
+    .nav-mobile {
+      padding: 16px var(--gutter-mobile);
+    }
     .nav-desktop {
       display: none;
     }

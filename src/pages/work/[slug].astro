@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Footer from '../../components/Footer.astro';
 import { projects, getNextProject, type Project } from '../../data/projects';
 import { site } from '../../data/site';
 
@@ -227,6 +228,8 @@ const factLabels = {
         <span class="next-label">Next</span>
         <span class="next-title">{next.title} <span class="accent">→</span></span>
       </a>
+
+      <Footer />
     </div>
   </main>
 </Layout>
