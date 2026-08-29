@@ -3,7 +3,7 @@ export type ProjectType = 'Work project' | 'Side project' | 'School project';
 
 export interface ProcessStep {
   label: string; // e.g. "01 — Research"
-  kind: 'statement' | 'quote' | 'explorations' | 'stats' | 'text' | 'testimonials' | 'insights' | 'comparison' | 'gallery' | 'image' | 'video' | 'list' | 'quotelist' | 'evidence' | 'reflection';
+  kind: 'statement' | 'quote' | 'explorations' | 'stats' | 'text' | 'testimonials' | 'insights' | 'comparison' | 'gallery' | 'image' | 'video' | 'list' | 'quotelist' | 'evidence' | 'carousel' | 'reflection';
   statement?: string;
   paragraph?: string;
   quote?: string;
@@ -19,6 +19,11 @@ export interface ProcessStep {
   listItems?: { title?: string; body: string; subitems?: { title: string; body: string }[] }[];
   quoteList?: { context: string; quotes: string[] }[];
   evidenceRows?: { title: string; body: string; images?: string[] }[];
+  carousel?: {
+    src: string;
+    caption: string;
+    annotations?: { title?: string; body: string; items?: { title: string; body: string }[] }[];
+  }[];
   worked?: string[];
   openQuestions?: string[];
 }
@@ -390,51 +395,55 @@ export const projects: Project[] = [
           ],
         },
         {
-          label: '14 — Design choices',
-          kind: 'list',
-          listItems: [
+          label: '14 — Hifi screens',
+          kind: 'carousel',
+          paragraph: 'Click through the hi-fi screens — each slide carries callouts on the key design decisions behind it.',
+          carousel: [
             {
-              body: 'Depop\'s "sell an item" flow already renders a different size-input template depending on category (shirts vs. shoes vs. accessories). I extended that same pattern for measurements — fields need to be required for the system to work, but a required "waist" field makes no sense for someone selling a bag.',
-            },
-            {
-              body: 'Rather than a small tweak per category, I scoped this into three distinct input branches: flat garments, shoes, and accessories.',
-            },
-            {
-              body: 'Within each branch, I had to decide what\'s required vs. optional. Depop\'s core weakness is that free-text measurements are easy to skip, which can discourage sellers or create loopholes for anyone trying to avoid filling them in.',
-            },
-            {
-              body: 'Making key fields required, paired with guided measurement diagrams (showing sellers exactly where to measure), is the strongest fix — stronger than just adding more fields.',
-            },
-            {
-              body: 'For shoes, I included a width field in addition to standard sizing, since resale shoe fit complaints are often about width, not just length. I also added a heel-height option.',
-            },
-            {
-              body: 'As a secondary trust signal for shoes, I considered letting sellers add insole length (cm/in), since vintage and vintage-adjacent shoe sizing runs inconsistent.',
-            },
-            {
-              title: 'For the buyer-facing trust signal, I chose a "fits like" badge system over a fit-confidence percentage/score.',
-              body: 'A percentage score can feel gimmicky unless it\'s backed by real data; "fits like" feels grounded in the buyer\'s own input instead of an opaque algorithm.',
-              subitems: [
+              src: '/work/depop-hifi-slide-sell-item.png',
+              caption: 'Sell an item → Measurements → guided diagram',
+              annotations: [
                 {
-                  title: 'Fits like you',
-                  body: 'measurements match the buyer\'s saved profile within a reasonable tolerance; the primary trust signal.',
+                  title: 'Category-specific measurement input',
+                  body: 'Depop\'s "sell an item" flow already renders a different size-input template depending on category (shirts vs. shoes vs. accessories). I extended that same pattern for measurements — fields need to be required for the system to work, but a required "waist" field makes no sense for someone selling a bag.',
                 },
                 {
-                  title: 'Runs bigger',
-                  body: 'a graduated variant rather than a flat pass/fail; tells the buyer to size down or check details before buying.',
-                },
-                {
-                  title: 'Add sizes',
-                  body: 'shown when the buyer hasn\'t saved measurements yet; doubles as a CTA nudging them to complete their profile, which is what feeds this whole feature.',
-                },
-                {
-                  title: 'No measurements',
-                  body: 'shown when the seller never filled in structured data; acts as a visual penalty for unverified listings and an implicit nudge for sellers to complete the form.',
+                  title: 'Guided diagrams over more fields',
+                  body: 'Making key fields required, paired with guided measurement diagrams (showing sellers exactly where to measure), is the strongest fix — stronger than just adding more fields.',
                 },
               ],
             },
             {
-              body: 'Process note: used Claude to help sketch and iterate on screen ideations on iPad, then used Replit to convert those into lo-fi wireframes.',
+              src: '/work/depop-hifi-slide-personalization.png',
+              caption: 'Personalization → my measurements → onboarding',
+            },
+            {
+              src: '/work/depop-hifi-slide-fits-like.png',
+              caption: 'Listing badge → "fits like" detail sheet',
+              annotations: [
+                {
+                  title: 'A "fits like" badge, not a percentage score',
+                  body: 'A percentage score can feel gimmicky unless it\'s backed by real data; "fits like" feels grounded in the buyer\'s own input instead of an opaque algorithm.',
+                  items: [
+                    {
+                      title: 'Fits like you',
+                      body: 'measurements match the buyer\'s saved profile within a reasonable tolerance; the primary trust signal.',
+                    },
+                    {
+                      title: 'Runs bigger',
+                      body: 'a graduated variant rather than a flat pass/fail; tells the buyer to size down or check details before buying.',
+                    },
+                    {
+                      title: 'Add sizes',
+                      body: 'shown when the buyer hasn\'t saved measurements yet; doubles as a CTA nudging them to complete their profile.',
+                    },
+                    {
+                      title: 'No measurements',
+                      body: 'shown when the seller never filled in structured data; a visual penalty for unverified listings.',
+                    },
+                  ],
+                },
+              ],
             },
           ],
         },

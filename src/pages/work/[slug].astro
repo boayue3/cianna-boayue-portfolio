@@ -202,6 +202,43 @@ const factLabels = {
                   </div>
                 </>
               )}
+              {step.kind === 'carousel' && step.carousel && (
+                <>
+                  {step.paragraph && <p class="paragraph" style="margin:0 0 20px">{step.paragraph}</p>}
+                  <div class="hifi-carousel" data-carousel>
+                    <div class="hifi-stage">
+                      <button class="hifi-nav hifi-nav--prev" type="button" aria-label="Previous screen">‹</button>
+                      <div class="hifi-slides">
+                        {step.carousel.map((slide, i) => (
+                          <div class="hifi-slide" data-slide={i} hidden={i !== 0}>
+                            <img src={slide.src} alt={slide.caption} />
+                            <div class="hifi-caption">{slide.caption}</div>
+                            {slide.annotations?.map((note) => (
+                              <div class="hifi-annotation">
+                                {note.title && <div class="hifi-annotation-title accent">{note.title}</div>}
+                                <p class="hifi-annotation-text">{note.body}</p>
+                                {note.items && (
+                                  <ul class="hifi-annotation-list">
+                                    {note.items.map((item) => (
+                                      <li><strong>{item.title}</strong> — {item.body}</li>
+                                    ))}
+                                  </ul>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        ))}
+                      </div>
+                      <button class="hifi-nav hifi-nav--next" type="button" aria-label="Next screen">›</button>
+                    </div>
+                    <div class="hifi-dots">
+                      {step.carousel.map((_, i) => (
+                        <button class:list={['hifi-dot', { active: i === 0 }]} type="button" data-dot={i} aria-label={`Go to screen ${i + 1}`} />
+                      ))}
+                    </div>
+                  </div>
+                </>
+              )}
               {step.kind === 'image' && step.image && (
                 <>
                   {step.paragraph && <p class="paragraph" style="margin:0 0 18px">{step.paragraph}</p>}
@@ -388,6 +425,7 @@ const factLabels = {
   .step-body:has(.step-list),
   .step-body:has(.quote-list),
   .step-body:has(.evidence-grid),
+  .step-body:has(.hifi-carousel),
   .step-body:has(.reflection-grid) {
     max-width: 760px;
   }
@@ -650,6 +688,99 @@ const factLabels = {
     color: var(--ink-60);
   }
 
+  .hifi-carousel {
+    max-width: 720px;
+  }
+
+  .hifi-stage {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .hifi-nav {
+    flex: 0 0 auto;
+    width: 34px;
+    height: 34px;
+    border: 1px solid var(--hairline-strong);
+    background: var(--paper);
+    color: var(--ink);
+    font: 400 16px var(--font-body);
+    cursor: pointer;
+  }
+
+  .hifi-nav:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .hifi-slides {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .hifi-slide img {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .hifi-caption {
+    margin-top: 14px;
+    text-align: center;
+    font: 400 12px/1.5 var(--font-body);
+    color: var(--ink-60);
+  }
+
+  .hifi-annotation {
+    margin-top: 16px;
+    padding: 14px 16px;
+    border-left: 2px solid var(--accent);
+    background: var(--paper-alt);
+  }
+
+  .hifi-annotation-title {
+    font: 700 12px/1.4 var(--font-display);
+  }
+
+  .hifi-annotation-text {
+    margin: 8px 0 0;
+    font: 300 12.5px/1.75 var(--font-body);
+    color: var(--ink-80);
+  }
+
+  .hifi-annotation-list {
+    margin: 10px 0 0;
+    padding-left: 18px;
+    font: 300 12px/1.7 var(--font-body);
+    color: var(--ink-80);
+  }
+
+  .hifi-annotation-list li {
+    margin-bottom: 8px;
+  }
+
+  .hifi-dots {
+    margin-top: 18px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .hifi-dot {
+    width: 7px;
+    height: 7px;
+    padding: 0;
+    border: 1px solid var(--ink-40);
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .hifi-dot.active {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
   .reflection-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -848,3 +979,25 @@ const factLabels = {
     }
   }
 </style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((root) => {
+    const slides = Array.from(root.querySelectorAll<HTMLElement>('[data-slide]'));
+    const dots = Array.from(root.querySelectorAll<HTMLElement>('[data-dot]'));
+    const prev = root.querySelector<HTMLButtonElement>('.hifi-nav--prev');
+    const next = root.querySelector<HTMLButtonElement>('.hifi-nav--next');
+    let active = 0;
+
+    function show(i: number) {
+      active = (i + slides.length) % slides.length;
+      slides.forEach((slide, idx) => {
+        slide.hidden = idx !== active;
+      });
+      dots.forEach((dot, idx) => dot.classList.toggle('active', idx === active));
+    }
+
+    prev?.addEventListener('click', () => show(active - 1));
+    next?.addEventListener('click', () => show(active + 1));
+    dots.forEach((dot, idx) => dot.addEventListener('click', () => show(idx)));
+  });
+</script>
