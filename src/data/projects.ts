@@ -221,6 +221,7 @@ export const projects: Project[] = [
     description: 'Fixing fit trust on Depop — verified measurements and a "fits like" signal buyers can trust.',
     type: 'Side project',
     tags: ['Redesign', 'UX Research', 'Product Design'],
+    coverImage: '/work/depop-cover.jpg',
     caseStudy: {
       number: 'Case study 02',
       readTime: '9 min read',
@@ -228,7 +229,7 @@ export const projects: Project[] = [
         'The "Depop cinch" fakes a smaller waist than a garment actually has, and sizing is often buried in free text or missing entirely. I designed a fit-confidence system so buyers can trust what they\'re buying before sales-final purchase.',
       fact: { role: 'UX Researcher, Product Designer', team: 'Solo', span: '6 weeks', result: 'Concept' },
       factLabels: { span: 'Timeline', result: 'Status' },
-      heroCaption: 'Depop Fit Confidence — image placeholder',
+      heroCaption: 'Depop splash screen and the "fits like" detail view, on iPhone mockups',
       steps: [
         {
           label: '01 — Overview',
