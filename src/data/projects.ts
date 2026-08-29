@@ -64,8 +64,8 @@ export const projects: Project[] = [
       readTime: '8 min read',
       standfirst:
         'HomeSafe is a ride-coordination app that helps Columbia & Barnard students find a travel buddy after a night out — splitting the cost of an Uber and making sure no one heads home alone, especially late at night.',
-      fact: { role: 'UX Researcher, Product Designer', team: '3 designers', span: '14 weeks', result: 'Concept' },
-      factLabels: { span: 'Timeline', result: 'Status' },
+      fact: { role: 'UX Researcher, Product Designer', team: '3 designers', span: '14 weeks', result: 'Figma, Balsamiq Wireframes, Slack' },
+      factLabels: { span: 'Timeline', result: 'Tools' },
       heroCaption: 'HomeSafe — image placeholder',
       steps: [
         {
@@ -227,8 +227,8 @@ export const projects: Project[] = [
       readTime: '9 min read',
       standfirst:
         'The "Depop cinch" fakes a smaller waist than a garment actually has, and sizing is often buried in free text or missing entirely. I designed a fit-confidence system so buyers can trust what they\'re buying before sales-final purchase.',
-      fact: { role: 'UX Researcher, Product Designer', team: 'Solo', span: '6 weeks', result: 'Concept' },
-      factLabels: { span: 'Timeline', result: 'Status' },
+      fact: { role: 'UX Researcher, Product Designer', team: 'Solo', span: '6 weeks', result: 'Figma, Notion, Claude' },
+      factLabels: { span: 'Timeline', result: 'Tools' },
       heroCaption: 'Depop splash screen and the "fits like" detail view, on iPhone mockups',
       steps: [
         {
