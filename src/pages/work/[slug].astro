@@ -131,11 +131,21 @@ const factLabels = {
                 </>
               )}
               {step.kind === 'gallery' && (
-                <div class="gallery">
-                  {step.gallery?.map((g) => (
-                    <div class="gallery-thumb placeholder-image">[ image ]<br />{g.caption}</div>
-                  ))}
-                </div>
+                <>
+                  {step.paragraph && <p class="paragraph" style="margin:0 0 18px">{step.paragraph}</p>}
+                  <div class="gallery">
+                    {step.gallery?.map((g) => (
+                      g.src ? (
+                        <figure class="gallery-figure">
+                          <img src={g.src} alt={g.caption} />
+                          <figcaption>{g.caption}</figcaption>
+                        </figure>
+                      ) : (
+                        <div class="gallery-thumb placeholder-image">[ image ]<br />{g.caption}</div>
+                      )
+                    ))}
+                  </div>
+                </>
               )}
               {step.kind === 'list' && (
                 <ul class:list={['step-list', { numbered: step.ordered !== false }]}>
@@ -172,9 +182,13 @@ const factLabels = {
                   <div class="evidence-grid">
                     {step.evidenceRows?.map((row) => (
                       <div class="evidence-row">
-                        {row.image ? (
-                          <div class="evidence-thumb evidence-thumb--photo">
-                            <img src={row.image} alt={row.title} />
+                        {row.images?.length ? (
+                          <div class="evidence-thumbs">
+                            {row.images.map((src) => (
+                              <div class="evidence-thumb evidence-thumb--photo">
+                                <img src={src} alt={row.title} />
+                              </div>
+                            ))}
                           </div>
                         ) : (
                           <div class="evidence-thumb placeholder-image">[ image ]<br />{row.title}</div>
@@ -470,6 +484,23 @@ const factLabels = {
     line-height: 1.7;
   }
 
+  .gallery-figure {
+    margin: 0;
+  }
+
+  .gallery-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--hairline);
+  }
+
+  .gallery-figure figcaption {
+    margin-top: 10px;
+    font: 300 11px/1.6 var(--font-body);
+    color: var(--ink-40);
+  }
+
   .step-figure {
     margin: 0;
   }
@@ -564,8 +595,8 @@ const factLabels = {
   }
 
   .evidence-row {
-    display: grid;
-    grid-template-columns: 220px 1fr;
+    display: flex;
+    flex-wrap: wrap;
     gap: 20px;
     padding-bottom: 20px;
     border-bottom: 1px solid var(--hairline);
@@ -576,24 +607,37 @@ const factLabels = {
     padding-bottom: 0;
   }
 
+  .evidence-thumbs {
+    display: flex;
+    gap: 10px;
+    flex: 0 0 auto;
+  }
+
   .evidence-thumb {
+    width: 200px;
     height: 130px;
     font-size: 10px;
     line-height: 1.6;
   }
 
   .evidence-thumb--photo {
-    height: 280px;
+    width: 200px;
+    height: 260px;
     overflow: hidden;
     border: 1px solid var(--hairline);
+    background: var(--paper-sunken);
   }
 
   .evidence-thumb--photo img {
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    object-position: center 30%;
+    object-fit: contain;
+  }
+
+  .evidence-body {
+    flex: 1 1 240px;
+    min-width: 240px;
   }
 
   .evidence-title {
@@ -785,12 +829,18 @@ const factLabels = {
       grid-template-columns: repeat(2, 1fr);
     }
     .evidence-row {
-      grid-template-columns: 1fr;
+      flex-direction: column;
+    }
+    .evidence-thumbs {
+      width: 100%;
     }
     .evidence-thumb {
+      width: 100%;
       height: 160px;
     }
     .evidence-thumb--photo {
+      flex: 1 1 0;
+      width: auto;
       height: 320px;
     }
     .next-title {

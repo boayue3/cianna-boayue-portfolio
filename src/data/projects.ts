@@ -12,13 +12,13 @@ export interface ProcessStep {
   testimonials?: { name: string; role: string; quote: string }[];
   insightGroups?: { title: string; points: string[] }[];
   comparisons?: { name: string; description: string; highlight?: boolean }[];
-  gallery?: { caption: string }[];
+  gallery?: { caption: string; src?: string }[];
   image?: { src: string; caption?: string };
   video?: { src: string; poster?: string; caption?: string };
   ordered?: boolean; // for 'list' — defaults to numbered (true)
   listItems?: { title?: string; body: string; subitems?: { title: string; body: string }[] }[];
   quoteList?: { context: string; quotes: string[] }[];
-  evidenceRows?: { title: string; body: string; image?: string }[];
+  evidenceRows?: { title: string; body: string; images?: string[] }[];
   worked?: string[];
   openQuestions?: string[];
 }
@@ -261,24 +261,22 @@ export const projects: Project[] = [
         {
           label: '05 — Evidence from existing listings',
           kind: 'evidence',
-          paragraph: 'Four real listings show the pattern clearly.',
+          paragraph: 'Three real listings show the pattern clearly.',
           evidenceRows: [
             {
               title: 'Guess tank top / cami',
               body: 'Cinching unnatural to how the shirt actually flows; no measurements listed, only one photo of the item.',
-              image: '/work/depop-evidence-guess-tank.jpg',
+              images: ['/work/depop-evidence-guess-tank.jpg', '/work/depop-evidence-guess-tank-description.jpg'],
             },
             {
               title: 'B Darlin dress',
               body: 'Description is written around how the item fits a specific height; sizing is inconsistent between the post (labeled a size 3) and the free-text description (labeled 3/4).',
+              images: ['/work/depop-evidence-bdarlin-dress.jpg', '/work/depop-evidence-bdarlin-description.jpg'],
             },
             {
               title: 'Guess t-shirt',
               body: 'Unnatural cinching not at the natural waistline; no measurements provided.',
-            },
-            {
-              title: 'New York & Company blouse',
-              body: 'Cinched photo; measurements are included but don\'t specify what was measured (e.g. no label for pit-to-pit vs. total width).',
+              images: ['/work/depop-evidence-guess-tshirt.jpg'],
             },
           ],
         },
@@ -365,7 +363,16 @@ export const projects: Project[] = [
             'Whether sellers continue to use cinched or styled photos. That\'s a valid creative and marketing choice, and the data shows it genuinely drives engagement, so I\'m not trying to eliminate it — the goal is ensuring accurate fit information exists alongside it, not replacing it.',
         },
         {
-          label: '12 — Design principles',
+          label: '12 — Lofi sketches',
+          kind: 'gallery',
+          paragraph: 'Early sketches for the measurement input flow and the buyer-facing trust signal.',
+          gallery: [
+            { caption: 'Selling an item — category-specific measurement inputs', src: '/work/depop-lofi-selling-item.jpg' },
+            { caption: 'Trust signal on the listing card and detail view', src: '/work/depop-lofi-trust-signal.jpg' },
+          ],
+        },
+        {
+          label: '13 — Design principles',
           kind: 'list',
           listItems: [
             {
@@ -383,7 +390,7 @@ export const projects: Project[] = [
           ],
         },
         {
-          label: '13 — Design choices',
+          label: '14 — Design choices',
           kind: 'list',
           listItems: [
             {
@@ -430,11 +437,6 @@ export const projects: Project[] = [
               body: 'Process note: used Claude to help sketch and iterate on screen ideations on iPad, then used Replit to convert those into lo-fi wireframes.',
             },
           ],
-        },
-        {
-          label: '14 — Lofi wireframes',
-          kind: 'gallery',
-          gallery: [{ caption: 'lofi wireframes' }],
         },
       ],
     },
