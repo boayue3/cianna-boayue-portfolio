@@ -172,7 +172,13 @@ const factLabels = {
                   <div class="evidence-grid">
                     {step.evidenceRows?.map((row) => (
                       <div class="evidence-row">
-                        <div class="evidence-thumb placeholder-image">[ image ]<br />{row.title}</div>
+                        {row.image ? (
+                          <div class="evidence-thumb evidence-thumb--photo">
+                            <img src={row.image} alt={row.title} />
+                          </div>
+                        ) : (
+                          <div class="evidence-thumb placeholder-image">[ image ]<br />{row.title}</div>
+                        )}
                         <div class="evidence-body">
                           <div class="evidence-title">{row.title}</div>
                           <p class="evidence-desc">{row.body}</p>
@@ -559,7 +565,7 @@ const factLabels = {
 
   .evidence-row {
     display: grid;
-    grid-template-columns: 200px 1fr;
+    grid-template-columns: 220px 1fr;
     gap: 20px;
     padding-bottom: 20px;
     border-bottom: 1px solid var(--hairline);
@@ -574,6 +580,20 @@ const factLabels = {
     height: 130px;
     font-size: 10px;
     line-height: 1.6;
+  }
+
+  .evidence-thumb--photo {
+    height: 280px;
+    overflow: hidden;
+    border: 1px solid var(--hairline);
+  }
+
+  .evidence-thumb--photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
   }
 
   .evidence-title {
@@ -769,6 +789,9 @@ const factLabels = {
     }
     .evidence-thumb {
       height: 160px;
+    }
+    .evidence-thumb--photo {
+      height: 320px;
     }
     .next-title {
       font-size: 17px;

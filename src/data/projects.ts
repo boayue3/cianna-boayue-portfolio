@@ -18,7 +18,7 @@ export interface ProcessStep {
   ordered?: boolean; // for 'list' — defaults to numbered (true)
   listItems?: { title?: string; body: string; subitems?: { title: string; body: string }[] }[];
   quoteList?: { context: string; quotes: string[] }[];
-  evidenceRows?: { title: string; body: string }[];
+  evidenceRows?: { title: string; body: string; image?: string }[];
   worked?: string[];
   openQuestions?: string[];
 }
@@ -266,6 +266,7 @@ export const projects: Project[] = [
             {
               title: 'Guess tank top / cami',
               body: 'Cinching unnatural to how the shirt actually flows; no measurements listed, only one photo of the item.',
+              image: '/work/depop-evidence-guess-tank.jpg',
             },
             {
               title: 'B Darlin dress',
@@ -282,52 +283,14 @@ export const projects: Project[] = [
           ],
         },
         {
-          label: '06 — Voices from a TikTok thread',
-          kind: 'quotelist',
+          label: '06 — Affinity diagram: voices from Reddit threads',
+          kind: 'image',
           paragraph:
-            'Reactions gathered from a TikTok comment thread on the cinching trend consistently pointed to the same frustrations.',
-          quoteList: [
-            {
-              context:
-                'Buyers can\'t tell whether a garment is boxy or fitted once it\'s been cinched — the shape shown in photos doesn\'t reflect the true cut.',
-              quotes: [
-                'oh my god yes. i want to see how the shirt is shaped 😭 but i cant ever see because of that stupid scrunch. is the shirt boxy or is it made to be tight around the sides?? guess we\'ll never know! even worse when the scrunch is insanely exaggerated and the waist is like an inch wide',
-              ],
-            },
-            {
-              context:
-                'Several buyers said the cinch reads as aesthetic staging (a "Pinterest board" look) rather than an honest product photo, and that they\'d scroll past a cinched listing rather than purchase.',
-              quotes: [
-                'Yes, it looks nice, but in a pinterest board kind of way. As a listing to purchase i would scroll right by, if it\'s a boxy t shirt i would rather it look like a boxy t shirt. If you really like the dynamic shape, maybe modeling it or putting it on a mannequin bust could give it something while still showing the true fit.',
-                'i dont like it tbh because that isn\'t my body shape it\'s hard to determine what it\'ll look like on and is automatically skewed perception from the cinching. i think having both is a good option!',
-              ],
-            },
-            {
-              context:
-                'Multiple people suggested flat, unscrunched photos should still be included even if a seller wants to also post a styled shot.',
-              quotes: [
-                'at least use the "aesthetic" scrunched photo for the cover and include an unscrunched photo so people can actually see what it looks like if you\'re that attached to the scrunch lol',
-              ],
-            },
-            {
-              context:
-                'One person noted cinching can also conceal flaws, stains, or wear, since the fabric is bunched rather than laid flat.',
-              quotes: ['I feel like cinching some items could easily hide flaws / stains / heavy use in the pictures.'],
-            },
-            {
-              context:
-                'One seller admitted to using the cinch despite disliking it themselves, because it visibly performs better and drives more engagement than a flat photo.',
-              quotes: [
-                'i agree but i\'m a sellout and a poser so i did the depop scrunch on one of my tops and it has had more traction than anything else',
-              ],
-            },
-            {
-              context: 'Several comments tied the trend to broader platform pressure to stand out.',
-              quotes: [
-                'Trendy hashtags, cool backdrops, "editing" the clothes into more desirable shapes or poses. whether it\'s scrunching them up or an XS model wearing an M-L top that\'s been tied up on the back, everyone\'s trying to make their account stand out and be the coolest',
-              ],
-            },
-          ],
+            'Reactions gathered from Reddit threads on the cinching trend sorted into two clusters: fit can\'t be judged, and trust & platform pressure.',
+          image: {
+            src: '/work/depop-affinity-diagram.jpg',
+            caption: 'Affinity diagram — clustering Reddit reactions to the Depop cinch',
+          },
         },
         {
           label: '07 — Secondary research: buyer interviews',
