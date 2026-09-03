@@ -402,16 +402,7 @@ export const projects: Project[] = [
             'Whether sellers continue to use cinched or styled photos. That\'s a valid creative and marketing choice, and the data shows it genuinely drives engagement, so I\'m not trying to eliminate it — the goal is ensuring accurate fit information exists alongside it, not replacing it.',
         },
         {
-          label: '12 — Lofi sketches',
-          kind: 'gallery',
-          paragraph: 'Early sketches for the measurement input flow and the buyer-facing trust signal.',
-          gallery: [
-            { caption: 'Selling an item — category-specific measurement inputs', src: '/work/depop-lofi-selling-item.jpg' },
-            { caption: 'Trust signal on the listing card and detail view', src: '/work/depop-lofi-trust-signal.jpg' },
-          ],
-        },
-        {
-          label: '13 — Design principles',
+          label: '12 — Design principles',
           kind: 'list',
           listItems: [
             {
@@ -429,7 +420,7 @@ export const projects: Project[] = [
           ],
         },
         {
-          label: '14 — Hifi screens',
+          label: '13 — Hifi screens',
           kind: 'carousel',
           paragraph: 'Click through the hi-fi screens — each slide carries callouts on the key design decisions behind it.',
           carousel: [
