@@ -3,7 +3,7 @@ export type ProjectType = 'Work project' | 'Side project' | 'School project';
 
 export interface ProcessStep {
   label: string; // e.g. "01 — Research"
-  kind: 'statement' | 'quote' | 'explorations' | 'stats' | 'text' | 'testimonials' | 'insights' | 'comparison' | 'gallery' | 'image' | 'video' | 'list' | 'quotelist' | 'evidence' | 'carousel' | 'reflection';
+  kind: 'statement' | 'quote' | 'explorations' | 'stats' | 'text' | 'testimonials' | 'insights' | 'comparison' | 'gallery' | 'image' | 'video' | 'list' | 'quotelist' | 'evidence' | 'carousel' | 'screens' | 'reflection';
   statement?: string;
   paragraph?: string;
   quote?: string;
@@ -14,7 +14,8 @@ export interface ProcessStep {
   comparisons?: { name: string; description: string; highlight?: boolean }[];
   gallery?: { caption: string; src?: string }[];
   image?: { src: string; caption?: string };
-  video?: { src: string; poster?: string; caption?: string };
+  screenFlows?: { label: string; shots: string[] }[];
+  video?: { src: string; poster?: string; caption?: string; loop?: boolean };
   ordered?: boolean; // for 'list' — defaults to numbered (true)
   listItems?: { title?: string; body: string; subitems?: { title: string; body: string }[] }[];
   quoteList?: { context: string; quotes: string[] }[];
@@ -88,7 +89,13 @@ export const projects: Project[] = [
             "Our primary users are students at Columbia and Barnard who frequent bars and clubs downtown; the app also serves the wider student body for shared rides to airports, concerts, and other off-campus destinations. We shadowed and interviewed students on real nights out — at jazz bars in the Lower East Side, clubs in Queens, and on the walk back to campus — then ran an affinity diagramming session to find patterns across everything we'd heard.",
         },
         {
-          label: '04 — Voices from the field',
+          label: '04 — Demo video',
+          kind: 'video',
+          paragraph: 'A walkthrough of the hi-fi prototype in action.',
+          video: { src: '/work/homesafe-demo.mp4', poster: '/work/homesafe-demo-poster.jpg', caption: 'HomeSafe prototype demo', loop: true },
+        },
+        {
+          label: '05 — Voices from the field',
           kind: 'testimonials',
           testimonials: [
             {
@@ -118,14 +125,14 @@ export const projects: Project[] = [
           ],
         },
         {
-          label: '05 — Affinity diagram',
+          label: '06 — Affinity diagram',
           kind: 'image',
           paragraph:
             'We grouped everything we heard into an affinity diagram, which sorted into two clear clusters: personal safety concerns and financial & logistical constraints.',
           image: { src: '/work/homesafe-affinity-diagram.jpg', caption: 'Affinity diagram — personal safety & financial/logistical clusters' },
         },
         {
-          label: '06 — Research insights',
+          label: '07 — Research insights',
           kind: 'insights',
           insightGroups: [
             {
@@ -149,7 +156,7 @@ export const projects: Project[] = [
           ],
         },
         {
-          label: '07 — Competitive analysis',
+          label: '08 — Competitive analysis',
           kind: 'comparison',
           paragraph:
             'Two services already address pieces of this puzzle — but each leaves a gap that HomeSafe was designed to fill.',
@@ -173,25 +180,51 @@ export const projects: Project[] = [
           ],
         },
         {
-          label: '08 — Lofi prototypes',
-          kind: 'gallery',
-          gallery: [{ caption: 'lofi wireframes' }],
+          label: '09 — Lofi prototypes',
+          kind: 'image',
+          paragraph:
+            'Balsamiq wireframes covering the full flow — destination search with buddy filters, the potential-buddy feed, direct messages, reviews and verification, profile sharing, account settings, and saved destinations.',
+          image: {
+            src: '/work/homesafe-lofi-wireframes.jpg',
+            caption: 'Lo-fi wireframes — search & match, messaging, reviews, profile, and saved destinations',
+          },
         },
         {
-          label: '09 — Hifi prototypes',
-          kind: 'gallery',
-          gallery: [
-            { caption: 'onboarding' },
-            { caption: 'create a ride' },
-            { caption: 'home page' },
-            { caption: 'profile page' },
+          label: '10 — Hifi prototypes',
+          kind: 'screens',
+          paragraph:
+            'Four core flows, built in Figma: onboarding and .edu verification, posting a ride, the rider home feed, and the profile other students see.',
+          screenFlows: [
+            {
+              label: 'Onboarding',
+              shots: [
+                '/work/homesafe-hifi-ob-1-loading.png',
+                '/work/homesafe-hifi-ob-2-app.png',
+                '/work/homesafe-hifi-ob-3-email.png',
+                '/work/homesafe-hifi-ob-4-code.png',
+                '/work/homesafe-hifi-ob-5-profile.png',
+                '/work/homesafe-hifi-ob-6-safety.png',
+                '/work/homesafe-hifi-ob-7-location.png',
+              ],
+            },
+            {
+              label: 'Create a ride',
+              shots: [
+                '/work/homesafe-hifi-par-where-when.png',
+                '/work/homesafe-hifi-par-who-riding.png',
+                '/work/homesafe-hifi-par-add-note.png',
+                '/work/homesafe-hifi-par-your-ride.png',
+              ],
+            },
+            {
+              label: 'Home page',
+              shots: ['/work/homesafe-hifi-home.png', '/work/homesafe-hifi-riders.png'],
+            },
+            {
+              label: 'Profile page',
+              shots: ['/work/homesafe-hifi-profile.png', '/work/homesafe-hifi-how-others-see-you.png'],
+            },
           ],
-        },
-        {
-          label: '10 — Demo video',
-          kind: 'video',
-          paragraph: 'A walkthrough of the hi-fi prototype in action.',
-          video: { src: '/work/homesafe-demo.mp4', caption: 'HomeSafe prototype demo' },
         },
         {
           label: '11 — Reflection',

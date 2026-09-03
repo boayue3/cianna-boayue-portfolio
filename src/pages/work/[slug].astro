@@ -239,6 +239,23 @@ const factLabels = {
                   </div>
                 </>
               )}
+              {step.kind === 'screens' && step.screenFlows && (
+                <>
+                  {step.paragraph && <p class="paragraph" style="margin:0 0 22px">{step.paragraph}</p>}
+                  <div class="screen-flows">
+                    {step.screenFlows.map((flow) => (
+                      <div class:list={['screen-flow', { compact: flow.shots.length <= 2 }]}>
+                        <div class="screen-flow-label accent">{flow.label}</div>
+                        <div class="screen-row">
+                          {flow.shots.map((src) => (
+                            <img src={src} alt={flow.label} loading="lazy" />
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
               {step.kind === 'image' && step.image && (
                 <>
                   {step.paragraph && <p class="paragraph" style="margin:0 0 18px">{step.paragraph}</p>}
@@ -252,7 +269,11 @@ const factLabels = {
                 <>
                   {step.paragraph && <p class="paragraph" style="margin:0 0 18px">{step.paragraph}</p>}
                   <figure class="step-figure">
-                    <video controls poster={step.video.poster} src={step.video.src} />
+                    {step.video.loop ? (
+                      <video src={step.video.src} poster={step.video.poster} autoplay loop muted playsinline preload="auto" disablepictureinpicture controlslist="nodownload noplaybackrate" data-loop-video />
+                    ) : (
+                      <video controls poster={step.video.poster} src={step.video.src} />
+                    )}
                     {step.video.caption && <figcaption>{step.video.caption}</figcaption>}
                   </figure>
                 </>
@@ -430,6 +451,10 @@ const factLabels = {
     max-width: 760px;
   }
 
+  .step-body:has(.screen-flows) {
+    max-width: none;
+  }
+
   .testimonials {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -537,6 +562,50 @@ const factLabels = {
     margin-top: 10px;
     font: 300 11px/1.6 var(--font-body);
     color: var(--ink-40);
+  }
+
+  .screen-flows {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .screen-flow {
+    flex: 1 1 100%;
+    box-sizing: border-box;
+    background: var(--paper-raised);
+    border: 1px solid var(--hairline);
+    border-radius: 14px;
+    padding: 24px 22px 26px;
+  }
+
+  .screen-flow.compact {
+    flex: 1 1 calc(50% - 10px);
+    padding: 24px 18px 26px;
+  }
+
+  .screen-flow-label {
+    margin: 0 0 16px;
+    font: 400 12px/1 var(--font-body);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .screen-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .screen-row img {
+    display: block;
+    height: 360px;
+    width: auto;
+    filter: drop-shadow(0 10px 22px rgba(28, 26, 23, 0.14));
+  }
+
+  .screen-flow.compact .screen-row img {
+    height: 328px;
   }
 
   .step-figure {
@@ -959,6 +1028,17 @@ const factLabels = {
     .gallery {
       grid-template-columns: repeat(2, 1fr);
     }
+    .screen-flow,
+    .screen-flow.compact {
+      flex: 1 1 100%;
+      padding: 18px 16px 20px;
+    }
+    .screen-row {
+      gap: 10px;
+    }
+    .screen-row img {
+      height: 300px;
+    }
     .evidence-row {
       flex-direction: column;
     }
@@ -999,5 +1079,34 @@ const factLabels = {
     prev?.addEventListener('click', () => show(active - 1));
     next?.addEventListener('click', () => show(active + 1));
     dots.forEach((dot, idx) => dot.addEventListener('click', () => show(idx)));
+  });
+
+  // Keep the no-controls loop video playing even when a browser defers muted autoplay.
+  document.querySelectorAll<HTMLVideoElement>('video[data-loop-video]').forEach((video) => {
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.loop = true;
+    const tryPlay = () => {
+      if (!video.paused) return;
+      const p = video.play();
+      if (p) p.catch(() => {});
+    };
+    ['loadeddata', 'canplay', 'stalled', 'suspend'].forEach((evt) =>
+      video.addEventListener(evt, tryPlay)
+    );
+    [0, 200, 600, 1500, 3000].forEach((ms) => setTimeout(tryPlay, ms));
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver((entries) => {
+        entries.forEach((e) => e.isIntersecting && tryPlay());
+      }, { threshold: 0.05 }).observe(video);
+    }
+    ['pointerdown', 'touchstart', 'scroll', 'keydown'].forEach((evt) =>
+      window.addEventListener(evt, tryPlay, { passive: true })
+    );
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) tryPlay();
+    });
+    video.load();
   });
 </script>
