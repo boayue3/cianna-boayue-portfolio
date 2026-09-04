@@ -57,10 +57,17 @@ import { resume } from '../data/resume';
 
       <div class="section">
         <div class="section-label accent">Skills</div>
-        <div class="skills-cloud">
-          {resume.skills.map((skill, i) => (
-            <span class:list={['chip', { 'chip--accent': i === 0 }]}>{skill}</span>
-          ))}
+        <div class="skills-block">
+          <div class="skills-toggle no-print" role="tablist">
+            <button type="button" class="skills-toggle-btn is-active" data-skills-tab="design" aria-selected="true">Design</button>
+            <button type="button" class="skills-toggle-btn" data-skills-tab="development" aria-selected="false">Development</button>
+          </div>
+          <div class="skills-cloud" data-skills-panel="design">
+            {resume.skills.design.map((skill) => <span class="chip">{skill}</span>)}
+          </div>
+          <div class="skills-cloud" data-skills-panel="development" hidden>
+            {resume.skills.development.map((skill) => <span class="chip">{skill}</span>)}
+          </div>
         </div>
       </div>
 
@@ -88,6 +95,25 @@ import { resume } from '../data/resume';
     </div>
   </main>
 </Layout>
+
+<script>
+  const tabButtons = document.querySelectorAll<HTMLButtonElement>('[data-skills-tab]');
+  const panels = document.querySelectorAll<HTMLElement>('[data-skills-panel]');
+
+  tabButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const tab = btn.dataset.skillsTab;
+      tabButtons.forEach((b) => {
+        const isActive = b === btn;
+        b.classList.toggle('is-active', isActive);
+        b.setAttribute('aria-selected', String(isActive));
+      });
+      panels.forEach((panel) => {
+        panel.hidden = panel.dataset.skillsPanel !== tab;
+      });
+    });
+  });
+</script>
 
 <style>
   .page {
@@ -203,11 +229,46 @@ import { resume } from '../data/resume';
     gap: 6px;
   }
 
+  .skills-block {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .skills-toggle {
+    display: flex;
+    gap: 8px;
+  }
+
+  .skills-toggle-btn {
+    font: 400 10.5px/1 var(--font-body);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 7px 12px;
+    border: 1px solid var(--hairline-chip);
+    color: var(--ink-40);
+    background: none;
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  .skills-toggle-btn:hover {
+    color: var(--ink-80);
+  }
+
+  .skills-toggle-btn.is-active {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
   .skills-cloud {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
     max-width: 560px;
+  }
+
+  .skills-cloud[hidden] {
+    display: none;
   }
 
   .education {
