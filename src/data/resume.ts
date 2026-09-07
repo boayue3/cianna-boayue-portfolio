@@ -53,6 +53,7 @@ export const resume = {
     development: [
       'React',
       'Java',
+      'Python',
       'TypeScript',
       'Next.js',
       'SQL',

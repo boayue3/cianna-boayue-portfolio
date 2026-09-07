@@ -476,45 +476,13 @@ export const projects: Project[] = [
     },
   },
   {
-    slug: 'docs-for-an-api-nobody-read',
+    slug: 'coming-soon-3',
     index: '03',
-    year: '2024',
-    title: 'Docs for an API nobody read',
-    description: 'A rewrite that cut support questions in half.',
-    type: 'School project',
-    tags: ['Writing', 'UX'],
-    caseStudy: {
-      number: 'Case study 03',
-      readTime: '5 min read',
-      standfirst:
-        'A capstone API had thorough docs and almost no readers. I rewrote them around the tasks people actually came to do.',
-      fact: { role: 'UX writing + design', team: 'Solo', span: '3 weeks', result: '−50% support questions' },
-      heroCaption: 'rewritten reference page — 1600×900',
-      steps: [
-        {
-          label: '01 — Research',
-          kind: 'statement',
-          statement: 'Every question in the support channel had already been "answered."',
-          paragraph:
-            'The docs were complete and organized by endpoint, not by task. People didn\'t know which endpoint they needed, so they asked instead of reading.',
-        },
-        {
-          label: '02 — Build',
-          kind: 'text',
-          paragraph:
-            'Restructured the docs around six common tasks, each with a copyable working example first and the reference detail below it.',
-        },
-        {
-          label: '03 — Results',
-          kind: 'stats',
-          stats: [
-            { figure: '−50%', caption: 'support questions' },
-            { figure: '6', caption: 'task-first guides' },
-            { figure: '2×', caption: 'docs page views' },
-          ],
-        },
-      ],
-    },
+    year: '—',
+    title: 'Coming soon',
+    description: 'Another case study in progress — check back soon.',
+    coverImage: '/work/coming-soon-cover.svg',
+    comingSoon: true,
   },
   {
     slug: 'coming-soon',
