@@ -8,7 +8,7 @@ export const site = {
   location: 'New York City',
   availability: 'open to design roles',
   roles: ['Product Designer', 'Software Engineer', 'UX Researcher', 'Freelancer'],
-  intro: 'Passionate about combining creativity with critical design thinking.',
+  intro: 'A designer who codes: passionate about combining creativity with critical design thinking.',
   github: 'https://github.com/boayue3',
   linkedin: 'https://www.linkedin.com/in/cianna-boayue/',
   resumePdf: '/cianna-boayue-resume.pdf',

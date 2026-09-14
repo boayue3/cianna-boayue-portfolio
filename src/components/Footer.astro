@@ -14,6 +14,7 @@ import { site } from '../data/site';
     <a href={`mailto:${site.email}`}>Email</a>
   </div>
 </footer>
+<div class="coded-with">Coded with Claude :)</div>
 
 <style>
   .site-footer {
@@ -30,6 +31,13 @@ import { site } from '../data/site';
     gap: 18px;
     font: 400 12px var(--font-body);
     color: var(--ink);
+  }
+
+  .coded-with {
+    margin-top: 18px;
+    text-align: left;
+    font: 300 11px var(--font-body);
+    color: var(--ink-40);
   }
 
   @media (max-width: 640px) {

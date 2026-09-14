@@ -9,7 +9,10 @@ const { active } = Astro.props;
 ---
 
 <div class="topbar">
-  <a href="/" class="brand">{site.name}</a>
+  <div class="brand-group">
+    <a href="/" class="brand">{site.name}</a>
+    <a href="/" class="role-tag">Product Designer + Engineer</a>
+  </div>
   <nav class="nav-desktop">
     <a href="/#work" class:list={{ active: active === 'work' }}>Work</a>
     <a href="/about" class:list={{ active: active === 'about' }}>About</a>
@@ -45,6 +48,12 @@ const { active } = Astro.props;
     font-family: var(--font-body);
   }
 
+  .brand-group {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+
   .brand {
     font: 400 14px/1 var(--font-body);
     letter-spacing: 0.2em;
@@ -53,6 +62,16 @@ const { active } = Astro.props;
   }
 
   .brand:hover {
+    color: var(--accent);
+  }
+
+  .role-tag {
+    font: 400 11px/1 var(--font-body);
+    letter-spacing: 0.06em;
+    color: var(--ink-40);
+  }
+
+  .role-tag:hover {
     color: var(--accent);
   }
 
@@ -140,6 +159,9 @@ const { active } = Astro.props;
     }
     .nav-toggle {
       display: block;
+    }
+    .role-tag {
+      display: none;
     }
   }
 </style>
