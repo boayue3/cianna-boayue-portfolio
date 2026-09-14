@@ -289,7 +289,7 @@ export const projects: Project[] = [
     slug: 'someday-accountability',
     index: '02',
     year: '2026',
-    title: 'Someday',
+    title: 'Someday — Turning Saved Content Into Action',
     coverImage: '/work/someday-cover.png',
     coverImageFit: 'contain',
     coverImageBg: '#b0c99d',
