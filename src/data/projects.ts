@@ -119,18 +119,6 @@ export const projects: Project[] = [
                 'I know on Sidechat people ask about splitting Ubers to airports at specific times. There should be one for trains and Ubers too.',
             },
             {
-              name: 'Dani',
-              role: 'Student @ Columbia',
-              quote:
-                "If I go out alone, I'd just pay for the Uber alone — from Queens to Manhattan that's roughly $40, but double after 4am.",
-            },
-            {
-              name: 'Diya',
-              role: 'Student @ Barnard',
-              quote:
-                "I don't feel safe alone on the subway drunk and in revealing clothes — if I'm taking it home, I go with a friend.",
-            },
-            {
               name: 'Julia',
               role: 'Student @ Columbia',
               quote:
@@ -139,14 +127,50 @@ export const projects: Project[] = [
           ],
         },
         {
-          label: '06 — Affinity diagram',
+          label: '06 — User personas',
+          kind: 'personas',
+          personas: [
+            {
+              name: 'Diya — The Safety-First Rider',
+              context: 'Barnard student, sophomore.',
+              quotes: [
+                '"I don\'t feel safe alone on the subway drunk and in revealing clothing — if I\'m taking it home, I go with a friend."',
+              ],
+              behaviors: [
+                'Goes out 2–3 times a month, mostly downtown or in Brooklyn.',
+                'Will wait an extra 15–20 minutes rather than travel home alone.',
+                'Default plan is "leave with a friend" — HomeSafe needs to replace that friend, not just save money.',
+                'Distrustful of ride-splitting with strangers unless there\'s some way to vet who she\'s riding with.',
+              ],
+              needs:
+                "Needs from HomeSafe: visible verification (.edu-only), the ability to filter or see who's asking to ride, and a sense of a match before she commits to leaving with them.",
+            },
+            {
+              name: 'Dani — The Budget-Conscious Rider',
+              context: 'Columbia student, junior.',
+              quotes: [
+                '"If I go out alone, I\'d just pay for the Uber alone — from Queens to Manhattan that\'s roughly $40, but double after 4am."',
+              ],
+              behaviors: [
+                'Goes out most weekends, often from further-out neighborhoods (Queens, Bushwick).',
+                'Price-sensitive, especially post-surge; has skipped nights out over the cost of the ride home.',
+                'Less worried about traveling alone than Diya, more worried about the bill.',
+                "Wants speed — doesn't want to wait around for a match if it costs her more time than it saves her money.",
+              ],
+              needs:
+                "Needs from HomeSafe: a fast, low-friction way to see who's already heading her direction, with the price split visible up front.",
+            },
+          ],
+        },
+        {
+          label: '07 — Affinity diagram',
           kind: 'image',
           paragraph:
             'We grouped everything we heard into an affinity diagram, which sorted into two clear clusters: personal safety concerns and financial & logistical constraints.',
           image: { src: '/work/homesafe-affinity-diagram.jpg', caption: 'Affinity diagram — personal safety & financial/logistical clusters' },
         },
         {
-          label: '07 — Research insights',
+          label: '08 — Research insights',
           kind: 'insights',
           insightGroups: [
             {
@@ -170,7 +194,7 @@ export const projects: Project[] = [
           ],
         },
         {
-          label: '08 — Competitive analysis',
+          label: '09 — Competitive analysis',
           kind: 'comparison',
           paragraph:
             'Two services already address pieces of this puzzle — but each leaves a gap that HomeSafe was designed to fill.',
@@ -194,7 +218,7 @@ export const projects: Project[] = [
           ],
         },
         {
-          label: '09 — Lofi prototypes',
+          label: '10 — Lofi prototypes',
           kind: 'image',
           paragraph:
             'Balsamiq wireframes covering the full flow — destination search with buddy filters, the potential-buddy feed, direct messages, reviews and verification, profile sharing, account settings, and saved destinations.',
@@ -204,7 +228,7 @@ export const projects: Project[] = [
           },
         },
         {
-          label: '10 — Hifi prototypes',
+          label: '11 — Hifi prototypes',
           kind: 'screens',
           paragraph:
             'Four core flows, built in Figma: onboarding and .edu verification, posting a ride, the rider home feed, and the profile other students see.',
@@ -241,11 +265,12 @@ export const projects: Project[] = [
           ],
         },
         {
-          label: '11 — Reflection',
+          label: '12 — Reflection & Results',
           kind: 'reflection',
           paragraph:
             'Our design hypothesis: a platform like HomeSafe would provide a reliable, cost-effective way to get home safely, reducing the cost of expensive Uber rides. Our small-scale prototype test supported that — but also surfaced real open questions.',
           worked: [
+            'HomeSafe won Best App Idea for the semester in UI Design, selected from 25 teams by the professor and TAs.',
             'The group-chat format felt natural and unforced — participants used it without prompting once it was time to leave.',
             'Splitting a $57 taxi from Queens down to $14.25 per person validated the core value proposition.',
             'Ranking-driven wireframes made the jump to a polished hi-fi prototype much faster.',
@@ -824,6 +849,91 @@ export const projects: Project[] = [
                       body: 'shown when the seller never filled in structured data; a visual penalty for unverified listings.',
                     },
                   ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: '14 — Usability testing',
+          kind: 'list',
+          ordered: false,
+          paragraph: 'Validates the design before it ships — does the "fits like" system make sense, and can people actually use it correctly, before measuring impact at scale.',
+          listItems: [
+            {
+              title: 'Goal:',
+              body: 'Does the "fits like" system make sense, and can people actually use it correctly — before you\'d ever measure impact at scale.',
+            },
+            {
+              title: 'Method:',
+              body: 'Moderated 1-on-1 sessions, 5–6 participants (enough to catch most usability issues per standard research practice), using a clickable prototype.',
+            },
+            {
+              title: 'Tasks to test:',
+              body: '',
+              subitems: [
+                {
+                  title: '"Find an item you think would fit you."',
+                  body: 'Tests whether the badge is noticed and understood at a glance in the scroll view.',
+                },
+                {
+                  title: '"Add your measurements to your profile."',
+                  body: 'Tests whether the sizing-input flow is clear enough that people complete it — the step the whole feature depends on.',
+                },
+                {
+                  title: '"You found a top marked \'runs bigger.\' What would you do next?"',
+                  body: 'Tests whether the graduated signal (not just pass/fail) is actually interpretable, not just noticed.',
+                },
+                {
+                  title: '"You\'re listing a jacket for sale. Add its measurements."',
+                  body: 'Tests the seller-side guided input flow.',
+                },
+              ],
+            },
+            {
+              title: 'What to measure:',
+              body: '',
+              subitems: [
+                { title: 'Task success rate', body: 'Did they complete it without help.' },
+                { title: 'Time on task', body: 'Especially for the seller measurement flow, since friction here is the biggest risk.' },
+                {
+                  title: 'Comprehension checks',
+                  body: 'After seeing the badge, ask "what do you think this means?" before explaining it — catches misread icons/labels.',
+                },
+                { title: 'Think-aloud notes', body: 'On hesitation points.' },
+              ],
+            },
+          ],
+        },
+        {
+          label: '15 — A/B testing (proposed)',
+          kind: 'comparison',
+          paragraph:
+            "This validates impact, framed as a hypothesis since there's no real traffic to test against. Worth being upfront in the case study that this is a proposed test, not a run one — that's honest and still shows strategic thinking.",
+          comparisons: [
+            {
+              name: 'Test 1: Does the trust badge change buying behavior?',
+              description: '',
+              items: [
+                { lead: 'A (control):', rest: 'Current Depop listing card, no badge.' },
+                { lead: 'B (variant):', rest: 'Listing card with "fits like you" / "runs bigger" / "add sizes" badge.' },
+                { lead: 'Primary metric:', rest: 'Click-through rate from card to full listing, purchase completion rate.' },
+                {
+                  lead: 'Secondary metric:',
+                  rest: 'Return/dispute rate tied to sizing complaints — ties directly back to the original research problem.',
+                },
+              ],
+            },
+            {
+              name: 'Test 2: Does requiring structured measurements change seller behavior?',
+              description: '',
+              items: [
+                { lead: 'A (control):', rest: 'Current free-text description field.' },
+                { lead: 'B (variant):', rest: 'Structured required fields with a guided diagram.' },
+                { lead: 'Primary metric:', rest: '% of listings with complete, structured measurement data.' },
+                {
+                  lead: 'Secondary metric:',
+                  rest: 'Listing completion rate — does the added friction cause sellers to abandon the listing flow? Worth naming honestly as the real risk of this design.',
                 },
               ],
             },
