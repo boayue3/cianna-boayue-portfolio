@@ -14,7 +14,7 @@ export interface ProcessStep {
   comparisons?: { name: string; description: string; highlight?: boolean }[];
   gallery?: { caption: string; src?: string }[];
   image?: { src: string; caption?: string };
-  screenFlows?: { label: string; shots: string[] }[];
+  screenFlows?: { label: string; shots: string[]; note?: string }[];
   video?: { src: string; poster?: string; caption?: string; loop?: boolean };
   ordered?: boolean; // for 'list' — defaults to numbered (true)
   listItems?: { title?: string; body: string; subitems?: { title: string; body: string }[] }[];
@@ -476,13 +476,300 @@ export const projects: Project[] = [
     },
   },
   {
-    slug: 'coming-soon-3',
+    slug: 'someday-accountability',
     index: '03',
-    year: '—',
-    title: 'Coming soon',
-    description: 'Another case study in progress — check back soon.',
-    coverImage: '/work/coming-soon-cover.svg',
-    comingSoon: true,
+    year: '2026',
+    title: 'Someday',
+    description:
+      'Consolidating saved inspiration from TikTok, Instagram, and Pinterest — and designing accountability without the guilt-driven notifications that make similar apps easy to abandon.',
+    type: 'Side project',
+    tags: ['UX Research', 'Product Design', 'Concept'],
+    caseStudy: {
+      number: 'Case study 03',
+      readTime: '10 min read',
+      standfirst:
+        'A concept for consolidating saved inspiration across TikTok, Instagram, and Pinterest into a single place — and helping people actually follow through on it, without relying on the guilt-driven notification tactics that make similar apps easy to abandon.',
+      fact: { role: 'UX Researcher, Product Designer', team: 'Solo', span: '6 weeks', result: 'Figma, Notion' },
+      factLabels: { span: 'Timeline', result: 'Tools' },
+      heroCaption: 'Final polished screen or wordmark treatment',
+      steps: [
+        {
+          label: '01 — The problem',
+          kind: 'quote',
+          quote:
+            "Push notifications drive users away from an app more often than they pull them back in. This project designs an accountability tool that gathers saved inspiration from multiple platforms into one place, and helps people follow through — without leaning on the guilt-driven pressure that makes tools like Duolingo easy to resent and delete.",
+        },
+        {
+          label: '02 — Target audience',
+          kind: 'text',
+          paragraph:
+            'People who consistently save inspiration across social platforms but rarely act on it — not due to lack of interest, but due to a mix of skill uncertainty, inconsistent structure needs, and past experiences with app notifications that made them disengage entirely.',
+        },
+        {
+          label: '03 — The solution',
+          kind: 'text',
+          paragraph:
+            'Someday consolidates saved inspiration from TikTok, Instagram, and Pinterest into one place, then helps people actually act on it: due dates chosen per save, never required; opt-in AI help for ideas that feel too big to start; pull-first notifications instead of push-heavy nagging; and a triage flow that treats an old save as a decision to revisit, not a failure to fix.',
+        },
+        {
+          label: '04 — Competitive analysis',
+          kind: 'comparison',
+          paragraph:
+            'I audited existing save-consolidation apps against the follow-through problem specifically — not just organization, which they already solve well.',
+          comparisons: [
+            {
+              name: 'ARCHV / Saver / CentralSave',
+              description:
+                'Pull saves from TikTok, Instagram, and Pinterest into one place via a share extension, and solve organization well. None of them touch the psychological gap between saving and doing.',
+            },
+            {
+              name: 'Pocket Places',
+              description:
+                "Goes one step further, turning travel saves into map-based trip plans — but only because travel inherently maps to an itinerary. A hairstyle, a recipe, or a hobby doesn't have that built-in structure, which is exactly the gap this project targets.",
+            },
+            {
+              name: 'Someday',
+              description:
+                'Solves the same consolidation problem, then adds the piece the others skip: optional due dates, opt-in AI planning for "unsure how to start" saves, and pull-first, triage-based accountability instead of guilt-driven push notifications.',
+              highlight: true,
+            },
+          ],
+        },
+        {
+          label: '05 — Notification teardown',
+          kind: 'comparison',
+          paragraph:
+            'I ran a focused teardown of how six existing products handle notifications — Pinterest, Duolingo, Urban Outfitters, Snapchat, Instagram/Messenger, and Headspace — looking at permission timing, channel behavior, settings reliability, and tone.',
+          comparisons: [
+            {
+              name: 'Duolingo — the anti-pattern',
+              description:
+                'Guilt-driven copy and mascot tone, with no user control over notification volume. Users reported disabling notifications entirely because of how the app made them feel.',
+            },
+            {
+              name: 'Headspace — the positive model',
+              description:
+                'Recommendation notifications default to off. Reminder timing is fully user-chosen. Notifications are reframed as "sleep nudges" or "breathe nudges" rather than generic alerts.',
+              highlight: true,
+            },
+          ],
+        },
+        {
+          label: '06 — User interviews',
+          kind: 'list',
+          ordered: false,
+          paragraph:
+            'I interviewed four people — three hobbyists (two beginner knitters and a cook) plus myself — about their saving habits, what stops them from following through, and their relationship with app notifications generally. I expected due dates and reminders to universally help people follow through. Instead, it split evenly: one participant said a due date "wouldn\'t help" — she either acts immediately or talks herself out of something, and a deadline doesn\'t change that. Another said the opposite — without writing a hobby project into her planner, "I never would\'ve done it." Neither was wrong; they just have different relationships to commitment.',
+          listItems: [
+            {
+              title: 'The real blocker is skill, not motivation.',
+              body: "Two participants independently described giving up on a saved project — a crochet pattern, a knitting technique — because it looked too advanced and they didn't know where to start, not because they didn't want to do it.",
+            },
+            {
+              title: 'Channel-crowding bothers people more than tone.',
+              body: 'Multiple participants described apps escalating from push to email to text when ignored, and reacted negatively to that specifically — more than to the content of any one message.',
+            },
+            {
+              title: 'The Duolingo backlash, confirmed independently.',
+              body: "Every participant who mentioned Duolingo described its notifications as aggressive, and two said they'd disabled it entirely for that reason — a strong, evidence-backed floor to design against.",
+            },
+          ],
+        },
+        {
+          label: '06 — Lofi Sketches',
+          kind: 'gallery',
+          gallery: [
+            { caption: 'Early low-fi sketches, flow exploration, and any paper/whiteboard process shots' },
+          ],
+        },
+        {
+          label: '07 — Hi-fi screens',
+          kind: 'screens',
+          paragraph: 'Final polished screens across the core flow, built in Figma.',
+          screenFlows: [
+            {
+              label: 'Onboarding',
+              shots: [
+                '/work/someday-hifi-ob-1-splash.png',
+                '/work/someday-hifi-ob-2-goal.png',
+                '/work/someday-hifi-ob-3-notifications.png',
+              ],
+            },
+            {
+              label: 'Save & file within the app using the extension',
+              shots: ['/work/someday-hifi-save-sheet.png'],
+              note:
+                'Due dates are optional, chosen per save — not a required step. Because participants split evenly on whether due dates help, forcing one at save time would alienate roughly half of them. The choice lives with the user, not a fixed app-wide setting.',
+            },
+            {
+              label: 'Home & boards',
+              shots: ['/work/someday-hifi-home.png', '/work/someday-hifi-board-crochet.png'],
+            },
+            {
+              label: 'Task & AI plan',
+              shots: ['/work/someday-hifi-task-detail.png', '/work/someday-hifi-ai-plan.png'],
+            },
+            {
+              label: 'Check-in & settings',
+              shots: ['/work/someday-hifi-checkin.png', '/work/someday-hifi-notifications-settings.png'],
+            },
+          ],
+        },
+        {
+          label: '08 — Design alternatives considered',
+          kind: 'explorations',
+          paragraph: 'The road not taken — alternatives explored before arriving at the final direction.',
+          explorations: [
+            { caption: 'Palette', verdict: 'Mint/plum/teal/coral wellness direction vs. the final neutral, content-forward system.' },
+            { caption: 'Typography', verdict: 'Single-typeface DM Sans vs. mixed serif pairing vs. playful rounded options.' },
+            { caption: 'Accountability mechanic', verdict: 'Reward/social system and time-boxed commitments, considered before landing on triage.' },
+            { caption: 'App name', verdict: 'Alternate names shortlisted before landing on "Someday."' },
+          ],
+        },
+        {
+          label: '09 — Design decisions',
+          kind: 'list',
+          ordered: false,
+          listItems: [
+            {
+              title: 'Due dates are optional, chosen per save — not a required step.',
+              body: 'Because participants split evenly on whether due dates help, forcing one at save time would alienate roughly half of them. The choice lives with the user, not a fixed app-wide setting.',
+            },
+            {
+              title: 'AI-assisted planning is opt-in, never automatic.',
+              body: 'When a saved idea sits in "unsure how to start," the app never generates a plan unprompted — it\'s a visible action the user taps ("Help me build a plan"). Every suggested step is editable and framed as a suggestion, and the screen discloses plainly when source material is incomplete.',
+            },
+            {
+              title: 'Notifications are pull-first by default, with real user control.',
+              body: 'Given the near-universal Duolingo backlash in interviews, the default experience favors in-app check-ins over push. Where push exists, it\'s a single either/or choice with in-app — not stacked with email. Recommendation-style notifications default to off, and a quiet-hours setting prevents late-night interruptions.',
+            },
+            {
+              title: 'Triage, not tracking.',
+              body: 'Old, untouched saves resurface with a simple question — "still want this?" — with three honest outcomes: keep it, let it go, or defer the decision. This reframes follow-through as an ongoing decision a person is allowed to revisit, rather than an obligation they\'re failing to meet.',
+            },
+            {
+              title: 'A soft permission ask before the system prompt.',
+              body: 'Since declining the OS notification dialog makes re-prompting difficult, a custom screen explains the value first and only leads into the system prompt if the user opts in. It only appears for users who said they want to actually follow through during onboarding.',
+            },
+          ],
+        },
+        {
+          label: '10 — Trade-offs',
+          kind: 'comparison',
+          comparisons: [
+            {
+              name: 'Pull-first notifications vs. engagement',
+              description:
+                "A pull-first model almost certainly means lower day-to-day engagement than a push-heavy competitor — that's the point, but it's a real cost if this were a product with growth targets. I'm accepting lower engagement as the price of not becoming Duolingo.",
+            },
+            {
+              name: 'Optional due dates vs. structure for people who need it',
+              description:
+                'Making due dates optional protects the half of my sample who found them pressuring — but the other half get a weaker default experience unless they opt in. A different designer could reasonably bet the other way.',
+            },
+            {
+              name: 'Opt-in AI assistance vs. usage',
+              description:
+                "Requiring a tap rather than surfacing help automatically means some people who'd benefit most — stuck and unsure — might never discover it.",
+            },
+            {
+              name: 'Single delivery channel vs. reach',
+              description:
+                'Restricting push and email to an either/or choice reduces the odds any single reminder reaches the user — the trade-off for solving the channel-crowding complaint from research.',
+            },
+            {
+              name: 'Small, hobbyist-skewed research sample vs. generalizability',
+              description:
+                "Three of four interview participants shared a craft/hobbyist context, which shaped flows like \"unsure how to start\" in ways that may not generalize. I'm treating this as a real limitation, not a settled finding.",
+            },
+          ],
+        },
+        {
+          label: '11 — Key flows',
+          kind: 'text',
+          paragraph:
+            'The core flow runs onboarding → soft permission moment → share-extension save → home confirmation → board detail → task detail → AI-assisted plan-building (opt-in) → triage → notification settings.',
+        },
+        {
+          label: '11 — Key flows',
+          kind: 'gallery',
+          gallery: [
+            { caption: 'Flow diagram — the full user journey, onboarding through triage/settings' },
+          ],
+        },
+        {
+          label: '12 — Results',
+          kind: 'quote',
+          paragraph: 'Hypothesis:',
+          quote:
+            'We believe pull-first triage (vs. push reminders) will increase saved-task completion without increasing notification opt-outs, because it removes guilt-driven pressure.',
+        },
+        {
+          label: '12 — Results',
+          kind: 'list',
+          ordered: false,
+          paragraph: "What I'd measure:",
+          listItems: [
+            {
+              title: 'Saved-task completion rate —',
+              body: 'the percentage of saves that move to "in progress" or "completed" within a given window. The core metric: it tests whether the accountability model works at all.',
+            },
+            {
+              title: 'Notification opt-out rate —',
+              body: 'the percentage of users who disable check-ins entirely after enabling them.',
+            },
+            {
+              title: 'Time-to-first-action after a triage session —',
+              body: 'how quickly a user acts after a check-in prompt, versus how often stale saves are simply ignored again.',
+            },
+            {
+              title: '"Let go" rate vs. silent abandonment —',
+              body: 'how often users actively release a save compared to how often saves just sit untouched indefinitely.',
+            },
+            {
+              title: 'A/B comparison against a push-reminder control group —',
+              body: 'completion rate and opt-out rate for a pull-first cohort against a push-reminder cohort, holding everything else constant.',
+            },
+          ],
+        },
+        {
+          label: '12 — Results',
+          kind: 'text',
+          paragraph:
+            'What would prove this wrong: if the pull-first cohort showed lower completion than the push cohort, that would suggest some users need to be pushed toward action more than this design assumes — mapping back to the due-date and notification-preference split already found in interviews.',
+        },
+        {
+          label: '13 — Usability testing',
+          kind: 'text',
+          paragraph:
+            "This is a concept, not a shipped product, so what follows is the plan for moderated usability testing rather than completed findings — to run once there's a testable prototype, with a participant mix broader than the hobbyist-skewed interview round above.",
+        },
+        {
+          label: '13 — Usability testing',
+          kind: 'list',
+          ordered: false,
+          paragraph: "What I'd test:",
+          listItems: [
+            { body: 'Save an item via the share extension and file it into a board.' },
+            { body: 'Locate a specific saved item and change its state.' },
+            { body: 'Use "unsure how to start" to generate and edit an AI-assisted plan — watching whether it feels trustworthy, generic, or off-base.' },
+            { body: 'Go through a triage/check-in prompt — watching whether "still want this?" feels supportive or still reads as pressure.' },
+            { body: 'Adjust notification settings (type, delivery channel, quiet hours).' },
+          ],
+        },
+        {
+          label: '13 — Usability testing',
+          kind: 'gallery',
+          gallery: [{ caption: 'Usability findings — to be filled in after sessions run' }],
+        },
+        {
+          label: '14 — Reflection',
+          kind: 'text',
+          paragraph:
+            "The most useful shift in this project happened when the research disagreed with my starting assumption — I expected due dates to universally help, and half my participants told me otherwise. Building the due-date decision around that disagreement, instead of picking a side, produced a better design than either extreme would have.",
+        },
+      ],
+    },
   },
   {
     slug: 'coming-soon',

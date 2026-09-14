@@ -62,6 +62,7 @@ const factLabels = {
                 <>
                   <div class="statement">{step.statement}</div>
                   <p class="paragraph">{step.paragraph}</p>
+                  {step.quote && <div class="quote">{step.quote}</div>}
                 </>
               )}
               {step.kind === 'quote' && (
@@ -148,6 +149,8 @@ const factLabels = {
                 </>
               )}
               {step.kind === 'list' && (
+                <>
+                {step.paragraph && <p class="paragraph" style="margin:0 0 18px">{step.paragraph}</p>}
                 <ul class:list={['step-list', { numbered: step.ordered !== false }]}>
                   {step.listItems?.map((item) => (
                     <li>
@@ -162,6 +165,7 @@ const factLabels = {
                     </li>
                   ))}
                 </ul>
+                </>
               )}
               {step.kind === 'quotelist' && (
                 <>
@@ -246,10 +250,13 @@ const factLabels = {
                     {step.screenFlows.map((flow) => (
                       <div class:list={['screen-flow', { compact: flow.shots.length <= 2 }]}>
                         <div class="screen-flow-label accent">{flow.label}</div>
-                        <div class="screen-row">
-                          {flow.shots.map((src) => (
-                            <img src={src} alt={flow.label} loading="lazy" />
-                          ))}
+                        <div class:list={['screen-flow-body', { 'has-note': flow.note }]}>
+                          <div class="screen-row">
+                            {flow.shots.map((src) => (
+                              <img src={src} alt={flow.label} loading="lazy" />
+                            ))}
+                          </div>
+                          {flow.note && <p class="screen-flow-note">{flow.note}</p>}
                         </div>
                       </div>
                     ))}
@@ -519,11 +526,12 @@ const factLabels = {
 
   .comparisons {
     display: flex;
+    flex-wrap: wrap;
     gap: 14px;
   }
 
   .comparison-card {
-    flex: 1;
+    flex: 1 1 220px;
     padding: 18px;
     border: 1px solid var(--hairline);
   }
@@ -603,16 +611,35 @@ const factLabels = {
     text-transform: uppercase;
   }
 
+  .screen-flow-body {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .screen-flow-body.has-note {
+    gap: 28px;
+    align-items: flex-start;
+  }
+
+  .screen-flow-note {
+    flex: 1 1 240px;
+    margin: 0;
+    font: 300 12.5px/1.85 var(--font-body);
+    color: var(--ink-60);
+  }
+
   .screen-row {
     display: flex;
     flex-wrap: wrap;
     gap: 14px;
+    flex: 0 0 auto;
   }
 
   .screen-row img {
     display: block;
     height: 360px;
     width: auto;
+    border-radius: 28px;
     filter: drop-shadow(0 10px 22px rgba(28, 26, 23, 0.14));
   }
 
@@ -810,6 +837,7 @@ const factLabels = {
     width: auto;
     max-width: 100%;
     margin: 0 auto;
+    border-radius: 36px;
   }
 
   .hifi-caption {
