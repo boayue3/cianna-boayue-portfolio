@@ -13,6 +13,7 @@ export interface ProcessStep {
   insightGroups?: { title: string; points: string[] }[];
   comparisons?: { name: string; description: string; highlight?: boolean; items?: { lead: string; rest: string }[] }[];
   gallery?: { caption: string; src?: string }[];
+  galleryLayout?: 'grid' | 'sketch'; // 'sketch': first image tall on the left, remaining stacked on the right
   image?: { src: string; caption?: string };
   screenFlows?: { label: string; shots: string[]; note?: string }[];
   video?: { src: string; poster?: string; caption?: string; loop?: boolean };
@@ -29,12 +30,13 @@ export interface ProcessStep {
   openQuestions?: string[];
   personas?: {
     name: string;
-    basedOn: string;
+    basedOn?: string;
     context: string;
-    goals: string[];
-    frustrations: string[];
-    behaviors: string[];
-    quotes: string[];
+    goals?: string[];
+    frustrations?: string[];
+    behaviors?: string[];
+    painPoint?: string;
+    quotes?: string[];
     needs: string;
   }[];
 }
@@ -407,8 +409,11 @@ export const projects: Project[] = [
         {
           label: '07 — Lofi Sketches',
           kind: 'gallery',
+          galleryLayout: 'sketch',
           gallery: [
-            { caption: 'Early low-fi sketches, flow exploration, and any paper/whiteboard process shots' },
+            { caption: 'Boards and saves view, home feed, and the pull-first check-in queue', src: '/work/someday-lofi-sketch-boards.jpg' },
+            { caption: 'Task detail and board detail, with materials/notes and status states', src: '/work/someday-lofi-sketch-detail.jpg' },
+            { caption: 'Check-in flow, notification settings, and onboarding', src: '/work/someday-lofi-sketch-onboarding.jpg' },
           ],
         },
         {
@@ -612,20 +617,38 @@ export const projects: Project[] = [
             'Sizing measurements are often buried in free-text descriptions, inconsistent, or missing entirely — and vintage sizing frequently doesn\'t match modern sizing anyway. Sales are final, so buyers can\'t reliably tell how an item will fit, which costs both buyers (regret purchases, hesitation to buy at all) and sellers (lost sales, disputes) confidence in the platform.',
         },
         {
-          label: '02 — The solution',
-          kind: 'text',
-          paragraph:
-            'I designed a "fit confidence" system with three parts: a standardized measurement input for sellers with structured fields and guided photo prompts, a "fits like" comparison tool for buyers that checks listings against their saved measurements, and a trust signal surfaced directly on the listing card — not buried in the description.',
-        },
-        {
-          label: '03 — Problem statement',
+          label: '02 — Problem statement',
           kind: 'quote',
           paragraph: 'I framed the core problem as:',
           quote:
             'Depop buyers can\'t verify how an item will actually fit before buying, because sizing information is inconsistent, hidden in free text, or visually distorted by styling — and because sales are final, this erodes buyer confidence and costs sellers sales.',
         },
         {
-          label: '04 — How I found it',
+          label: '03 — Target audience',
+          kind: 'insights',
+          insightGroups: [
+            {
+              title: 'Primary user — Buyers',
+              points: [
+                'Buyers who hesitate or back out of purchases because they can\'t trust how an item will actually fit — whether that\'s from missing measurements, cinched photos that distort shape, or sizing formats they don\'t understand.',
+              ],
+            },
+            {
+              title: 'Secondary user — Sellers',
+              points: [
+                'Sellers caught between what performs well (styled, cinched photos) and what builds buyer trust (accurate, structured fit information) — with no easy way to do both at once.',
+              ],
+            },
+          ],
+        },
+        {
+          label: '04 — The solution',
+          kind: 'text',
+          paragraph:
+            'I designed a "fit confidence" system with three parts: a standardized measurement input for sellers with structured fields and guided photo prompts, a "fits like" comparison tool for buyers that checks listings against their saved measurements, and a trust signal surfaced directly on the listing card — not buried in the description.',
+        },
+        {
+          label: '05 — How I found it',
           kind: 'list',
           ordered: false,
           listItems: [
@@ -638,7 +661,7 @@ export const projects: Project[] = [
           ],
         },
         {
-          label: '05 — Evidence from existing listings',
+          label: '06 — Evidence from existing listings',
           kind: 'evidence',
           paragraph: 'Three real listings show the pattern clearly.',
           evidenceRows: [
@@ -660,7 +683,7 @@ export const projects: Project[] = [
           ],
         },
         {
-          label: '06 — Affinity diagram: voices from Reddit threads',
+          label: '07 — Affinity diagram: voices from Reddit threads',
           kind: 'image',
           paragraph:
             'Reactions gathered from Reddit threads on the cinching trend sorted into two clusters: fit can\'t be judged, and trust & platform pressure.',
@@ -670,35 +693,47 @@ export const projects: Project[] = [
           },
         },
         {
-          label: '07 — Secondary research: buyer interviews',
-          kind: 'testimonials',
-          testimonials: [
+          label: '08 — User personas',
+          kind: 'personas',
+          personas: [
             {
-              name: 'Amelia',
-              role: 'Depop buyer, 23',
-              quote: 'But normally I don\'t pay attention to much so I have bought quite a lot of clothes that don\'t fit.',
-            },
-            {
-              name: 'Milly',
-              role: 'Depop buyer, 23',
-              quote: 'I gamble lol.',
+              name: 'Katherine',
+              context: '24, regular Depop buyer — checks measurements and photos before buying when info is available.',
+              behaviors: [
+                'Cross-references photos and any listed measurements to estimate fit, but currently has no personal saved sizing to check against — everything is manual guesswork done fresh on each listing.',
+              ],
+              painPoint:
+                "When a photo is cinched and no measurements are listed, she doesn't buy — she doesn't trust the listing enough to gamble.",
+              needs:
+                'What she needs from this redesign: a fast way to know a listing matches her actual size without doing mental math on every scroll — this is exactly what the "fits like you" badge solves for her.',
             },
             {
               name: 'Enshalla',
-              role: 'Depop buyer, 23',
-              quote:
-                'I just hope lol... I\'ve gotten burned a lot but i just eye the item and pray it\'ll fit. Yes, I would check measurements if listed — I just also don\'t know what some mean. If it\'s US sizes I\'m good, but like Italian sizes, French sizes, I don\'t really know.',
+              context: 'Buys secondhand often but treats fit as a gamble — has been "burned" by purchases that didn\'t fit.',
+              behaviors: [
+                "Doesn't consistently check measurements, partly because she doesn't always understand sizing formats (mentioned confusion with Italian/French sizing).",
+              ],
+              painPoint:
+                "Even when measurements exist, they're not always usable to her — the raw numbers don't translate to a confident decision.",
+              needs:
+                'What she needs from this redesign: not just the presence of measurements, but a translated, comparative signal — this is why the "compare to your sizes" table and the plain-language badge matter more for her than raw numbers would, and it\'s the strongest argument for personalization over just "add more data."',
             },
             {
-              name: 'Kat',
-              role: 'Depop buyer, 24',
-              quote:
-                'i look at the image and measurements (if available) and i try to determine based off that. If the image is scrunched and measurements aren\'t listed — well i dont buy it then bc i dont trust it.',
+              name: 'Jamie',
+              context: 'Sells regularly on Depop, aware that cinched/styled photos get more traction and engagement.',
+              behaviors: [
+                'Torn between using cinching because it performs better, and knowing it undermines buyer trust.',
+              ],
+              quotes: ['"I\'m a sellout and a poser... it has had more traction than anything else."'],
+              painPoint:
+                'No structured, low-friction way to provide trustworthy fit info without sacrificing the styled photo that drives engagement.',
+              needs:
+                "What they need from this redesign: a way to have both — the styled cover photo and a fast, structured measurement flow that doesn't feel like extra work. This is why guided fields and diagrams matter: they lower the friction enough that accuracy isn't a trade-off against engagement.",
             },
           ],
         },
         {
-          label: '08 — Root causes',
+          label: '09 — Root causes',
           kind: 'list',
           listItems: [
             {
@@ -708,24 +743,6 @@ export const projects: Project[] = [
             {
               title: 'There\'s no standardized, required way to communicate fit.',
               body: 'Measurements are optional, free-text, and inconsistently labeled, so even well-intentioned sellers produce listings buyers can\'t reliably interpret. Over time, buyers either disengage from measurements entirely (treating purchases as a gamble) or abandon purchases they\'d otherwise want to make.',
-            },
-          ],
-        },
-        {
-          label: "09 — Who's affected",
-          kind: 'insights',
-          insightGroups: [
-            {
-              title: 'Primary user — Buyers',
-              points: [
-                'Lose confidence in purchasing because they can\'t reliably predict fit, leading to both regretted purchases and abandoned ones.',
-              ],
-            },
-            {
-              title: 'Secondary user — Sellers',
-              points: [
-                'Face a dilemma between using a technique that drives engagement (cinching) and one that builds buyer trust (flat, accurate photos and measurements) — and currently have no structured way to do both well.',
-              ],
             },
           ],
         },

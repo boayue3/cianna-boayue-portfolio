@@ -176,14 +176,62 @@ const factLabels = {
                   </div>
                 </>
               )}
-              {step.kind === 'gallery' && (
+              {step.kind === 'gallery' && step.galleryLayout === 'sketch' && step.gallery && (
+                <>
+                  {step.paragraph && <p class="paragraph" style="margin:0 0 18px">{step.paragraph}</p>}
+                  <div class="gallery gallery--sketch">
+                    {step.gallery[0]?.src && (
+                      <figure class="gallery-figure gallery-figure--tall">
+                        <button
+                          type="button"
+                          class="screen-shot-trigger"
+                          data-lightbox-trigger
+                          data-lightbox-src={step.gallery[0].src}
+                          data-lightbox-caption={step.gallery[0].caption}
+                          aria-label={`Expand ${step.gallery[0].caption}`}
+                        >
+                          <img src={step.gallery[0].src} alt={step.gallery[0].caption} loading="lazy" />
+                        </button>
+                        <figcaption>{step.gallery[0].caption}</figcaption>
+                      </figure>
+                    )}
+                    <div class="gallery-stack">
+                      {step.gallery.slice(1).map((g) => (
+                        <figure class="gallery-figure">
+                          <button
+                            type="button"
+                            class="screen-shot-trigger"
+                            data-lightbox-trigger
+                            data-lightbox-src={g.src}
+                            data-lightbox-caption={g.caption}
+                            aria-label={`Expand ${g.caption}`}
+                          >
+                            <img src={g.src} alt={g.caption} loading="lazy" />
+                          </button>
+                          <figcaption>{g.caption}</figcaption>
+                        </figure>
+                      ))}
+                    </div>
+                  </div>
+                </>
+              )}
+              {step.kind === 'gallery' && step.galleryLayout !== 'sketch' && (
                 <>
                   {step.paragraph && <p class="paragraph" style="margin:0 0 18px">{step.paragraph}</p>}
                   <div class="gallery">
                     {step.gallery?.map((g) => (
                       g.src ? (
                         <figure class="gallery-figure">
-                          <img src={g.src} alt={g.caption} />
+                          <button
+                            type="button"
+                            class="screen-shot-trigger"
+                            data-lightbox-trigger
+                            data-lightbox-src={g.src}
+                            data-lightbox-caption={g.caption}
+                            aria-label={`Expand ${g.caption}`}
+                          >
+                            <img src={g.src} alt={g.caption} loading="lazy" />
+                          </button>
                           <figcaption>{g.caption}</figcaption>
                         </figure>
                       ) : (
@@ -377,31 +425,45 @@ const factLabels = {
                     {step.personas?.map((p) => (
                       <div class="persona-card">
                         <div class="persona-name">{p.name}</div>
-                        <div class="persona-based-on">Based on: {p.basedOn}</div>
+                        {p.basedOn && <div class="persona-based-on">Based on: {p.basedOn}</div>}
                         <p class="persona-context">{p.context}</p>
                         <div class="persona-sections">
-                          <div class="persona-section">
-                            <div class="persona-label accent">Goals</div>
-                            <ul class="persona-list">
-                              {p.goals.map((item) => <li>{item}</li>)}
-                            </ul>
-                          </div>
-                          <div class="persona-section">
-                            <div class="persona-label accent">Frustrations</div>
-                            <ul class="persona-list">
-                              {p.frustrations.map((item) => <li>{item}</li>)}
-                            </ul>
-                          </div>
-                          <div class="persona-section">
-                            <div class="persona-label accent">Behaviors</div>
-                            <ul class="persona-list">
-                              {p.behaviors.map((item) => <li>{item}</li>)}
-                            </ul>
-                          </div>
-                          <div class="persona-section">
-                            <div class="persona-label accent">Quotes</div>
-                            {p.quotes.map((q) => <div class="quote persona-quote">{q}</div>)}
-                          </div>
+                          {p.goals && p.goals.length > 0 && (
+                            <div class="persona-section">
+                              <div class="persona-label accent">Goals</div>
+                              <ul class="persona-list">
+                                {p.goals.map((item) => <li>{item}</li>)}
+                              </ul>
+                            </div>
+                          )}
+                          {p.frustrations && p.frustrations.length > 0 && (
+                            <div class="persona-section">
+                              <div class="persona-label accent">Frustrations</div>
+                              <ul class="persona-list">
+                                {p.frustrations.map((item) => <li>{item}</li>)}
+                              </ul>
+                            </div>
+                          )}
+                          {p.behaviors && p.behaviors.length > 0 && (
+                            <div class="persona-section">
+                              <div class="persona-label accent">Behaviors</div>
+                              <ul class="persona-list">
+                                {p.behaviors.map((item) => <li>{item}</li>)}
+                              </ul>
+                            </div>
+                          )}
+                          {p.painPoint && (
+                            <div class="persona-section">
+                              <div class="persona-label accent">Pain point</div>
+                              <p class="persona-context" style="margin:0">{p.painPoint}</p>
+                            </div>
+                          )}
+                          {p.quotes && p.quotes.length > 0 && (
+                            <div class="persona-section">
+                              <div class="persona-label accent">Quotes</div>
+                              {p.quotes.map((q) => <div class="quote persona-quote">{q}</div>)}
+                            </div>
+                          )}
                         </div>
                         <p class="persona-needs">{p.needs}</p>
                       </div>
@@ -698,6 +760,32 @@ const factLabels = {
     gap: 14px;
   }
 
+  .gallery--sketch {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    max-width: 560px;
+  }
+
+  .gallery--sketch .gallery-figure--tall {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .gallery--sketch .gallery-stack {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .gallery--sketch .gallery-figure img {
+    max-height: 260px;
+    object-fit: cover;
+    object-position: top;
+  }
+
   .gallery-thumb {
     height: 190px;
     font-size: 10.5px;
@@ -706,6 +794,10 @@ const factLabels = {
 
   .gallery-figure {
     margin: 0;
+  }
+
+  .gallery-figure .screen-shot-trigger {
+    width: 100%;
   }
 
   .gallery-figure img {
