@@ -46,8 +46,8 @@ const factLabels = {
       </div>
 
       {project.coverImage ? (
-        <div class="hero-image hero-image--photo">
-          <img src={project.coverImage} alt={project.caseStudy.heroCaption} />
+        <div class="hero-image hero-image--photo" style={project.coverImageBg ? `background:${project.coverImageBg}` : undefined}>
+          <img src={project.coverImage} alt={project.caseStudy.heroCaption} style={project.coverImageFit ? `object-fit:${project.coverImageFit}` : undefined} />
         </div>
       ) : (
         <div class="hero-image placeholder-image">[ hero image placeholder ]<br />{project.caseStudy.heroCaption}</div>
@@ -69,16 +69,51 @@ const factLabels = {
                 <>
                   <p class="paragraph" style="margin:0">{step.paragraph}</p>
                   <div class="quote">{step.quote}</div>
+                  {step.comparisons && (
+                    <div class="comparisons" style="margin-top:22px">
+                      {step.comparisons.map((c) => (
+                        <div class:list={['comparison-card', { highlight: c.highlight }]}>
+                          <div class:list={['comparison-name', { highlight: c.highlight }]}>{c.name}</div>
+                          {c.items ? (
+                            <ul class="comparison-item-list">
+                              {c.items.map((item) => (
+                                <li><strong>{item.lead}</strong> {item.rest}</li>
+                              ))}
+                            </ul>
+                          ) : (
+                            <p class="comparison-desc">{c.description}</p>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </>
               )}
               {step.kind === 'text' && <p class="paragraph" style="margin:0">{step.paragraph}</p>}
               {step.kind === 'explorations' && (
                 <>
                   <p class="paragraph explorations-intro">{step.paragraph}</p>
+                  {step.explorations?.some((ex) => ex.src) && (
+                    <p class="paragraph explorations-hint">Tap any screen to expand it.</p>
+                  )}
                   <div class="explorations">
                     {step.explorations?.map((ex) => (
                       <div class="exploration">
-                        <div class:list={['exploration-thumb', { shipped: ex.shipped }]}>[ {ex.caption} ]</div>
+                        {ex.src ? (
+                          <button
+                            type="button"
+                            class:list={['exploration-thumb', 'has-image', { shipped: ex.shipped }]}
+                            data-lightbox-trigger
+                            data-lightbox-src={ex.src}
+                            data-lightbox-caption={ex.caption}
+                            aria-label={`Expand ${ex.caption}`}
+                          >
+                            <img src={ex.src} alt={ex.caption} loading="lazy" />
+                            <span class="exploration-caption">{ex.caption}</span>
+                          </button>
+                        ) : (
+                          <div class:list={['exploration-thumb', { shipped: ex.shipped }]}>[ {ex.caption} ]</div>
+                        )}
                         <div class:list={['exploration-verdict', { shipped: ex.shipped }]}>{ex.verdict}</div>
                       </div>
                     ))}
@@ -125,7 +160,15 @@ const factLabels = {
                     {step.comparisons?.map((c) => (
                       <div class:list={['comparison-card', { highlight: c.highlight }]}>
                         <div class:list={['comparison-name', { highlight: c.highlight }]}>{c.name}</div>
-                        <p class="comparison-desc">{c.description}</p>
+                        {c.items ? (
+                          <ul class="comparison-item-list">
+                            {c.items.map((item) => (
+                              <li><strong>{item.lead}</strong> {item.rest}</li>
+                            ))}
+                          </ul>
+                        ) : (
+                          <p class="comparison-desc">{c.description}</p>
+                        )}
                       </div>
                     ))}
                   </div>
@@ -245,7 +288,8 @@ const factLabels = {
               )}
               {step.kind === 'screens' && step.screenFlows && (
                 <>
-                  {step.paragraph && <p class="paragraph" style="margin:0 0 22px">{step.paragraph}</p>}
+                  {step.paragraph && <p class="paragraph" style="margin:0 0 4px">{step.paragraph}</p>}
+                  <p class="paragraph explorations-hint" style="margin-bottom:22px">Tap any screen to expand it.</p>
                   <div class="screen-flows">
                     {step.screenFlows.map((flow) => (
                       <div class:list={['screen-flow', { compact: flow.shots.length <= 2 }]}>
@@ -253,7 +297,16 @@ const factLabels = {
                         <div class:list={['screen-flow-body', { 'has-note': flow.note }]}>
                           <div class="screen-row">
                             {flow.shots.map((src) => (
-                              <img src={src} alt={flow.label} loading="lazy" />
+                              <button
+                                type="button"
+                                class="screen-shot-trigger"
+                                data-lightbox-trigger
+                                data-lightbox-src={src}
+                                data-lightbox-caption={flow.label}
+                                aria-label={`Expand ${flow.label}`}
+                              >
+                                <img src={src} alt={flow.label} loading="lazy" />
+                              </button>
                             ))}
                           </div>
                           {flow.note && <p class="screen-flow-note">{flow.note}</p>}
@@ -356,6 +409,12 @@ const factLabels = {
       <Footer />
     </div>
   </main>
+
+  <div class="lightbox" data-lightbox hidden>
+    <button type="button" class="lightbox-close" data-lightbox-close aria-label="Close">×</button>
+    <img class="lightbox-image" data-lightbox-image src="" alt="" />
+    <p class="lightbox-caption" data-lightbox-image-caption></p>
+  </div>
 </Layout>
 
 <style>
@@ -480,7 +539,14 @@ const factLabels = {
   }
 
   .explorations-intro {
+    margin-bottom: 0;
+  }
+
+  .explorations-hint {
+    margin-top: 4px;
     margin-bottom: 18px;
+    font-size: 11.5px;
+    color: var(--ink-40);
   }
 
   .step-body:has(.explorations),
@@ -598,6 +664,21 @@ const factLabels = {
     color: var(--ink-60);
   }
 
+  .comparison-item-list {
+    margin: 10px 0 0;
+    padding-left: 16px;
+    font: 300 11.5px/1.75 var(--font-body);
+    color: var(--ink-60);
+  }
+
+  .comparison-item-list li {
+    margin-bottom: 8px;
+  }
+
+  .comparison-item-list strong {
+    color: var(--ink);
+  }
+
   .gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -675,7 +756,17 @@ const factLabels = {
     display: flex;
     flex-wrap: wrap;
     gap: 14px;
-    flex: 0 0 auto;
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+
+  .screen-shot-trigger {
+    display: block;
+    padding: 0;
+    border: none;
+    background: none;
+    line-height: 0;
+    cursor: pointer;
   }
 
   .screen-row img {
@@ -684,6 +775,12 @@ const factLabels = {
     width: auto;
     border-radius: 28px;
     filter: drop-shadow(0 10px 22px rgba(28, 26, 23, 0.14));
+    transition: filter 0.15s ease;
+  }
+
+  .screen-shot-trigger:hover img,
+  .screen-shot-trigger:focus-visible img {
+    filter: drop-shadow(0 10px 22px rgba(28, 26, 23, 0.14)) brightness(0.94);
   }
 
   .screen-flow.compact .screen-row img {
@@ -1038,11 +1135,14 @@ const factLabels = {
 
   .explorations {
     display: flex;
-    gap: 12px;
+    flex-wrap: wrap;
+    gap: 20px 12px;
   }
 
   .exploration {
-    flex: 1;
+    flex: 1 1 180px;
+    min-width: 180px;
+    max-width: 220px;
   }
 
   .exploration-thumb {
@@ -1059,6 +1159,41 @@ const factLabels = {
   .exploration-thumb.shipped {
     border: 1px solid var(--accent);
     color: var(--accent);
+  }
+
+  .exploration-thumb.has-image {
+    flex-direction: column;
+    justify-content: flex-start;
+    border-style: solid;
+    padding: 0;
+    overflow: hidden;
+    width: 100%;
+    margin: 0;
+    background: var(--paper-sunken);
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.15s ease;
+  }
+
+  .exploration-thumb.has-image:hover,
+  .exploration-thumb.has-image:focus-visible {
+    border-color: var(--accent);
+    outline: none;
+  }
+
+  .exploration-thumb.has-image img {
+    width: 100%;
+    height: 152px;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+  }
+
+  .exploration-thumb.has-image .exploration-caption {
+    padding: 8px 10px;
+    font: 400 10.5px var(--font-body);
+    color: var(--ink-60);
+    text-align: left;
   }
 
   .exploration-verdict {
@@ -1229,6 +1364,59 @@ const factLabels = {
       font-size: 17px;
     }
   }
+
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 40px 24px;
+    background: rgba(20, 18, 14, 0.88);
+  }
+
+  .lightbox[hidden] {
+    display: none;
+  }
+
+  .lightbox-image {
+    max-width: min(420px, 100%);
+    max-height: 80vh;
+    width: auto;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  }
+
+  .lightbox-caption {
+    margin: 0;
+    font: 400 12px var(--font-body);
+    color: var(--paper);
+    text-align: center;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--paper);
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .lightbox-close:hover,
+  .lightbox-close:focus-visible {
+    border-color: var(--paper);
+  }
 </style>
 
 <script>
@@ -1250,6 +1438,40 @@ const factLabels = {
     prev?.addEventListener('click', () => show(active - 1));
     next?.addEventListener('click', () => show(active + 1));
     dots.forEach((dot, idx) => dot.addEventListener('click', () => show(idx)));
+  });
+
+  const lightbox = document.querySelector<HTMLElement>('[data-lightbox]');
+  const lightboxImage = lightbox?.querySelector<HTMLImageElement>('[data-lightbox-image]');
+  const lightboxCaption = lightbox?.querySelector<HTMLElement>('[data-lightbox-image-caption]');
+
+  function openLightbox(src: string, caption: string) {
+    if (!lightbox || !lightboxImage || !lightboxCaption) return;
+    lightboxImage.src = src;
+    lightboxImage.alt = caption;
+    lightboxCaption.textContent = caption;
+    lightbox.hidden = false;
+  }
+
+  function closeLightbox() {
+    if (!lightbox || !lightboxImage) return;
+    lightbox.hidden = true;
+    lightboxImage.src = '';
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-lightbox-trigger]').forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      const src = trigger.dataset.lightboxSrc;
+      const caption = trigger.dataset.lightboxCaption ?? '';
+      if (src) openLightbox(src, caption);
+    });
+  });
+
+  lightbox?.querySelector('[data-lightbox-close]')?.addEventListener('click', closeLightbox);
+  lightbox?.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox && !lightbox.hidden) closeLightbox();
   });
 
   // Keep the no-controls loop video playing even when a browser defers muted autoplay.

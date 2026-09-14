@@ -49,6 +49,9 @@ export const resume = {
       'Information Architecture',
       'Design Thinking',
       'Design Workshops',
+      'Affinity Diagram',
+      'A/B Testing',
+      'Ethnographic Research',
     ],
     development: [
       'React',

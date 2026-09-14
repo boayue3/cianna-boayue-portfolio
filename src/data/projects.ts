@@ -7,11 +7,11 @@ export interface ProcessStep {
   statement?: string;
   paragraph?: string;
   quote?: string;
-  explorations?: { caption: string; verdict: string; shipped?: boolean }[];
+  explorations?: { caption: string; verdict: string; shipped?: boolean; src?: string }[];
   stats?: { figure: string; caption: string }[];
   testimonials?: { name: string; role: string; quote: string }[];
   insightGroups?: { title: string; points: string[] }[];
-  comparisons?: { name: string; description: string; highlight?: boolean }[];
+  comparisons?: { name: string; description: string; highlight?: boolean; items?: { lead: string; rest: string }[] }[];
   gallery?: { caption: string; src?: string }[];
   image?: { src: string; caption?: string };
   screenFlows?: { label: string; shots: string[]; note?: string }[];
@@ -48,6 +48,8 @@ export interface Project {
   type?: ProjectType;
   tags?: string[];
   coverImage?: string;
+  coverImageFit?: 'cover' | 'contain';
+  coverImageBg?: string;
   comingSoon?: boolean;
   caseStudy?: {
     number: string; // "Case study 01"
@@ -75,7 +77,7 @@ export const projects: Project[] = [
       readTime: '8 min read',
       standfirst:
         'HomeSafe is a ride-coordination app that helps Columbia & Barnard students find a travel buddy after a night out — splitting the cost of an Uber and making sure no one heads home alone, especially late at night.',
-      fact: { role: 'UX Researcher, Product Designer', team: '3 designers', span: '14 weeks', result: 'Figma, Balsamiq Wireframes, Slack, React, JavaScript, HTML/CSS' },
+      fact: { role: 'UX Researcher, Product Designer', team: '3 designers', span: '14 weeks', result: 'Figma, Balsamiq Wireframes, Miro, Slack, React, JavaScript, HTML/CSS' },
       factLabels: { span: 'Timeline', result: 'Tools' },
       heroCaption: 'HomeSafe — image placeholder',
       steps: [
@@ -261,6 +263,9 @@ export const projects: Project[] = [
     index: '02',
     year: '2026',
     title: 'Someday',
+    coverImage: '/work/someday-cover.png',
+    coverImageFit: 'contain',
+    coverImageBg: '#b0c99d',
     description:
       'Consolidating saved inspiration from TikTok, Instagram, and Pinterest — and designing accountability without the guilt-driven notifications that make similar apps easy to abandon.',
     type: 'Side project',
@@ -270,7 +275,7 @@ export const projects: Project[] = [
       readTime: '10 min read',
       standfirst:
         'A concept for consolidating saved inspiration across TikTok, Instagram, and Pinterest into a single place — and helping people actually follow through on it, without relying on the guilt-driven notification tactics that make similar apps easy to abandon.',
-      fact: { role: 'UX Researcher, Product Designer', team: 'Solo', span: '6 weeks', result: 'Figma, Notion' },
+      fact: { role: 'UX Researcher, Product Designer', team: 'Solo', span: '6 weeks', result: 'Figma, Notion, Miro' },
       factLabels: { span: 'Timeline', result: 'Tools' },
       heroCaption: 'Final polished screen or wordmark treatment',
       steps: [
@@ -450,10 +455,36 @@ export const projects: Project[] = [
           kind: 'explorations',
           paragraph: 'The road not taken — alternatives explored before arriving at the final direction.',
           explorations: [
-            { caption: 'Palette', verdict: 'Mint/plum/teal/coral wellness direction vs. the final neutral, content-forward system.' },
-            { caption: 'Typography', verdict: 'Single-typeface DM Sans vs. mixed serif pairing vs. playful rounded options.' },
-            { caption: 'Accountability mechanic', verdict: 'Reward/social system and time-boxed commitments, considered before landing on triage.' },
-            { caption: 'App name', verdict: 'Alternate names shortlisted before landing on "Someday."' },
+            {
+              caption: 'Check-in: inline card',
+              verdict: 'Triage buttons ("Still want it / Let it go / Not sure") sitting directly on the saved item\'s own full video-style card vs. the shipped check-in screen\'s small thumbnail-plus-text layout — kept the content front and center, but crowded out room for the queue count and settings shown together on the shipped screen.',
+              src: '/work/someday-alt-checkin-card.png',
+            },
+            {
+              caption: 'Check-in: full-screen queue',
+              verdict: 'A dedicated, TikTok-attributed question screen ("Five months ago you saved this...") with settings kept separate, vs. the shipped version, which folds the same "X more waiting" queue and the item into one compact card alongside check-in settings — less ceremony per prompt.',
+              src: '/work/someday-alt-checkin-batch.png',
+            },
+            {
+              caption: 'Save sheet: auto-guess & one-tap',
+              verdict: 'An auto-guessed board with an instant one-tap save and collapsed details vs. the shipped flow, which keeps board choice, due date, and the inspiration-only toggle expanded and visible by default — speed lost to keeping real choices in view.',
+              src: '/work/someday-alt-save-minimal.png',
+            },
+            {
+              caption: 'Save sheet: intent toggle',
+              verdict: '"Just looking" vs. "want to do it" as two equal, explained buttons vs. the shipped version, which folds the same choice into a single low-emphasis "just for inspiration" toggle so it doesn\'t compete with the due-date and Save action.',
+              src: '/work/someday-alt-save-intent.png',
+            },
+            {
+              caption: 'AI plan: stepwise reveal',
+              verdict: 'One current step at a time ("Start here," with a "swap this" option) vs. the shipped full-plan-at-once view — lower commitment per step, but hid how much was left and what the AI was unsure about.',
+              src: '/work/someday-alt-plan-stepwise.png',
+            },
+            {
+              caption: 'AI plan: itemized unknowns',
+              verdict: 'An earlier full-plan pass with a dashed-border step and a separate "still unknown" list (yarn amount, finished size) vs. the shipped version\'s single disclosure line — itemizing every gap read as more caveat than plan, so it was condensed down to one honest sentence.',
+              src: '/work/someday-alt-plan-full.png',
+            },
           ],
         },
         {
@@ -494,58 +525,44 @@ export const projects: Project[] = [
             'The core flow runs onboarding → soft permission moment → share-extension save → home confirmation → board detail → task detail → AI-assisted plan-building (opt-in) → triage → notification settings.',
         },
         {
-          label: '11 — Key flows',
-          kind: 'gallery',
-          gallery: [
-            { caption: 'Flow diagram — the full user journey, onboarding through triage/settings' },
-          ],
-        },
-        {
-          label: '12 — Results',
+          label: '12 — Hypothesis & Testing',
           kind: 'quote',
           paragraph: 'Hypothesis:',
           quote:
             'We believe pull-first triage (vs. push reminders) will increase saved-task completion without increasing notification opt-outs, because it removes guilt-driven pressure.',
-        },
-        {
-          label: '12 — Results',
-          kind: 'list',
-          ordered: false,
-          paragraph: "What I'd measure:",
-          listItems: [
+          comparisons: [
             {
-              title: 'Saved-task completion rate —',
-              body: 'the percentage of saves that move to "in progress" or "completed" within a given window. The core metric: it tests whether the accountability model works at all.',
+              name: "What I'd measure",
+              description: '',
+              items: [
+                {
+                  lead: 'Saved-task completion rate',
+                  rest: '— the percentage of saves that move to "in progress" or "completed" within a given window, the core metric for whether the accountability model works at all.',
+                },
+                {
+                  lead: 'Notification opt-out rate',
+                  rest: '— the percentage of users who disable check-ins after enabling them.',
+                },
+                {
+                  lead: 'Time-to-first-action after a triage session',
+                  rest: '— how quickly a user acts after a check-in prompt, versus how often stale saves are simply ignored again.',
+                },
+                {
+                  lead: '"Let go" rate vs. silent abandonment',
+                  rest: '— how often users actively release a save versus letting it sit untouched indefinitely.',
+                },
+                {
+                  lead: 'A/B comparison against a push-reminder control group',
+                  rest: '— holding everything else constant.',
+                },
+              ],
             },
             {
-              title: 'Notification opt-out rate —',
-              body: 'the percentage of users who disable check-ins entirely after enabling them.',
-            },
-            {
-              title: 'Time-to-first-action after a triage session —',
-              body: 'how quickly a user acts after a check-in prompt, versus how often stale saves are simply ignored again.',
-            },
-            {
-              title: '"Let go" rate vs. silent abandonment —',
-              body: 'how often users actively release a save compared to how often saves just sit untouched indefinitely.',
-            },
-            {
-              title: 'A/B comparison against a push-reminder control group —',
-              body: 'completion rate and opt-out rate for a pull-first cohort against a push-reminder cohort, holding everything else constant.',
+              name: 'What would prove this wrong',
+              description:
+                'If the pull-first cohort showed lower completion than the push cohort, that would suggest some users need to be pushed toward action more than this design assumes — mapping back to the due-date and notification-preference split already found in interviews.',
             },
           ],
-        },
-        {
-          label: '12 — Results',
-          kind: 'text',
-          paragraph:
-            'What would prove this wrong: if the pull-first cohort showed lower completion than the push cohort, that would suggest some users need to be pushed toward action more than this design assumes — mapping back to the due-date and notification-preference split already found in interviews.',
-        },
-        {
-          label: '13 — Usability testing',
-          kind: 'text',
-          paragraph:
-            "This is a concept, not a shipped product, so what follows is the plan for moderated usability testing rather than completed findings — to run once there's a testable prototype, with a participant mix broader than the hobbyist-skewed interview round above.",
         },
         {
           label: '13 — Usability testing',
@@ -559,11 +576,6 @@ export const projects: Project[] = [
             { body: 'Go through a triage/check-in prompt — watching whether "still want this?" feels supportive or still reads as pressure.' },
             { body: 'Adjust notification settings (type, delivery channel, quiet hours).' },
           ],
-        },
-        {
-          label: '13 — Usability testing',
-          kind: 'gallery',
-          gallery: [{ caption: 'Usability findings — to be filled in after sessions run' }],
         },
         {
           label: '14 — Reflection',

@@ -11,7 +11,9 @@ const Tag = project.comingSoon ? 'div' : 'a';
 
 <Tag class:list={['card', { 'card--soon': project.comingSoon }]} href={project.comingSoon ? undefined : `/work/${project.slug}`}>
   {project.coverImage ? (
-    <div class="thumb"><img src={project.coverImage} alt={project.title} /></div>
+    <div class="thumb" style={project.coverImageBg ? `background:${project.coverImageBg}` : undefined}>
+      <img src={project.coverImage} alt={project.title} style={project.coverImageFit ? `object-fit:${project.coverImageFit}` : undefined} />
+    </div>
   ) : (
     <div class="thumb placeholder-image">[ image ]<br />1200×900</div>
   )}

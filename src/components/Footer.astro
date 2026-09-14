@@ -4,7 +4,7 @@ import { site } from '../data/site';
 
 <footer class="site-footer">
   <div class="left">
-    {site.email}<br />
+    <a class="email-link" href={`mailto:${site.email}`}>{site.email}</a><br />
     {site.location} · {site.availability}
   </div>
   <div class="right">
@@ -24,6 +24,16 @@ import { site } from '../data/site';
     align-items: flex-end;
     font: 300 12px/1.8 var(--font-body);
     color: var(--ink-60);
+  }
+
+  .email-link {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .email-link:hover {
+    color: var(--accent);
   }
 
   .right {
