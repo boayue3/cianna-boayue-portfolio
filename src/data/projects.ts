@@ -66,228 +66,8 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    slug: 'homesafe-ride-coordination',
-    index: '01',
-    year: '2024',
-    title: 'HomeSafe — Ride Coordination App',
-    description: 'Helping Columbia & Barnard students split a ride home and never travel alone late at night.',
-    type: 'School project',
-    tags: ['UX Research', 'Product Design'],
-    coverImage: '/work/homesafe-cover.jpg',
-    caseStudy: {
-      number: 'Case study 01',
-      readTime: '8 min read',
-      standfirst:
-        'HomeSafe is a ride-coordination app that helps Columbia & Barnard students find a travel buddy after a night out — splitting the cost of an Uber and making sure no one heads home alone, especially late at night.',
-      fact: { role: 'UX Researcher, Product Designer', team: '3 designers', span: '14 weeks', result: 'Figma, Balsamiq Wireframes, Miro, Slack, React, JavaScript, HTML/CSS' },
-      factLabels: { span: 'Timeline', result: 'Tools' },
-      heroCaption: 'HomeSafe — image placeholder',
-      steps: [
-        {
-          label: '01 — The problem',
-          kind: 'statement',
-          statement: 'For students heading downtown for a night out, the trip home is often the hardest part of the night.',
-          paragraph:
-            'An Uber back to Morningside Heights from the Lower East Side or Brooklyn can run $40–$70, and the subway, while cheap, can feel unsafe late at night — especially for someone traveling alone, intoxicated, or in revealing clothing.',
-        },
-        {
-          label: '02 — The solution',
-          kind: 'text',
-          paragraph:
-            'HomeSafe connects students who are heading toward the same place at the same time so they can split an Uber or ride the train back together, turning a stressful, expensive solo trip into a shared, affordable, and safer one.',
-        },
-        {
-          label: '03 — Audience & method',
-          kind: 'text',
-          paragraph:
-            "Our primary users are students at Columbia and Barnard who frequent bars and clubs downtown; the app also serves the wider student body for shared rides to airports, concerts, and other off-campus destinations. We shadowed and interviewed students on real nights out — at jazz bars in the Lower East Side, clubs in Queens, and on the walk back to campus — then ran an affinity diagramming session to find patterns across everything we'd heard.",
-        },
-        {
-          label: '04 — Demo video',
-          kind: 'video',
-          paragraph: 'A walkthrough of the hi-fi prototype in action.',
-          video: { src: '/work/homesafe-demo.mp4', poster: '/work/homesafe-demo-poster.jpg', caption: 'HomeSafe prototype demo', loop: true },
-        },
-        {
-          label: '05 — Voices from the field',
-          kind: 'testimonials',
-          testimonials: [
-            {
-              name: 'Jojo',
-              role: 'Student @ Barnard',
-              quote:
-                'I know on Sidechat people ask about splitting Ubers to airports at specific times. There should be one for trains and Ubers too.',
-            },
-            {
-              name: 'Julia',
-              role: 'Student @ Columbia',
-              quote:
-                'The wait for trains gets really long, and I feel unsafe waiting alone on deserted platforms — more than I do on the train itself.',
-            },
-          ],
-        },
-        {
-          label: '06 — User personas',
-          kind: 'personas',
-          personas: [
-            {
-              name: 'Diya — The Safety-First Rider',
-              context: 'Barnard student, sophomore.',
-              quotes: [
-                '"I don\'t feel safe alone on the subway drunk and in revealing clothing — if I\'m taking it home, I go with a friend."',
-              ],
-              behaviors: [
-                'Goes out 2–3 times a month, mostly downtown or in Brooklyn.',
-                'Will wait an extra 15–20 minutes rather than travel home alone.',
-                'Default plan is "leave with a friend" — HomeSafe needs to replace that friend, not just save money.',
-                'Distrustful of ride-splitting with strangers unless there\'s some way to vet who she\'s riding with.',
-              ],
-              needs:
-                "Needs from HomeSafe: visible verification (.edu-only), the ability to filter or see who's asking to ride, and a sense of a match before she commits to leaving with them.",
-            },
-            {
-              name: 'Dani — The Budget-Conscious Rider',
-              context: 'Columbia student, junior.',
-              quotes: [
-                '"If I go out alone, I\'d just pay for the Uber alone — from Queens to Manhattan that\'s roughly $40, but double after 4am."',
-              ],
-              behaviors: [
-                'Goes out most weekends, often from further-out neighborhoods (Queens, Bushwick).',
-                'Price-sensitive, especially post-surge; has skipped nights out over the cost of the ride home.',
-                'Less worried about traveling alone than Diya, more worried about the bill.',
-                "Wants speed — doesn't want to wait around for a match if it costs her more time than it saves her money.",
-              ],
-              needs:
-                "Needs from HomeSafe: a fast, low-friction way to see who's already heading her direction, with the price split visible up front.",
-            },
-          ],
-        },
-        {
-          label: '07 — Affinity diagram',
-          kind: 'image',
-          paragraph:
-            'We grouped everything we heard into an affinity diagram, which sorted into two clear clusters: personal safety concerns and financial & logistical constraints.',
-          image: { src: '/work/homesafe-affinity-diagram.jpg', caption: 'Affinity diagram — personal safety & financial/logistical clusters' },
-        },
-        {
-          label: '08 — Research insights',
-          kind: 'insights',
-          insightGroups: [
-            {
-              title: 'Personal safety',
-              points: [
-                'Traveling alone late at night feels far less safe than with company — especially while intoxicated.',
-                'Transferring trains alone, or waiting on empty platforms, was repeatedly described as scary.',
-                'Revealing clothing after a night out heightened feelings of vulnerability on transit.',
-                "Many students said they'd rather wait and leave with another woman than go alone, sober or not.",
-              ],
-            },
-            {
-              title: 'Financial & logistical',
-              points: [
-                'Ubers from popular nightlife areas (Brooklyn, Queens, downtown) are a real financial strain.',
-                'Surge pricing pushes prices well past what students consider affordable.',
-                'Students consistently said they\'d prefer to go home with other women if given the option.',
-                'Friends often leave at different times, leaving someone to figure out the trip home solo.',
-              ],
-            },
-          ],
-        },
-        {
-          label: '09 — Competitive analysis',
-          kind: 'comparison',
-          paragraph:
-            'Two services already address pieces of this puzzle — but each leaves a gap that HomeSafe was designed to fill.',
-          comparisons: [
-            {
-              name: 'Uber',
-              description:
-                'Splits fares with a stranger heading the same direction — but the savings are often marginal. A shared ride from Morningside Heights to the Upper East Side was $17.52 versus $21.94 for a private UberX, a difference of just a few dollars.',
-            },
-            {
-              name: 'Columbia Evening Shuttle',
-              description:
-                'Free rides within a campus radius, but waits often exceed 20 minutes, service runs only 6pm–3am, and it never reaches downtown Manhattan, Queens, or Brooklyn — exactly where our users are going out.',
-            },
-            {
-              name: 'Our solution: HomeSafe',
-              description:
-                "Combines the cost-sharing of Uber Share with the safety and community of the Evening Shuttle. Students coordinate with people already heading their way — no time window, no service-area limit, and a shorter wait than a scheduled shuttle since it's an on-demand car.",
-              highlight: true,
-            },
-          ],
-        },
-        {
-          label: '10 — Lofi prototypes',
-          kind: 'image',
-          paragraph:
-            'Balsamiq wireframes covering the full flow — destination search with buddy filters, the potential-buddy feed, direct messages, reviews and verification, profile sharing, account settings, and saved destinations.',
-          image: {
-            src: '/work/homesafe-lofi-wireframes.jpg',
-            caption: 'Lo-fi wireframes — search & match, messaging, reviews, profile, and saved destinations',
-          },
-        },
-        {
-          label: '11 — Hifi prototypes',
-          kind: 'screens',
-          paragraph:
-            'Four core flows, built in Figma: onboarding and .edu verification, posting a ride, the rider home feed, and the profile other students see.',
-          screenFlows: [
-            {
-              label: 'Onboarding',
-              shots: [
-                '/work/homesafe-hifi-ob-1-loading.png',
-                '/work/homesafe-hifi-ob-2-app.png',
-                '/work/homesafe-hifi-ob-3-email.png',
-                '/work/homesafe-hifi-ob-4-code.png',
-                '/work/homesafe-hifi-ob-5-profile.png',
-                '/work/homesafe-hifi-ob-6-safety.png',
-                '/work/homesafe-hifi-ob-7-location.png',
-              ],
-            },
-            {
-              label: 'Create a ride',
-              shots: [
-                '/work/homesafe-hifi-par-where-when.png',
-                '/work/homesafe-hifi-par-who-riding.png',
-                '/work/homesafe-hifi-par-add-note.png',
-                '/work/homesafe-hifi-par-your-ride.png',
-              ],
-            },
-            {
-              label: 'Home page',
-              shots: ['/work/homesafe-hifi-home.png', '/work/homesafe-hifi-riders.png'],
-            },
-            {
-              label: 'Profile page',
-              shots: ['/work/homesafe-hifi-profile.png', '/work/homesafe-hifi-how-others-see-you.png'],
-            },
-          ],
-        },
-        {
-          label: '12 — Reflection & Results',
-          kind: 'reflection',
-          paragraph:
-            'Our design hypothesis: a platform like HomeSafe would provide a reliable, cost-effective way to get home safely, reducing the cost of expensive Uber rides. Our small-scale prototype test supported that — but also surfaced real open questions.',
-          worked: [
-            'HomeSafe won Best App Idea for the semester in UI Design, selected from 25 teams by the professor and TAs.',
-            'The group-chat format felt natural and unforced — participants used it without prompting once it was time to leave.',
-            'Splitting a $57 taxi from Queens down to $14.25 per person validated the core value proposition.',
-            'Ranking-driven wireframes made the jump to a polished hi-fi prototype much faster.',
-          ],
-          openQuestions: [
-            'How do we build critical mass — and promote the app — without a large existing user base?',
-            'Would users feel comfortable sharing real-time location at scale, beyond a small trusted group?',
-            'How should the UI feel less like "messaging strangers" and more like the original group chat?',
-            "What's the right way to incentivize early prototype testers given limited go-out windows (Thu–Sun)?",
-          ],
-        },
-      ],
-    },
-  },
-  {
     slug: 'someday-accountability',
-    index: '02',
+    index: '01',
     year: '2026',
     title: 'Someday — Turning Saved Content Into Action',
     coverImage: '/work/someday-cover.png',
@@ -298,7 +78,7 @@ export const projects: Project[] = [
     type: 'Side project',
     tags: ['UX Research', 'Product Design', 'Concept'],
     caseStudy: {
-      number: 'Case study 02',
+      number: 'Case study 01',
       readTime: '10 min read',
       standfirst:
         'A concept for consolidating saved inspiration across TikTok, Instagram, and Pinterest into a single place — and helping people actually follow through on it, without relying on the guilt-driven notification tactics that make similar apps easy to abandon.',
@@ -618,7 +398,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'depop-fit-confidence',
-    index: '03',
+    index: '02',
     year: '2026',
     title: 'Depop Fit Confidence',
     description: 'Fixing fit trust on Depop — verified measurements and a "fits like" signal buyers can trust.',
@@ -626,7 +406,7 @@ export const projects: Project[] = [
     tags: ['Redesign', 'UX Research', 'Product Design'],
     coverImage: '/work/depop-cover.jpg',
     caseStudy: {
-      number: 'Case study 03',
+      number: 'Case study 02',
       readTime: '9 min read',
       standfirst:
         'The "Depop cinch" fakes a smaller waist than a garment actually has, and sizing is often buried in free text or missing entirely. I designed a fit-confidence system so buyers can trust what they\'re buying before sales-final purchase.',
@@ -937,6 +717,226 @@ export const projects: Project[] = [
                 },
               ],
             },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    slug: 'homesafe-ride-coordination',
+    index: '03',
+    year: '2024',
+    title: 'HomeSafe — Ride Coordination App',
+    description: 'Helping Columbia & Barnard students split a ride home and never travel alone late at night.',
+    type: 'School project',
+    tags: ['UX Research', 'Product Design'],
+    coverImage: '/work/homesafe-cover.jpg',
+    caseStudy: {
+      number: 'Case study 03',
+      readTime: '8 min read',
+      standfirst:
+        'HomeSafe is a ride-coordination app that helps Columbia & Barnard students find a travel buddy after a night out — splitting the cost of an Uber and making sure no one heads home alone, especially late at night.',
+      fact: { role: 'UX Researcher, Product Designer', team: '3 designers', span: '14 weeks', result: 'Figma, Balsamiq Wireframes, Miro, Slack, React, JavaScript, HTML/CSS' },
+      factLabels: { span: 'Timeline', result: 'Tools' },
+      heroCaption: 'HomeSafe — image placeholder',
+      steps: [
+        {
+          label: '01 — The problem',
+          kind: 'statement',
+          statement: 'For students heading downtown for a night out, the trip home is often the hardest part of the night.',
+          paragraph:
+            'An Uber back to Morningside Heights from the Lower East Side or Brooklyn can run $40–$70, and the subway, while cheap, can feel unsafe late at night — especially for someone traveling alone, intoxicated, or in revealing clothing.',
+        },
+        {
+          label: '02 — The solution',
+          kind: 'text',
+          paragraph:
+            'HomeSafe connects students who are heading toward the same place at the same time so they can split an Uber or ride the train back together, turning a stressful, expensive solo trip into a shared, affordable, and safer one.',
+        },
+        {
+          label: '03 — Audience & method',
+          kind: 'text',
+          paragraph:
+            "Our primary users are students at Columbia and Barnard who frequent bars and clubs downtown; the app also serves the wider student body for shared rides to airports, concerts, and other off-campus destinations. We shadowed and interviewed students on real nights out — at jazz bars in the Lower East Side, clubs in Queens, and on the walk back to campus — then ran an affinity diagramming session to find patterns across everything we'd heard.",
+        },
+        {
+          label: '04 — Demo video',
+          kind: 'video',
+          paragraph: 'A walkthrough of the hi-fi prototype in action.',
+          video: { src: '/work/homesafe-demo.mp4', poster: '/work/homesafe-demo-poster.jpg', caption: 'HomeSafe prototype demo', loop: true },
+        },
+        {
+          label: '05 — Voices from the field',
+          kind: 'testimonials',
+          testimonials: [
+            {
+              name: 'Jojo',
+              role: 'Student @ Barnard',
+              quote:
+                'I know on Sidechat people ask about splitting Ubers to airports at specific times. There should be one for trains and Ubers too.',
+            },
+            {
+              name: 'Julia',
+              role: 'Student @ Columbia',
+              quote:
+                'The wait for trains gets really long, and I feel unsafe waiting alone on deserted platforms — more than I do on the train itself.',
+            },
+          ],
+        },
+        {
+          label: '06 — User personas',
+          kind: 'personas',
+          personas: [
+            {
+              name: 'Diya — The Safety-First Rider',
+              context: 'Barnard student, sophomore.',
+              quotes: [
+                '"I don\'t feel safe alone on the subway drunk and in revealing clothing — if I\'m taking it home, I go with a friend."',
+              ],
+              behaviors: [
+                'Goes out 2–3 times a month, mostly downtown or in Brooklyn.',
+                'Will wait an extra 15–20 minutes rather than travel home alone.',
+                'Default plan is "leave with a friend" — HomeSafe needs to replace that friend, not just save money.',
+                'Distrustful of ride-splitting with strangers unless there\'s some way to vet who she\'s riding with.',
+              ],
+              needs:
+                "Needs from HomeSafe: visible verification (.edu-only), the ability to filter or see who's asking to ride, and a sense of a match before she commits to leaving with them.",
+            },
+            {
+              name: 'Dani — The Budget-Conscious Rider',
+              context: 'Columbia student, junior.',
+              quotes: [
+                '"If I go out alone, I\'d just pay for the Uber alone — from Queens to Manhattan that\'s roughly $40, but double after 4am."',
+              ],
+              behaviors: [
+                'Goes out most weekends, often from further-out neighborhoods (Queens, Bushwick).',
+                'Price-sensitive, especially post-surge; has skipped nights out over the cost of the ride home.',
+                'Less worried about traveling alone than Diya, more worried about the bill.',
+                "Wants speed — doesn't want to wait around for a match if it costs her more time than it saves her money.",
+              ],
+              needs:
+                "Needs from HomeSafe: a fast, low-friction way to see who's already heading her direction, with the price split visible up front.",
+            },
+          ],
+        },
+        {
+          label: '07 — Affinity diagram',
+          kind: 'image',
+          paragraph:
+            'We grouped everything we heard into an affinity diagram, which sorted into two clear clusters: personal safety concerns and financial & logistical constraints.',
+          image: { src: '/work/homesafe-affinity-diagram.jpg', caption: 'Affinity diagram — personal safety & financial/logistical clusters' },
+        },
+        {
+          label: '08 — Research insights',
+          kind: 'insights',
+          insightGroups: [
+            {
+              title: 'Personal safety',
+              points: [
+                'Traveling alone late at night feels far less safe than with company — especially while intoxicated.',
+                'Transferring trains alone, or waiting on empty platforms, was repeatedly described as scary.',
+                'Revealing clothing after a night out heightened feelings of vulnerability on transit.',
+                "Many students said they'd rather wait and leave with another woman than go alone, sober or not.",
+              ],
+            },
+            {
+              title: 'Financial & logistical',
+              points: [
+                'Ubers from popular nightlife areas (Brooklyn, Queens, downtown) are a real financial strain.',
+                'Surge pricing pushes prices well past what students consider affordable.',
+                'Students consistently said they\'d prefer to go home with other women if given the option.',
+                'Friends often leave at different times, leaving someone to figure out the trip home solo.',
+              ],
+            },
+          ],
+        },
+        {
+          label: '09 — Competitive analysis',
+          kind: 'comparison',
+          paragraph:
+            'Two services already address pieces of this puzzle — but each leaves a gap that HomeSafe was designed to fill.',
+          comparisons: [
+            {
+              name: 'Uber',
+              description:
+                'Splits fares with a stranger heading the same direction — but the savings are often marginal. A shared ride from Morningside Heights to the Upper East Side was $17.52 versus $21.94 for a private UberX, a difference of just a few dollars.',
+            },
+            {
+              name: 'Columbia Evening Shuttle',
+              description:
+                'Free rides within a campus radius, but waits often exceed 20 minutes, service runs only 6pm–3am, and it never reaches downtown Manhattan, Queens, or Brooklyn — exactly where our users are going out.',
+            },
+            {
+              name: 'Our solution: HomeSafe',
+              description:
+                "Combines the cost-sharing of Uber Share with the safety and community of the Evening Shuttle. Students coordinate with people already heading their way — no time window, no service-area limit, and a shorter wait than a scheduled shuttle since it's an on-demand car.",
+              highlight: true,
+            },
+          ],
+        },
+        {
+          label: '10 — Lofi prototypes',
+          kind: 'image',
+          paragraph:
+            'Balsamiq wireframes covering the full flow — destination search with buddy filters, the potential-buddy feed, direct messages, reviews and verification, profile sharing, account settings, and saved destinations.',
+          image: {
+            src: '/work/homesafe-lofi-wireframes.jpg',
+            caption: 'Lo-fi wireframes — search & match, messaging, reviews, profile, and saved destinations',
+          },
+        },
+        {
+          label: '11 — Hifi prototypes',
+          kind: 'screens',
+          paragraph:
+            'Four core flows, built in Figma: onboarding and .edu verification, posting a ride, the rider home feed, and the profile other students see.',
+          screenFlows: [
+            {
+              label: 'Onboarding',
+              shots: [
+                '/work/homesafe-hifi-ob-1-loading.png',
+                '/work/homesafe-hifi-ob-2-app.png',
+                '/work/homesafe-hifi-ob-3-email.png',
+                '/work/homesafe-hifi-ob-4-code.png',
+                '/work/homesafe-hifi-ob-5-profile.png',
+                '/work/homesafe-hifi-ob-6-safety.png',
+                '/work/homesafe-hifi-ob-7-location.png',
+              ],
+            },
+            {
+              label: 'Create a ride',
+              shots: [
+                '/work/homesafe-hifi-par-where-when.png',
+                '/work/homesafe-hifi-par-who-riding.png',
+                '/work/homesafe-hifi-par-add-note.png',
+                '/work/homesafe-hifi-par-your-ride.png',
+              ],
+            },
+            {
+              label: 'Home page',
+              shots: ['/work/homesafe-hifi-home.png', '/work/homesafe-hifi-riders.png'],
+            },
+            {
+              label: 'Profile page',
+              shots: ['/work/homesafe-hifi-profile.png', '/work/homesafe-hifi-how-others-see-you.png'],
+            },
+          ],
+        },
+        {
+          label: '12 — Reflection & Results',
+          kind: 'reflection',
+          paragraph:
+            'Our design hypothesis: a platform like HomeSafe would provide a reliable, cost-effective way to get home safely, reducing the cost of expensive Uber rides. Our small-scale prototype test supported that — but also surfaced real open questions.',
+          worked: [
+            'HomeSafe won Best App Idea for the semester in UI Design, selected from 25 teams by the professor and TAs.',
+            'The group-chat format felt natural and unforced — participants used it without prompting once it was time to leave.',
+            'Splitting a $57 taxi from Queens down to $14.25 per person validated the core value proposition.',
+            'Ranking-driven wireframes made the jump to a polished hi-fi prototype much faster.',
+          ],
+          openQuestions: [
+            'How do we build critical mass — and promote the app — without a large existing user base?',
+            'Would users feel comfortable sharing real-time location at scale, beyond a small trusted group?',
+            'How should the UI feel less like "messaging strangers" and more like the original group chat?',
+            "What's the right way to incentivize early prototype testers given limited go-out windows (Thu–Sun)?",
           ],
         },
       ],
